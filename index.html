@@ -1,154 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/svg+xml" href="new_favicon.svg">
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <title>Declan Zammit</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <style>
-    body {
-      max-width: 2000px;
-      margin:0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                   Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.6;
-      color: #222;
-      display: flex;
-    }
-
-        nav {
-            width: 420px;
-            background-color: #9C501E; /* green */
-            color: white;
-            padding: 20px;
-            padding-left: 200px;
-            padding-top: 20px;
-            padding-right:120px;
-            line-height: 2;
-            height: calc(100vh); /* full height */
-            box-sizing: border-box;
-        }
-
-        nav a {
-            display: block;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            margin: 10px 0;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-    
-        main {
-            flex: 1;
-            padding: 10px;
-            padding-left: 60px;
-            padding-right: 60px;
-            box-sizing: border-box;
-        }
-
-        aside {
-            width: 420px;
-            background-color: #9C501E; /* green */
-            color: white;
-            padding: 20px;
-            padding-right: 250px;
-            height: calc(100vh); /* full height */
-            box-sizing: border-box;
-        }
-
-
-    h1, h2, h3 {
-      font-family: 'Dancing Script', cursive;
-      line-height: 1.25;
-    }
-    
-
-    h1 {
-      margin-bottom: 0.25rem;
-      text-align: center;
-      color: #333;
-      font-size: 40px;
-      padding-bottom: 5px;
-    }
-
-    h2 {
-      margin-top: 2rem;
-      border-bottom: 1px solid #ddd;
-      text-align: center;
-      padding-bottom: 0.25rem;
-    }
-
-    ul {
-      padding-left: 1.25rem;
-    }
-
-    a {
-      color: #9C501E;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .subtitle {
-      color: #555;
-      margin-top: 0;
-    }
-
-    footer {
-            position: fixed;
-            bottom: 0;
-            left: 0px; /* match sidebar width */
-            width: calc(100%);
-            background-color: #9C501E;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-        }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
-  <nav>
+  <div class="left-column">
+    <nav>
         <h2>Menu</h2>
-        <a href="#">Home</a>
+        <a href="#" class="active">Home</a>
         <a href="talks.html">Talks</a>
         <a href="about.html">About Me</a>
-        <a href="shot.html">SHoT Group</a>
     </nav>
+  </div>
 
-  <main>
-    <header>
-      <h1>Declan Zammit</h1>
-    </header>
-    <section>
-      <p>
-        I am an Australian maths student interested in homotopy theory and higher category theory. I am currently completing a Masters of Research at Macquarie University under <a href="https://researchers.mq.edu.au/en/persons/steve-lack/">Steve Lack</a>. The goal of the project is to determine constraints for the choice of isofibrations in the structure of an &infin;-cosmos.
-      </p>
-      <p>
-        Previously, I completed a Bachelor of Science (Honours) at the University of Sydney. My Honours thesis was supervised by <a href="https://www.maths.usyd.edu.au/u/kevinc/">Kevin Coulembier</a>, and described a version of the Pontryagin-Thom construction which could be described from the perspective of simplicial homotopy theory. I am still thinking about this and I hope to publish about it once I understand it better.
-      </p>
-      <p>
-        Before that, I completed a Bachelor of Arts and Advanced Studies at the University of Sydney. This is just a strange name for a double degree that allowed me to pursue degrees in both mathematics and Ancient Greek.
-      </p>
-    </section>
+  <div class="content">
+    <main>
+      <header>
+        <h1>Declan Zammit</h1>
+      </header>
+      <section>
+        <p>
+          I am an Australian maths student interested in homotopy theory and higher category theory. I am currently completing a Masters of Research at Macquarie University under <a href="https://researchers.mq.edu.au/en/persons/steve-lack/">Steve Lack</a>. The goal of the project is to determine constraints for the choice of isofibrations in the structure of an &infin;-cosmos.
+        </p>
+        <p>
+          Previously, I completed a Bachelor of Science (Honours) at the University of Sydney. My Honours thesis was supervised by <a href="https://www.maths.usyd.edu.au/u/kevinc/">Kevin Coulembier</a>, and described a version of the Pontryagin-Thom construction which could be described from the perspective of simplicial homotopy theory. I am still thinking about this and I hope to publish about it once I understand it better.
+        </p>
+        <p>
+          Before that, I completed a Bachelor of Arts and Advanced Studies at the University of Sydney. This is just a strange name for a double degree that allowed me to pursue degrees in both mathematics and Ancient Greek.
+        </p>
+      </section>
+      <section>
+        <h2>Stable Homotopy Theory Reading Group</h2>
+        <p>
+          This year, I will be running a reading group for stable homotopy theory at the University of Sydney. For now, the goal of the group is to introduce the Adams spectral sequence. Along the way we will talk about Steenrod operations, spectral sequences, Hopf algebras and generalised cohomology theories. At the beginning of the course we will be following <a href="https://webhomes.maths.ed.ac.uk/~v1ranick/papers/moshtang.pdf">Mosher-Tangora</a>, but we may jump to Ravenel's <a href="https://webhomes.maths.ed.ac.uk/~v1ranick/papers/ravenel2.pdf">green book</a> later in the semester. If you would like to join the group or contribute a talk, send me an email! The main webpage for the reading group is linked <a href="shot.html">here</a>.
+        </p>
+      </section>
+    </main>
+  </div>
 
-    <section>
-      <h2>Stable Homotopy Theory Reading Group</h2>
-      <p>
-        This year, I will be running a reading group for stable homotopy theory at the University of Sydney. For now, the goal of the group is to introduce the Adams spectral sequence. Along the way we will talk about Steenrod operations, spectral sequences, Hopf algebras and generalised cohomology theories. At the beginning of the course we will be following <a href="https://webhomes.maths.ed.ac.uk/~v1ranick/papers/moshtang.pdf">Mosher-Tangora</a>, but we may jump to Ravenel's <a href="https://webhomes.maths.ed.ac.uk/~v1ranick/papers/ravenel2.pdf">green book</a> later in the semester. If you would like to join the group or contribute a talk, send me an email! The main webpage for the reading group is linked <a href="shot.html">here</a>.
-      </p>
-    </section>
-  </main>
-
-  <aside>
-  </aside>
+  <div class="right-column">
+    <aside>
+        <h2>Courses</h2>
+        <a href="shot.html">SHoT Group</a>
+    </aside>
+  </div>
 
   <footer>
     Contact me at declantzammit@gmail.com
