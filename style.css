@@ -10,13 +10,15 @@ body {
 
 nav {
     position: fixed;
-    width: 420px;
+    left:0;
+    top:0;
+    width: calc(30vw - 30px);
     background-color: #9C501E; /* green */
     color: white;
     padding: 20px;
-    padding-left: 200px;
+    padding-left: calc(25vw - 160px);
     padding-top: 20px;
-    padding-right:120px;
+    padding-right: calc(10px + 5vw);
     line-height: 2;
     height: calc(100vh); /* full height */
     box-sizing: border-box;
@@ -39,8 +41,8 @@ nav a:hover {
 main {
     flex: 1;
     padding: 10px;
-    padding-left: 480px;
-    padding-right: 480px;
+    padding-left: calc(30vw + 45px);
+    padding-right: calc(30vw + 45px);
     padding-bottom: 50px;
     height: 100vh;
     box-sizing: border-box;
@@ -51,13 +53,13 @@ aside {
     position: fixed;
     right: 0;
     top: 0;
-    width: 420px;
+    width: calc(30vw - 30px);
     background-color: #9C501E; /* green */
     color: white;
     padding: 20px;
-    padding-right: 200px;
+    padding-right: calc(25vw - 160px);
     padding-top: 250px;
-    padding-left:120px;
+    padding-left:calc(10px + 5vw);
     line-height: 2;
     height: calc(100vh); /* full height */
     box-sizing: border-box;
@@ -133,6 +135,7 @@ img {
     display: block;
     margin: 0 auto;
     padding-top: 20px;
+    max-width: calc(40vw - 90px);
 }
 
 html, body {
@@ -157,11 +160,15 @@ footer::before {
 nav a.active::before {
   content: "";
   position: absolute;
-  left: 185px;
+  right: calc(130px + 5vw);
   transform: translateY(12px);
 
   width: 9px;
   height: 9px;
   border-radius: 50%;
   background: white;
+}
+
+#desktop-layout, #mobile-layout {
+  display: none;
 }
