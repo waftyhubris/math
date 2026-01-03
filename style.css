@@ -49,6 +49,12 @@ main {
     overflow-y: auto;
 }
 
+main#mobile-wrapper {
+  padding-left: 20px;
+  padding-right:20px;
+  padding-bottom:100px;
+}
+
 aside {
     position: fixed;
     right: 0;
@@ -131,11 +137,52 @@ footer {
         z-index: 1;
     }
 
+#he {
+  display: flex;                  /* arrange children in a row */
+  justify-content: space-between; /* space out the columns */
+  align-items: center;            /* vertical alignment */
+  background-color: #9C501E;       /* header color */
+  padding: 10px 20px;             /* some padding top/bottom and sides */
+}
+
+#he .col a {
+  color: white !important;                /* hyperlink color */             /* optional: make links bold */
+  padding: 0 10px;                /* space between links */
+}
+
+#he .col a:hover {
+  text-decoration: underline;     /* optional: underline on hover */
+}
+
+#fo {
+  display: flex;                  /* arrange children in a row */
+  justify-content: center; /* space out the columns */
+  align-items: center;            /* vertical alignment */
+  background-color: #9C501E;       /* header color */
+  padding: 10px 20px;             /* some padding top/bottom and sides */
+}
+
+#fo .col a {
+  color: white !important;                /* hyperlink color */             /* optional: make links bold */
+  padding: 0 10px;                /* space between links */
+}
+
+#fo .col a:hover {
+  text-decoration: underline;     /* optional: underline on hover */
+}
+
 img {
     display: block;
     margin: 0 auto;
     padding-top: 20px;
     max-width: calc(40vw - 90px);
+}
+
+img#mobile-image {
+    display: block;
+    margin: 0 auto;
+    padding-top: 20px;
+    max-width: calc(100vw - 70px);
 }
 
 html, body {
