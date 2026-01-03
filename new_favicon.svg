@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="42.664062mm"
+   height="41.746288mm"
+   viewBox="0 0 42.664062 41.746288"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <rect
+       x="255.61136"
+       y="109.71997"
+       width="270.07993"
+       height="314.69135"
+       id="rect1" />
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-82.318565,-124.36387)">
+    <path
+       style="fill:#9c501e;fill-opacity:1;stroke-width:0.264583"
+       id="path2"
+       d="m 99.180328,124.36387 c 0,15.02306 -1.838698,16.86176 -16.861763,16.86176 -15.023064,0 -16.861763,-1.8387 -16.861763,-16.86176 0,-15.02307 1.838699,-16.86176 16.861763,-16.86176 15.023065,0 16.861763,1.83869 16.861763,16.86176 z"
+       transform="matrix(1.2651127,0,0,1.2378981,-0.49166658,-8.712781)" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.1978619,0,0,0.1978619,26.854527,105.09472)"
+       id="text1"
+       style="font-size:192px;line-height:1;font-family:'Adobe Devanagari';-inkscape-font-specification:'Adobe Devanagari';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect1);display:inline;fill:#f9f9f9"><tspan
+         x="294.65137"
+         y="278.6582"
+         id="tspan3"><tspan
+           style="font-weight:500;font-family:'Yu Gothic';-inkscape-font-specification:'Yu Gothic Medium'"
+           id="tspan2">す</tspan></tspan></text>
+  </g>
+</svg>
