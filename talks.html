@@ -1,127 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/svg+xml" href="new_favicon.svg">
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <title>Declan Zammit</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <style>
-    body {
-      max-width: 2000px;
-      margin:0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                   Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.6;
-      color: #222;
-      display: flex;
-    }
-
-        nav {
-            width: 420px;
-            background-color: #9C501E; /* green */
-            color: white;
-            padding: 20px;
-            padding-left: 200px;
-            padding-top: 20px;
-            padding-right:120px;
-            line-height: 2;
-            height: calc(100vh); /* full height */
-            box-sizing: border-box;
-        }
-
-        nav a {
-            display: block;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            margin: 10px 0;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-    
-        main {
-            flex: 1;
-            padding: 10px;
-            padding-left: 60px;
-            padding-right: 60px;
-            box-sizing: border-box;
-        }
-
-        aside {
-            width: 420px;
-            background-color: #9C501E; /* green */
-            color: white;
-            padding: 20px;
-            padding-right: 250px;
-            height: calc(100vh); /* full height */
-            box-sizing: border-box;
-        }
-
-
-    h1, h2, h3 {
-      font-family: 'Dancing Script', cursive;
-      line-height: 1.25;
-    }
-    
-
-    h1 {
-      margin-bottom: 0.25rem;
-      text-align: center;
-      color: #333;
-      font-size: 40px;
-      padding-bottom: 5px;
-    }
-
-    h2 {
-      margin-top: 2rem;
-      border-bottom: 1px solid #ddd;
-      text-align: center;
-      padding-bottom: 0.25rem;
-    }
-
-    ul {
-      padding-left: 1.25rem;
-    }
-
-    a {
-      color: #9C501E;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .subtitle {
-      color: #555;
-      margin-top: 0;
-    }
-
-    footer {
-            position: fixed;
-            bottom: 0;
-            left: 0px; /* match sidebar width */
-            width: calc(100%);
-            background-color: #9C501E;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-        }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
   <nav>
-        <h2>Menu</h2>
-        <a href="index.html">Home</a>
-        <a href="talks.html">Talks</a>
-        <a href="about.html">About Me</a>
-        <a href="shot.html">SHoT Group</a>
-    </nav>
+      <h2>Menu</h2>
+      <a href="index.html">Home</a>
+      <a href="talks.html" class="active">Talks</a>
+      <a href="about.html">About Me</a>
+  </nav>
 
   <main>
     <header>
@@ -130,7 +25,7 @@
     <section>
       <h2>2025</h2>
       <p>
-        I gave two talks at the Homological Algebra Reading Group, coordinated by <a href="https://www.maths.usyd.edu.au/ut/people?who=WN_Hobkirk">Will Hobkirk</a> and <a href="https://www.maths.usyd.edu.au/u/damianl/">Damian Lin</a>. The first was an introductory talk on simplicial sets. The second introduced the Ext and Tor functors from the perspective of projective and injective resolutions, and presented a quick proof of the Universal Coefficient Theorem based on the exposition in Weibel's textbook. The latter talk was recorded by Will and may be viewed in parts <a href="https://youtu.be/xML5WapJYnk">here</a> and <a href="https://youtu.be/9Sa905xFciY">here</a>.
+        I gave two talks at the Homological Algebra Reading Group, coordinated by <a href="https://www.maths.usyd.edu.au/ut/people?who=WN_Hobkirk">Will Hobkirk</a> and <a href="https://www.maths.usyd.edu.au/u/damianl/">Damian Lin</a>. The first was an introductory talk on simplicial sets. The second talk introduced the Ext and Tor functors from the perspective of projective and injective resolutions, and presented a quick proof of the Universal Coefficient Theorem based on the exposition in Weibel's textbook. The latter talk was recorded by Will and may be viewed in parts <a href="https://youtu.be/xML5WapJYnk">here</a> and <a href="https://youtu.be/9Sa905xFciY">here</a>.
       </p>
       <p>
         I also gave a few informal presentations at <a href="https://www.zsuzsannadancso.net/">Zsuzsanna Dancso</a>'s Knot at Lunch group.
@@ -139,8 +34,9 @@
   </main>
 
   <aside>
-        
-    </aside>
+      <h2>Courses</h2>
+      <a href="shot.html">SHoT Group</a>
+  </aside>
 
   <footer>
     Contact me at declantzammit@gmail.com
