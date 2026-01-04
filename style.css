@@ -58,7 +58,7 @@ main#shot {
 
 main#shot .shot-inner{
   margin-left: calc(50vw - 250px);
-  width: 500px;
+  width: clamp(200px, 90vw, 500px);
 }
 
 main {
@@ -127,6 +127,8 @@ h1#shot {
     border-bottom: 2px solid #ddd;
     padding-bottom: 20px;
     font-weight: normal!important;
+    width: clamp(200px, 90vw, 500px);
+    font-size: 40px;
     z-index: 200;
 }
 
