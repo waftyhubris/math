@@ -71,7 +71,7 @@ function maybeAddFooterShot() {
     if (!existingFooter) {
       const footer = document.createElement("footer");
       footer.id = "fo";
-      footer.innerHTML = `If you are interested in attending or giving a talk, contact me at declantzammit@gmail.com`;
+      footer.innerHTML = `Come along, we'd love to see you there!`;
       document.body.appendChild(footer);
     }
   } else {
