@@ -12,6 +12,11 @@ body {
     display: flex;
 }
 
+.logo {
+  width: 120px;
+  height: auto;
+}
+
 nav {
     position: fixed;
     left:0;
@@ -60,6 +65,15 @@ main#mobile-wrapper {
   padding-top:93px;
 }
 
+main#shot {
+  background-color: var(--main-color);
+  color: white;
+}
+
+main#shot a {
+  color: white;
+}
+
 aside {
     position: fixed;
     right: 0;
@@ -88,6 +102,15 @@ aside a {
 
 aside a:hover {
     text-decoration: underline;
+}
+
+h1#shot {
+    font-family: Garamond, "Times New Roman", serif;
+    line-height: 1.25;
+    color:white;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 20px;
+    font-weight: normal!important;
 }
 
 
