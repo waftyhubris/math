@@ -53,7 +53,7 @@ main#mobile-wrapper {
   padding-left: 20px;
   padding-right:20px;
   padding-bottom:120px;
-  padding-top:90px;
+  padding-top:93px;
 }
 
 aside {
@@ -158,12 +158,13 @@ footer {
 
 #he {
     position: fixed;
-    top: 40px; /* height of #titlehe */
+    top: 43px; /* height of #titlehe */
     left: 0;
     width: 100%;
     box-sizing: border-box; 
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 50px;
     align-items: center;
     background-color: #9C501E;
     padding: 10px 20px;
