@@ -1,3 +1,7 @@
+:root {
+    --main-color:#BA0B3A;
+}
+
 body {
     max-width: 2000px;
     margin:0;
@@ -13,7 +17,7 @@ nav {
     left:0;
     top:0;
     width: calc(30vw - 30px);
-    background-color: #9C501E; /* green */
+    background-color: var(--main-color); /* green */
     color: white;
     padding: 20px;
     padding-left: calc(25vw - 160px);
@@ -61,7 +65,7 @@ aside {
     right: 0;
     top: 0;
     width: calc(30vw - 30px);
-    background-color: #9C501E; /* green */
+    background-color: var(--main-color); /* green */
     color: white;
     padding: 20px;
     padding-right: calc(25vw - 160px);
@@ -120,7 +124,7 @@ ul {
 }
 
 a {
-    color: #9C501E;
+    color: var(--main-color);
     text-decoration: none;
 }
 
@@ -138,7 +142,7 @@ footer {
         bottom: 0;
         left: 0px; /* match sidebar width */
         width: calc(100%);
-        background-color: #9C501E;
+        background-color: var(--main-color);
         color: white;
         text-align: center;
         padding: 10px 0;
@@ -150,7 +154,7 @@ footer {
     top: 0;
     left: 0px; /* match sidebar width */
     width: calc(100%);
-    background-color: #9C501E;
+    background-color: var(--main-color);
     color: white;
     text-align: center;
     z-index: 2;
@@ -166,7 +170,7 @@ footer {
     justify-content: center;
     gap: 50px;
     align-items: center;
-    background-color: #9C501E;
+    background-color: var(--main-color);
     padding: 10px 20px;
     z-index: 1;
 }
@@ -184,7 +188,7 @@ footer {
   display: flex;                  /* arrange children in a row */
   justify-content: center; /* space out the columns */
   align-items: center;            /* vertical alignment */
-  background-color: #9C501E;       /* header color */
+  background-color: var(--main-color);       /* header color */
   padding: 10px 20px;             /* some padding top/bottom and sides */
 }
 
