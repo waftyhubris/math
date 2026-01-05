@@ -12,16 +12,15 @@ body {
     justify-content: center;
     background-color: var(--main-color);
     color: white;
+    overflow-y: auto;
 }
 
 main {
     padding: 0;
     padding-top: 15vh;
-    padding-bottom: 50px;
     height: 100vh;
     box-sizing: border-box;
-    overflow-y: auto;
-    font-size: 23px;
+    font-size: clamp(7px, 2.628vw, 23px);
 }
 
 div {
@@ -47,7 +46,7 @@ h1 {
     padding-bottom: 20px;
     font-weight: normal!important;
     width: clamp(200px, 80vw, 700px);
-    font-size: 58px;
+    font-size: clamp(16.57px, 6.628vw, 58px);
     z-index: 200;
     text-align: center;
 }
@@ -66,7 +65,7 @@ h4 {
 }
 
 .logo {
-    width: clamp(45px, 34vw, 160px);
+    width: clamp(45px, 18.28vw, 160px);
     height: auto;
     margin-top: 15vh; 
     display: block;
