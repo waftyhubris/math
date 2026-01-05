@@ -19,11 +19,11 @@ main {
     padding: 0;
     padding-top: 15vh;
     box-sizing: border-box;
-    font-size: clamp(7px, 3vw, 23px);
+    font-size: clamp(7px, 3.5vw, 23px);
 }
 
 div {
-    width: clamp(200px, 80vw, 700px);
+    width: clamp(200px, 90vw, 700px);
     /* margin-left: calc(50vw - 250px);
     width: clamp(200px, 90vw, 500px); */
 }
@@ -44,8 +44,8 @@ h1 {
     border-bottom: 3px solid #ddd;
     padding-bottom: 20px;
     font-weight: normal!important;
-    width: clamp(200px, 80vw, 700px);
-    font-size: clamp(16.57px, 7.5vw, 58px);
+    width: clamp(200px, 90vw, 700px);
+    font-size: clamp(16.57px, 8.5vw, 58px);
     z-index: 200;
     text-align: center;
 }
