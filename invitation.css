@@ -19,11 +19,11 @@ main {
     padding: 0;
     padding-top: 15vh;
     box-sizing: border-box;
-    font-size: clamp(7px, 3.5vw, 23px);
+    font-size: clamp(7px, 3.5vw, 17.25px);
 }
 
 div {
-    width: clamp(200px, 85vw, 700px);
+    width: clamp(200px, 85vw, 525px);
     /* margin-left: calc(50vw - 250px);
     width: clamp(200px, 90vw, 500px); */
 }
@@ -42,10 +42,10 @@ h1 {
     line-height: 1.25;
     color:white;
     border-bottom: clamp(0px, 0.42vw, 3px) solid #ddd;
-    padding-bottom: clamp(0px, 2.8vw, 20px);
+    padding-bottom: clamp(0px, 2.8vw, 15px);
     font-weight: normal!important;
-    width: clamp(200px, 85vw, 700px);
-    font-size: clamp(16.57px, 8vw, 58px);
+    width: clamp(200px, 85vw, 525px);
+    font-size: clamp(16.57px, 8vw, 43.5px);
     z-index: 200;
     text-align: center;
 }
@@ -64,7 +64,7 @@ h4 {
 }
 
 .logo {
-    width: clamp(45px, 25vw, 160px);
+    width: clamp(45px, 25vw, 120px);
     height: auto;
     margin-top: 15vh; 
     display: block;
