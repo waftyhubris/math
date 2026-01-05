@@ -41,7 +41,7 @@ h1 {
     font-family: Garamond, "Times New Roman", serif;
     line-height: 1.25;
     color:white;
-    border-bottom: clamp(0px, 0.42vw, 3px);
+    border-bottom: clamp(0px, 0.42vw, 3px) solid #ddd;
     padding-bottom: clamp(0px, 2.8vw, 20px);
     font-weight: normal!important;
     width: clamp(200px, 85vw, 700px);
