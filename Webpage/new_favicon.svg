@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="42mm"
+   height="42mm"
+   viewBox="0 0 42 42"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="new_favicon.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="5.9005745"
+     inkscape:cx="68.891597"
+     inkscape:cy="79.737999"
+     inkscape:window-width="1920"
+     inkscape:window-height="1191"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <defs
+     id="defs1">
+    <rect
+       x="255.61136"
+       y="109.71997"
+       width="270.07993"
+       height="314.69135"
+       id="rect1" />
+  </defs>
+  <g
+     id="layer1"
+     transform="matrix(0.98443512,0,0,1.0060775,-81.037286,-125.11969)"
+     style="fill:#ba0b3a;fill-opacity:1">
+    <path
+       style="fill:#ba0b3a;fill-opacity:1;stroke-width:0.264583"
+       id="path2"
+       d="m 99.180328,124.36387 c 0,15.02306 -1.838698,16.86176 -16.861763,16.86176 -15.023064,0 -16.861763,-1.8387 -16.861763,-16.86176 0,-15.02307 1.838699,-16.86176 16.861763,-16.86176 15.023065,0 16.861763,1.83869 16.861763,16.86176 z"
+       transform="matrix(1.2651127,0,0,1.2378981,-0.49166658,-8.712781)" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.1978619,0,0,0.1978619,26.854527,105.09472)"
+       id="text1"
+       style="font-size:192px;line-height:1;font-family:'Adobe Devanagari';-inkscape-font-specification:'Adobe Devanagari';text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect1);display:inline;fill:#ffffff;fill-opacity:1"><tspan
+         x="294.65137"
+         y="278.6582"
+         id="tspan4"><tspan
+           style="font-weight:500;font-family:'Yu Gothic';-inkscape-font-specification:'Yu Gothic Medium'"
+           id="tspan1">す</tspan></tspan></text>
+  </g>
+</svg>

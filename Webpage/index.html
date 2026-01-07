@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="new_favicon.svg">
+  <link rel="apple-touch-icon" href="new_favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Declan Zammit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <script src="layout_switcher.js"></script>
+</head>
+
+<body>
+  <div id="desktop-layout">
+    <div class="left-column">
+      <nav>
+          <h2>Menu</h2>
+          <a href="#" class="active">Home</a>
+          <a href="talks.html">Talks</a>
+          <a href="about.html">About Me</a>
+      </nav>
+    </div>
+
+    <div class="content">
+      <main>
+        <header>
+          <h1>Declan Zammit</h1>
+        </header>
+        <section>
+          <p>
+            I am an Australian maths student interested in homotopy theory and higher category theory. I am currently completing a Masters of Research at Macquarie University under <a href="https://researchers.mq.edu.au/en/persons/steve-lack/">Steve Lack</a>. The goal of the project is to determine constraints for the choice of isofibrations in the structure of an &infin;-cosmos.
+          </p>
+          <p>
+            Previously, I completed a Bachelor of Science (Honours) at the University of Sydney. My Honours thesis was supervised by <a href="https://www.maths.usyd.edu.au/u/kevinc/">Kevin Coulembier</a>, and described a new version of the Pontryagin-Thom construction from the perspective of simplicial homotopy theory. I am still thinking about this and I hope to publish about it once I understand it better.
+          </p>
+          <p>
+            Before that, I completed a Bachelor of Arts and Advanced Studies at the University of Sydney. This is just a strange name for a double degree that allowed me to pursue degrees in mathematics and Ancient Greek.
+          </p>
+        </section>
+        <section>
+          <h2>Stable Homotopy Theory Reading Group</h2>
+          <p>
+            This year, I will be running a reading group for stable homotopy theory at the University of Sydney. For now, the goal of the group is to introduce the Adams spectral sequence. Along the way we will talk about Steenrod operations, spectral sequences, Hopf algebras and generalised cohomology theories. At the beginning of the course we will be following <a href="https://webhomes.maths.ed.ac.uk/~v1ranick/papers/moshtang.pdf">Mosher-Tangora</a>, but we may jump to Ravenel's <a href="https://webhomes.maths.ed.ac.uk/~v1ranick/papers/ravenel2.pdf">green book</a> later in the semester. If you would like to join the group or contribute a talk, send me an email! The main webpage for the reading group is linked <a href="../SHoT/shot.html">here</a>.
+          </p>
+        </section>
+      </main>
+    </div>
+
+    <div class="right-column">
+      <aside>
+          <h2>Courses</h2>
+          <a href="../SHoT/shot.html">SHoT Group</a>
+      </aside>
+    </div>
+
+    <footer>
+      Contact me at declantzammit@gmail.com
+    </footer>
+  </div>
+
+  <div id="mobile-layout">
+    <header id="titlehe">
+      <h3>
+        Declan Zammit
+      </h3>
+    </header>
+    <header id="he">
+      <div class="col"><a href="index.html" class="mactive">Home</a></div>
+      <div class="col"><a href="talks.html">Talks</a></div>
+      <div class="col"><a href="about.html">About Me</a></div>
+    </header>
+
+    <div class="content">
+      <main id="mobile-wrapper">
+        <section>
+          <p>
+            I am an Australian maths student interested in homotopy theory and higher category theory. I am currently completing a Masters of Research at Macquarie University under <a href="https://researchers.mq.edu.au/en/persons/steve-lack/">Steve Lack</a>. The goal of the project is to determine constraints for the choice of isofibrations in the structure of an &infin;-cosmos.
+          </p>
+          <p>
+            Previously, I completed a Bachelor of Science (Honours) at the University of Sydney. My Honours thesis was supervised by <a href="https://www.maths.usyd.edu.au/u/kevinc/">Kevin Coulembier</a>, and described a version of the Pontryagin-Thom construction which could be described from the perspective of simplicial homotopy theory. I am still thinking about this and I hope to publish about it once I understand it better.
+          </p>
+          <p>
+            Before that, I completed a Bachelor of Arts and Advanced Studies at the University of Sydney. This is just a strange name for a double degree that allowed me to pursue degrees in mathematics and Ancient Greek.
+          </p>
+        </section>
+        <section>
+          <h2>Stable Homotopy Theory Reading Group</h2>
+          <p>
+            This year, I will be running a reading group for stable homotopy theory at the University of Sydney. For now, the goal of the group is to introduce the Adams spectral sequence. Along the way we will talk about Steenrod operations, spectral sequences, Hopf algebras and generalised cohomology theories. At the beginning of the course we will be following <a href="https://webhomes.maths.ed.ac.uk/~v1ranick/papers/moshtang.pdf">Mosher-Tangora</a>, but we may jump to Ravenel's <a href="https://webhomes.maths.ed.ac.uk/~v1ranick/papers/ravenel2.pdf">green book</a> later in the semester. If you would like to join the group or contribute a talk, send me an email! The main webpage for the reading group is linked <a href="../SHoT/shot.html">here</a>.
+          </p>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // Run on page load
+    chooseLayout();
+
+    // Optional: update if user resizes window
+    window.addEventListener('resize', chooseLayout);
+  </script>
+
+</body>
+</html>
