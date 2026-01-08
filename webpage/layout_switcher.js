@@ -52,7 +52,7 @@ function maybeAddFooter() {
     if (!existingFooter) {
       const footer = document.createElement("footer");
       footer.id = "fo";
-      footer.innerHTML = `<div class="col"><a href="shot.html">SHoT Group</a></div>`;
+      footer.innerHTML = `<div class="col"><a href="../shot/shot.html">SHoT Group</a></div>`;
       document.body.appendChild(footer);
     }
   } else {
