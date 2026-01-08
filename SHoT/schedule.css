@@ -1,6 +1,14 @@
 :root {
     --main-color:#BA0B3A;
-    --pearl: #F7F4E4;
+    --pearl: #FFFDF7;
+    --offpearl: #FFFCF0;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-y: hidden;
 }
 
 h1 {
@@ -12,6 +20,18 @@ h1 {
     font-size: 40px;
     z-index: 200;
     width: 670px;
+    text-align: center;
+}
+
+h2 {
+    font-family: Garamond, "Times New Roman", serif;
+    line-height: 0.5;
+    color:black;
+    width: 400px;
+    padding-bottom: 0px;
+    font-weight: normal;
+    font-size: 30px;
+    z-index: 200;
     text-align: center;
 }
 
@@ -39,17 +59,17 @@ header {
   width: auto;
 }
 
+.weekly {
+    padding-top: 4px;
+    width: 300px; /* adjust as needed */
+    height: auto;
+    align-content: center;
+    display: block;
+    margin: 0 auto;
+}
+
 main {
-    width: 500px;
-    padding-top: 95px;
-    margin: 0 auto;   /* centers the box itself */
-    padding-left: 40px;
-    padding-right: 40px;
-    text-align: left;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--pearl);
-    height: 100vh;
+    margin: 0 auto;
 }
 
 a {
@@ -59,4 +79,28 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+.scroll {
+  display: flex;          /* space between the sections */
+  align-items: flex-start;
+  width: 500px;
+}
+
+section.odd{
+    background-color: var(--pearl);               /* equal width columns */
+}
+
+section.even{
+    background-color: var(--offpearl);               /* equal width columns */
+}
+
+.scroll section {
+    flex: 1;
+    padding: 95px 40px 0;
+    text-align: left;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Roboto, Helvetica, Arial, sans-serif;
+    height: calc(100vh);
+    box-sizing: border-box;               /* equal width columns */
 }
