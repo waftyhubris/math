@@ -19,7 +19,7 @@ main {
     padding: 0;
     padding-top: 15vh;
     box-sizing: border-box;
-    font-size: clamp(7px, 3.5vw, 17.25px);
+    font-size: 17.25px;
 }
 
 div {
