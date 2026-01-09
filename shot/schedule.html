@@ -8,94 +8,129 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Declan Zammit</title>
   <link rel="stylesheet" href="schedule.css">
+  <script src="layout_switcher_shot.js"></script>
 </head>
 
-<div>
-    <header>
-        <div class="header-inner">
-            <img src="shot_logo.png" alt="It's not a Roman cult I swear" class="logo">
-            <h1>Stable Homotopy Theory Reading Group</h1>
-        </div>
-    </header>
+<main>
+    <div class="desktop-layout", id="desktop-layout">
 
-    <main>
+        <header>
+            <div class="header-inner">
+                <a href="shot.html">
+                    <img src="shot_logo.png" alt="It's not a Roman cult I swear" class="logo">
+                </a>
+                <h1>Stable Homotopy Theory Reading Group</h1>
+            </div>
+        </header>
+
         <div class="scroll">
-            <section class="odd">
+            <section class="divide">
+            </section>
+            
+            <section>
+                <h4></h4>
                 <h2>
-                Week 1: Spectral Sequences
+                    Week 1: Spectral Sequences
                 </h2>
-                <p>
-                Abstract: The first talk in our reading group! We will define spectral sequences, and use as our motivating example the spectral sequence of a filtered complex. We will then introduce the spectral sequence of a double complex, and produce quick and marvelous proofs of some results in homological algebra, such as the five lemma and the snake lemma.
-                </p>
-                <p>
-                Speaker: <a href="../webpage/index.html">Declan Zammit</a>, Macquarie University
-                </p>
-                <img src="week_1.png" alt="Horizontal filtration on double complex" class = "weekly">
-                <p>
-                The notes and video will be made available after the talk.
-                </p>
+                <h3>
+                Date and location to be confirmed
+                </h3>
+                <div class="week1"></div>
             </section>
 
-            <section class="even">
+            <section class="divide">
+            </section>
+
+            <section>
+                <h4></h4>
                 <h2>
                 Week 2: Steenrod Squares
                 </h2>
-                <p>
-                Abstract: We will concretely introduce the Steenrod squares, which are precisely the stable cohomology operations on the modulo 2 cochains of a topological space. The method we use is a combination of the ones used by Mosher-Tangora and Lurie. We then prove some of the basic properties of Steenrod squares, including the Cartan formula and the Adem relations.
-                </p>
-                <p>
-                Speaker: <a href="../webpage/index.html">Declan Zammit</a>, Macquarie University
-                </p>
-                <img src="week_2.png" alt="Horizontal filtration on double complex" class = "weekly">
-                <p>
-                The notes and video will be made available after the talk.
-                </p>
+                <h3>
+                Date and location to be confirmed
+                </h3>
+                <div class="week2"></div>
+            </section>
+
+            <section class="divide">
             </section>
 
             <section class="odd">
+                <h4></h4>
                 <h2>
                 Week 3: Hopf Algebras
                 </h2>
-                <p>
-                Abstract: To be confirmed.
-                </p>
-                <p>
-                Speaker: To be confirmed.
-                </p>
-                <p>
-                The notes and video will be made available after the talk.
-                </p>
+                <h3>
+                Date and location to be confirmed
+                </h3>
+                <div class="week3"></div>
             </section>
 
-            <section class="even">
-                <h2>
-                Week 4: Spectra
-                </h2>
-                <p>
-                Abstract: To be confirmed.
-                </p>
-                <p>
-                Speaker: To be confirmed.
-                </p>
-                <p>
-                The notes and video will be made available after the talk.
-                </p>
+            <section class="divide">
+            </section>
+
+            <!-- <section class="even">
+                <div class="week4"></div>
+            </section>
+
+            <section class="divide">
             </section>
 
             <section class="odd">
-                <h2>
-                Week 5: Cohomology Theories
-                </h2>
-                <p>
-                Abstract: To be confirmed.
-                </p>
-                <p>
-                Speaker: To be confirmed.
-                </p>
-                <p>
-                The notes and video will be made available after the talk.
-                </p>
+                <div class="week5"></div>
+            </section>
+
+            <section class="divide"> -->
             </section>
         </div>
-    </main>
-  </div>
+
+        <footer>
+        </footer>
+    </div>
+
+    <div class="mobile-layout", id="mobile-layout">
+        <header class="mobile-header">
+            <div class="header-inner">
+                <a href="shot.html">
+                    <img src="shot_logo.png" alt="It's not a Roman cult I swear" class="logo">
+                </a>
+                <h5>Stable Homotopy Theory<br>Reading Group</h5>
+            </div>
+        </header>
+
+        <div class="stack">
+            <section>
+                <h6>Week 1: Spectral Sequences</h6>
+                <div class="week1"></div>
+            </section>
+
+            <section>
+                <h6>Week 2: Steenrod Squares</h6>
+                <div class="week2"></div>
+            </section>
+
+            <section>
+                <h6>Week 3: Hopf Algebras</h6>
+                <div class="week3"></div>
+            </section>
+
+            <!-- <section>
+                <div class="week4"></div>
+            </section>
+
+            <section>
+                <div class="week5"></div>
+            </section> -->
+        </div>
+    </div>
+</main>
+
+<script src="weeks_storage.js"></script>
+
+<script>
+    // Run on page load
+    chooseLayout();
+
+    // Optional: update if user resizes window
+    window.addEventListener('resize', chooseLayout);
+</script>
