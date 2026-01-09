@@ -165,7 +165,7 @@ a:hover {
 .mobile-layout {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
                  Roboto, Helvetica, Arial, sans-serif;
-    padding: 75px 40px 0;
+    padding: 75px 14px 0;
 }
 
 .stack {
@@ -173,7 +173,7 @@ a:hover {
 }
 
 .stack section {
-    padding-bottom: 35px
+    padding-bottom: 35px;
 }
 
 .centered {
