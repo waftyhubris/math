@@ -88,8 +88,8 @@ header {
     width: 100%;
     height: 140px;
     background-color: var(--main-color);
-    padding-top: 20px;
-    padding-bottom: 25px;
+    padding-top: 15px;
+    padding-bottom: 20px;
 
     display: flex;
     justify-content: center;   /* centers the group in the header */
@@ -116,6 +116,12 @@ footer {
 .logo {
   padding-top: 2px;
     height: 60px; /* adjust as needed */
+  width: auto;
+}
+
+.mobile-logo {
+  padding-top: 2px;
+    height: 45px; /* adjust as needed */
   width: auto;
 }
 
@@ -168,7 +174,7 @@ a:hover {
 .mobile-layout {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
                  Roboto, Helvetica, Arial, sans-serif;
-    padding: 75px 14px 0;
+    padding: 65px 14px 0;
     line-height: 1.6;
 }
 
