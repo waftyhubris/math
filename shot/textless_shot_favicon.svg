@@ -99,7 +99,7 @@
        id="rect1-3" /><linearGradient
        inkscape:collect="always"
        xlink:href="#swatch1"
-       id="linearGradient18"
+       id="linearGradient2"
        gradientUnits="userSpaceOnUse"
        x1="188.12109"
        y1="153.17848"
@@ -113,14 +113,14 @@
        id="path2"
        d="m 123.65463,43.054118 c 0,16.68208 -2.04043,18.723829 -18.7118,18.723829 -16.671365,0 -18.711804,-2.041749 -18.711804,-18.723829 0,-16.68209 2.040439,-18.723828 18.711804,-18.723828 16.67137,0 18.7118,2.041738 18.7118,18.723828 z" /><text
        xml:space="preserve"
-       transform="matrix(0.67576403,0,0,0.67576403,-36.971368,-60.658241)"
+       transform="matrix(0.53977707,0,0,0.53977707,-8.4146366,-40.423277)"
        id="text2"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:64px;font-family:'Bell MT';-inkscape-font-specification:'Bell MT';text-align:start;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect2);display:inline;fill:#1b839e;fill-opacity:1;stroke:url(#linearGradient18)"><tspan
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:64px;font-family:'Bell MT';-inkscape-font-specification:'Bell MT';text-align:start;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect2);display:inline;fill:#1b839e;fill-opacity:1;stroke:url(#linearGradient2)"><tspan
          x="185.43359"
          y="174.85035"
-         id="tspan3"><tspan
+         id="tspan4"><tspan
            style="fill:#ffffff"
-           id="tspan1">Ω</tspan></tspan></text><text
+           id="tspan2">Ω</tspan></tspan></text><text
        xml:space="preserve"
        transform="scale(0.26458333)"
        id="text3"
