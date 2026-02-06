@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="hieroglyphs_favicon.svg">
+  <link rel="apple-touch-icon" href="shot_favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>The Hieroglyphics Archive</title>
+  <link rel="stylesheet" href="flashcard.css">
+</head>
+<main>
+    <div class="desktop-layout", id="desktop-layout">
+
+        <header>
+            <div class="header-inner">
+                <a href="hieroglyphs.html">
+                    <img src="hieroglyphs_logo.png" alt="Pretty bird" class="logo">
+                </a>
+                <h1>The Hieroglyphics Archive</h1>
+            </div>
+        </header>
+
+        <div class="scroll">
+            <section class="divide">
+            </section>
+            
+            <section>
+                <h4></h4>
+                
+                <div class="flashcard">
+                    <img src="speech/proof_of_concept.png" alt="speech_bubble" class="speech">
+                    <img id ="randomImage" src="" alt="speaking_character" class="speaker">
+                </div>
+            </section>
+
+            <section class="divide">
+            </section>
+            </section>
+        </div>
+
+        <footer>
+        </footer>
+    </div>
+
+    <script>
+        const images = [
+            "speaking_avatars/man.svg",
+            "speaking_avatars/cobra.svg",
+            "speaking_avatars/falcon.svg"
+        ];
+
+        const img = document.getElementById("randomImage");
+        const randomIndex = Math.floor(Math.random() * images.length);
+        img.src = images[randomIndex];
+    </script>
+
+</main>
