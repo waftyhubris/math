@@ -1,5 +1,6 @@
 :root {
     --main-color:#ff6500ff;
+    --sub-color: rgb(174, 69, 0);
     --pearl: #FFFDF7;
     --offpearl: white;
 }
@@ -28,56 +29,12 @@ h1 {
     text-align: center;
 }
 
-h2 {
-    font-family: Georgia, "Times New Roman", serif;
-    line-height: 0.1;
-    color:black;
-    padding-bottom: 0px;
-    font-weight: normal;
-    font-size: 30px;
-    z-index: 200;
-    text-align: center;
-}
-
-h3 {
-    font-family: Georgia, "Times New Roman", serif;
-    line-height: 0.5;
-    color:black;
-    padding-top: 0px;
-    padding-bottom: 5px;
-    font-weight: normal;
-    font-size: 20px;
-    z-index: 200;
-    text-align: center;
-}
-
 h4 {
     width: 500px;
 }
 
 h5 {
-    font-family: Georgia, "Times New Roman", serif;
-    line-height: 1.2;
-    color:white;
-    padding-bottom: 2px;
-    font-weight: normal;
-    font-size: clamp(25px, 0.45vw, 32px);
-    z-index: 200;
-    text-align: center;
-    margin-left: 10px;
-}
-
-h6 {
-    font-family: Garamond, "Times New Roman", serif;
-    line-height: 0;
-    color:black;
-    padding-top: 0px;
-    padding-bottom: 2px;
-    margin-bottom: 26px;
-    margin-top: 15px;
-    font-weight: normal;
-    font-size: 24px;
-    text-align: center;
+    width: 600px;
 }
 
 header {
@@ -85,10 +42,10 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    height: 130px;
+    height: 120px;
     background-color: var(--main-color);
     padding-top: 5px;
-    padding-bottom: 50px;
+    padding-bottom: 40px;
 
     display: flex;
     justify-content: center;   /* centers the group in the header */
@@ -99,8 +56,8 @@ footer {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: calc(100vh - 510px);
-    background-color: var(--main-color);
+    height: calc(100px);
+    background-color: var(--sub-color);
 
     display: flex;
     justify-content: center;   /* centers the group in the header */
@@ -131,21 +88,40 @@ a:hover {
   align-items: flex-start;
 }
 
+.bottom-scroll {
+  display: flex;          /* space between the sections */
+  align-items: flex-start;
+}
+
 .divide {
     background-color: var(--main-color)!important;
 }
 
 .scroll section {
     flex: 1;
-    padding: 160px 40px 0;
+    padding: 0px 40px 0;
+    margin-top: 165px;
     justify-content: center;
     align-content: center;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
                  Roboto, Helvetica, Arial, sans-serif;
-    height: calc(100vh - 350px);
+    height: calc(100vh - 550px);
     background-color: var(--pearl); 
     box-sizing: border-box;               /* equal width columns */
-    padding-bottom:30px;
+    padding-bottom:10px;
+}
+
+.bottom-scroll section {
+    flex: 1;
+    padding: 0px 40px 0;
+    justify-content: center;
+    align-content: top;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Roboto, Helvetica, Arial, sans-serif;
+    height: calc(100vh - 550px);
+    background-color: var(--pearl); 
+    box-sizing: border-box;               /* equal width columns */
+    padding-bottom:10px;
 }
 
 .logo {
@@ -170,4 +146,80 @@ a:hover {
 
 .speech {
     height: 100px;
+}
+
+#flashcard {
+    border: 4px solid var(--sub-color);
+    border-bottom: 10px solid var(--sub-color);
+}
+
+#sentence {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top:0px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: left!important;
+}
+
+#buttons {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+button.word {
+  padding-top:8px;
+  padding-bottom:10px;
+  padding-left:16px;
+  padding-right:16px;
+  margin-top:10px;
+  margin-bottom:10px;
+  font-weight: normal;
+  font-size: 1.2em;
+  border-radius: 16px;   /* ellipse / pill */
+  background: white;
+  color: var(--sub-color);
+  border: 2px solid var(--sub-color);
+  border-bottom: 4px solid var(--sub-color);
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Roboto, Helvetica, Arial, sans-serif;
+}
+
+button.word:active {
+    border-bottom: 2px solid var(--sub-color); /* optional: make it feel pressed */
+}
+
+button.word:disabled {
+  background: #e0e0e0;
+  color: #666;
+  border-color: #ccc;
+  cursor: pointer; /* optional: prevents hover effects entirely */
+}
+
+button.word:disabled {
+  background: #e0e0e0;
+  color: #666;
+  border-color: #ccc;
+  cursor: pointer;        /* keep cursor consistent */
+}
+
+.sentence-section {
+    background-color: var(--main-color)!important;
+    vertical-align: top!important;
+    padding-top: 0px!important;
+    justify-content: top!important;
+    margin-top: 0px!important;
+}
+
+#weak {
+    height: 300px!important;
+    padding-top: 0px!important;
+    margin-top: 0px!important;
 }

@@ -25,21 +25,61 @@
             <section class="divide">
             </section>
             
-            <section>
+            <section id="flashcard">
                 <h4></h4>
                 
                 <div class="flashcard">
-                    <img src="speech/lesson1/sentence1/lesson1_sentence1.png" alt="speech_bubble" class="speech">
+                    <img src="speech/lesson1/sentence1/lesson1_sentence1.svg" alt="speech_bubble" class="speech">
                     <img id ="randomImage" src="" alt="speaking_character" class="speaker">
                 </div>
             </section>
 
             <section class="divide">
             </section>
+        </div>
+
+        <div class="bottom-scroll">
+            <section class="divide">
+            </section>
+            
+            <section class="sentence-section">
+    
+                <h5></h5>
+
+                <div id="sentence" class="container"></div>
+            </section>
+
+            <section class="divide">
             </section>
         </div>
 
         <footer>
+            <div id="buttons">
+                <button class="word" data-word="I">I</button>
+                <button class="word" data-word="am">am</button>
+                <button class="word" data-word="a">a</button>
+                <button class="word" data-word="child">child</button>
+                <button class="word" data-word="Egypt">Egypt</button>
+                <button class="word" data-word="man">man</button>
+                <button class="word" data-word="god">god</button>
+                <button class="word" data-word="Ptah">Ptah</button>
+            </div>
+
+            <script>
+            const container = document.getElementById("buttons");
+            const nodes = Array.from(container.children);
+
+            // Fisher–Yates shuffle
+            for (let i = nodes.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [nodes[i], nodes[j]] = [nodes[j], nodes[i]];
+            }
+
+            // Re-append nodes in new order (does not break links)
+            nodes.forEach(node => container.appendChild(node));
+        </script>
+
+        <script src="script.js"></script>
         </footer>
     </div>
 
