@@ -26,7 +26,7 @@ document.getElementById("check-button").addEventListener("click", () => {
 
 const buttonSets = {
     1: [
-        "I", "am", "a", "child", "Egypt", "man", "god", "Ptah"
+        "I", "am", "her", "child", "Egypt", "man", "god", "Ptah"
     ],
     2: [
         "he", "is", "the", "king", "of", "the", "gods", "desert"
@@ -44,7 +44,7 @@ const buttonSets = {
 
 const answerSet = {
     1: [
-        "I am a child"
+        "I am her child"
     ],
     2: [
         "He is the king of the gods"
@@ -62,14 +62,10 @@ const answerSet = {
 
 const avatars = {
     1: [
-        "../../speaking_avatars/man.svg",
-        "../../speaking_avatars/cobra.svg",
-        "../../speaking_avatars/falcon.svg"
+        "../../speaking_avatars/man.svg"
     ],
     2: [
-        "../../speaking_avatars/man.svg",
-        "../../speaking_avatars/cobra.svg",
-        "../../speaking_avatars/falcon.svg"
+        "../../speaking_avatars/cobra.svg"
     ],
     3: [
         "../../speaking_avatars/falcon.svg"
@@ -89,7 +85,11 @@ const avatars = {
 document.getElementById("win-next").addEventListener("click", () => {
     counter++;
     if (counter >= 6) {
-        counter = 1;
+        // counter = 1;
+        const horizontal = document.getElementById("horizontal-layout");
+        horizontal.classList.add("hidden");
+        const vertical = document.getElementById("vertical-layout");
+        vertical.classList.add("block");
     }
     updatePage();
 });
@@ -97,7 +97,11 @@ document.getElementById("win-next").addEventListener("click", () => {
 document.getElementById("lose-next").addEventListener("click", () => {
     counter++;
     if (counter >= 6) {
-        counter = 1;
+        // counter = 1;
+        const page = document.getElementById("horizontal-layout");
+        page.classList.add("hidden");
+        const vertical = document.getElementById("vertical-layout");
+        vertical.classList.add("block");
     }
     updatePage();
 });

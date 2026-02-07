@@ -77,6 +77,11 @@ header {
     justify-content: center;   /* centers the group in the header */
 }
 
+#vertical-header {
+    height: 100px;
+    padding-bottom: 20px
+}
+
 .header-inner {
     display: flex;
     align-items: center;       /* vertical alignment of logo + text */
@@ -111,6 +116,8 @@ a:hover {
     background-color: var(--main-color)!important;
 }
 
+
+
 .scroll section {
     flex: 1;
     padding: 0px 40px 0;
@@ -125,6 +132,20 @@ a:hover {
     padding-bottom:10px;
 }
 
+#vertical-scroll section {
+    margin-top: 125px;
+    height: calc(100vh - 250px);
+}
+
+.vertical-left-divide, .vertical-right-divide {
+    background-color: var(--main-color)!important;
+}
+
+.vertical-right-divide {
+    max-width: 300px;
+}
+
+
 .bottom-scroll section {
     flex: 1;
     padding: 0px 40px 0;
@@ -136,6 +157,10 @@ a:hover {
     background-color: var(--pearl); 
     box-sizing: border-box;               /* equal width columns */
     padding-bottom:10px;
+}
+
+.vertical-bottom-scroll section {
+    height: 30px;
 }
 
 .logo {
@@ -154,18 +179,52 @@ a:hover {
     gap: 2rem;
 }
 
+#vertical-flashcard {
+    padding-top:15px;
+    flex-direction: column;
+    gap:1.4rem;
+    width: 170px;
+    display: flex;
+    align-content: right;
+}
+
+
 .speaker {
     height: 280px;
+}
+
+.vertical-speaker {
+    width: 150px;
+    padding-left: 10px;
+    padding-right:20px;
 }
 
 .speech {
     height: 100px;
 }
 
+.vertical-speech {
+    width: 70px;
+}
+
 #flashcard {
     border: 4px solid var(--sub-color);
     border-bottom: 10px solid var(--sub-color);
 }
+
+#flashcard-image {
+    align-content: right;
+}
+
+#vertical-flashcard-container {
+    justify-content: right;
+    padding-right:5px;
+    margin-right: 0px;
+    max-width: 230px;
+    border: 4px solid var(--sub-color);
+    border-bottom: 10px solid var(--sub-color);
+}
+
 
 #sentence {
     padding-left: 10px;
@@ -330,3 +389,10 @@ button.inaccessible:active {
     pointer-events: none;
 }
 
+.hidden {
+    display: none;
+}
+
+.block {
+    display: block;
+}
