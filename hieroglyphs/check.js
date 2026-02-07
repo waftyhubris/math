@@ -9,8 +9,14 @@ document.getElementById("check-button").addEventListener("click", () => {
   flashcard.classList.remove("correct", "incorrect");
 
   if (text === "I am a child") {
-    flashcard.style.backgroundColor = "#63c85a";
+    flashcard.style.backgroundColor = "#7fd877";
+    document.getElementById("win-footer").classList.add("show");
   } else {
-    flashcard.style.backgroundColor = "#fb7676";
+    flashcard.style.backgroundColor = "#ffa4a4";
+    document.getElementById("lose-footer").classList.add("show");
   }
+
+  buttons.forEach(button => {
+    button.classList.add("inaccessible"); // replace "new-class" with your class name
+  });
 });

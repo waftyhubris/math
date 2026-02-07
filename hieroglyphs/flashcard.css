@@ -31,6 +31,30 @@ h1 {
     text-align: center;
 }
 
+h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    color:white;
+    padding-bottom: 2px;
+    font-weight: normal;
+    font-size: 30px;
+    z-index: 200;
+    text-align: center;
+    margin-top:0px!important;
+    padding-top:0px!important;
+}
+
+h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    color:white;
+    padding-bottom: 2px;
+    font-weight: normal;
+    font-size: 20px;
+    z-index: 200;
+    text-align: center;
+    margin-top:0px!important;
+    padding-top:0px!important;
+}
+
 h4 {
     width: 500px;
 }
@@ -51,18 +75,6 @@ header {
 
     display: flex;
     justify-content: center;   /* centers the group in the header */
-}
-
-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: calc(100px);
-    background-color: var(--sub-color);
-
-    display: flex;
-    justify-content: space-between;   /* centers the group in the header */
 }
 
 .header-inner {
@@ -186,7 +198,7 @@ button {
   font-size: 1.2em;
   border-radius: 16px;   /* ellipse / pill */
   background: white;
-  color: var(--sub-color);
+  color: black;
   border: 2px solid var(--sub-color);
   border-bottom: 4px solid var(--sub-color);
   cursor: pointer;
@@ -199,7 +211,7 @@ button.check {
 }
 
 button:active {
-    border-bottom: 2px solid var(--sub-color)!important; /* optional: make it feel pressed */
+    border-bottom: 2px solid var(--sub-color); /* optional: make it feel pressed */
 }
 
 button.word:disabled {
@@ -230,3 +242,91 @@ button.word:disabled:active {
     margin-right:20px;
     z-index:100;
 }
+
+.next {
+    bottom: 0;
+    display: flex;
+    align-content: right;
+    justify-content: center;
+    padding: 10px;
+    margin-right:20px;
+    z-index:100;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100px);
+    background-color: var(--sub-color);
+
+    display: flex;
+    justify-content: space-between;   /* centers the group in the header */
+}
+
+footer.result-footer {
+    background: var(--sub-color);
+    color: white;
+    transition: transform 0.2s ease;
+    transform: translateY(100%);
+
+    line-height: 10px;
+}
+
+.footer-stack {
+    padding-top:25px;
+    align-content: center;
+    padding-left: 130px;
+}
+
+footer.result-footer.show {
+  transform: translateY(0);
+}
+
+.win-next {
+    border: 2px solid #1e8f14;
+    border-bottom: 4px solid #1e8f14;
+}
+
+.lose-next {
+    border: 2px solid #ab2020;
+    border-bottom: 4px solid #ab2020;
+}
+
+button.win-next:active {
+    border-bottom: 2px solid #1e8f14;
+}
+
+button.lose-next:active {
+    border-bottom: 2px solid #ab2020;
+}
+
+#win-footer {
+    background-color: #1e8f14
+}
+
+#lose-footer {
+    background-color: #ab2020
+}
+
+.next {
+    bottom: 0;
+    display: flex;
+    align-content: right;
+    justify-content: center;
+    padding: 10px;
+    margin-right:20px;
+    z-index:100;
+}
+
+button.inaccessible {
+    cursor: default;
+}
+
+button.inaccessible:active {
+    border: 2px solid var(--sub-color);
+    border-bottom: 4px solid var(--sub-color);
+    pointer-events: none;
+}
+
