@@ -26,11 +26,20 @@ document.getElementById("check-button").addEventListener("click", () => {
 
 const buttonSets = {
     1: [
-        "I", "am", "a", "child", "Egypt", "man", "god", "Ptah", "enemy", "desert"
+        "I", "am", "a", "child", "Egypt", "man", "god", "Ptah"
     ],
     2: [
-        "you", "are", "the", "king", "of", "Upper", "Egypt"
-    ]
+        "he", "is", "the", "king", "of", "the", "gods", "desert"
+    ],
+    3: [
+        "I", "am", "Horus", "desert", "child", "the", "of", "great"
+    ],
+    4: [
+        "Isis", "is", "a", "great", "goddess", "god", "queen", "of"
+    ],
+    5: [
+        "their", "brother", "is", "a", "scribe", "king", "desert", "daughter"
+    ],
 };
 
 const answerSet = {
@@ -38,7 +47,16 @@ const answerSet = {
         "I am a child"
     ],
     2: [
-        "You are the king of Upper Egypt"
+        "He is the king of the gods"
+    ],
+    3: [
+        "I am Horus"
+    ],
+    4: [
+        "Isis is a great goddess"
+    ],
+    5: [
+        "Their brother is a scribe"
     ]
 };
 
@@ -52,16 +70,35 @@ const avatars = {
         "../../speaking_avatars/man.svg",
         "../../speaking_avatars/cobra.svg",
         "../../speaking_avatars/falcon.svg"
+    ],
+    3: [
+        "../../speaking_avatars/falcon.svg"
+    ],
+    4: [
+        "../../speaking_avatars/man.svg",
+        "../../speaking_avatars/cobra.svg",
+        "../../speaking_avatars/falcon.svg"
+    ],
+    5: [
+        "../../speaking_avatars/man.svg",
+        "../../speaking_avatars/cobra.svg",
+        "../../speaking_avatars/falcon.svg"
     ]
 };
 
 document.getElementById("win-next").addEventListener("click", () => {
     counter++;
+    if (counter >= 6) {
+        counter = 1;
+    }
     updatePage();
 });
 
 document.getElementById("lose-next").addEventListener("click", () => {
     counter++;
+    if (counter >= 6) {
+        counter = 1;
+    }
     updatePage();
 });
 
