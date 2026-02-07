@@ -54,6 +54,8 @@
         </div>
 
         <footer>
+            <div></div>
+
             <div id="buttons">
                 <button class="word" data-word="I">I</button>
                 <button class="word" data-word="am">am</button>
@@ -66,20 +68,26 @@
             </div>
 
             <script>
-            const container = document.getElementById("buttons");
-            const nodes = Array.from(container.children);
+                const container = document.getElementById("buttons");
+                const nodes = Array.from(container.children);
 
-            // Fisher–Yates shuffle
-            for (let i = nodes.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [nodes[i], nodes[j]] = [nodes[j], nodes[i]];
-            }
+                // Fisher–Yates shuffle
+                for (let i = nodes.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [nodes[i], nodes[j]] = [nodes[j], nodes[i]];
+                }
 
-            // Re-append nodes in new order (does not break links)
-            nodes.forEach(node => container.appendChild(node));
-        </script>
+                // Re-append nodes in new order (does not break links)
+                nodes.forEach(node => container.appendChild(node));
+            </script>
 
-        <script src="script.js"></script>
+            <script src="script.js"></script>
+
+            <div id="check">
+                <button class="check" id="check-button">Check</button>
+            </div>
+
+            <script src="check.js"></script>
         </footer>
     </div>
 

@@ -5,6 +5,8 @@
     --offpearl: white;
 }
 
+
+
 html, body {
   margin: 0;
   padding: 0;
@@ -60,7 +62,7 @@ footer {
     background-color: var(--sub-color);
 
     display: flex;
-    justify-content: center;   /* centers the group in the header */
+    justify-content: space-between;   /* centers the group in the header */
 }
 
 .header-inner {
@@ -173,7 +175,7 @@ a:hover {
   justify-content: center;
 }
 
-button.word {
+button {
   padding-top:8px;
   padding-bottom:10px;
   padding-left:16px;
@@ -192,15 +194,12 @@ button.word {
                  Roboto, Helvetica, Arial, sans-serif;
 }
 
-button.word:active {
-    border-bottom: 2px solid var(--sub-color); /* optional: make it feel pressed */
+button.check {
+    font-size: 1.4em;
 }
 
-button.word:disabled {
-  background: #e0e0e0;
-  color: #666;
-  border-color: #ccc;
-  cursor: pointer; /* optional: prevents hover effects entirely */
+button:active {
+    border-bottom: 2px solid var(--sub-color)!important; /* optional: make it feel pressed */
 }
 
 button.word:disabled {
@@ -208,6 +207,10 @@ button.word:disabled {
   color: #666;
   border-color: #ccc;
   cursor: pointer;        /* keep cursor consistent */
+}
+
+button.word:disabled:active {
+  border-bottom: 2px solid #ccc!important;
 }
 
 .sentence-section {
@@ -218,8 +221,12 @@ button.word:disabled {
     margin-top: 0px!important;
 }
 
-#weak {
-    height: 300px!important;
-    padding-top: 0px!important;
-    margin-top: 0px!important;
+#check {
+    bottom: 0;
+    display: flex;
+    align-content: right;
+    justify-content: center;
+    padding: 10px;
+    margin-right:20px;
+    z-index:100;
 }
