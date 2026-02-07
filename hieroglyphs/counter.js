@@ -1,5 +1,73 @@
 let counter = 1;
 
+// let answers = []; // list of answers
+
+// async function loadAnswers(counterList) {
+//     answers = [];
+
+//     for (let c of counterList) {
+//         const path = `../../lessons/lesson${c}/sentences/sentence${c}/lesson${c}_sentence${c}.txt`;
+//         const text = await fetch(path).then(res => res.text());
+
+//         const firstLine = text.split(/\r?\n/)[0];
+//         const answer = firstLine.split(":").slice(1).join(":").trim();
+
+//         answers.push(answer);
+//     }
+
+//     console.log("Loaded answers:", answers);
+// }
+
+// function showCorrectAnswer(index) {
+//     const answerEl = document.getElementById("correct-answer");
+//     answerEl.textContent = answers[index] || "what";
+// }
+
+function updateAnswer() {
+  fetch(`../../lessons/lesson1/sentences/sentence${counter}/lesson1_sentence${counter}.txt`)
+    .then(r => r.text())
+    .then(t => {
+      const firstLine = t.split('\n')[0];
+      const secondHalf = firstLine.split(': ')[1] ?? '';
+      document.getElementById("correct-answer").textContent = "hello";
+    });
+}
+
+function updateText() {
+  fetch(`texts/text${counter}.txt`)
+    .then(r => r.text())
+    .then(t => {
+      const firstLine = t.split('\n')[0];
+      const secondHalf = firstLine.split(': ')[1] ?? '';
+      document.getElementById("text").textContent = secondHalf;
+    });
+}
+
+
+document.getElementById("check-button").addEventListener("click", () => {
+  const buttons = document.querySelectorAll("#sentence button");
+  const flashcard = document.getElementById("flashcard");
+
+  const text = Array.from(buttons)
+    .map(b => b.textContent.trim())
+    .join(" ");
+
+  flashcard.classList.remove("correct", "incorrect");
+
+  if (text === "I am a child") {
+    flashcard.style.backgroundColor = "#7fd877";
+    document.getElementById("win-footer").classList.add("show");
+  } else {
+    flashcard.style.backgroundColor = "#ffa4a4";
+    document.getElementById("lose-footer").classList.add("show");
+  }
+
+  buttons.forEach(button => {
+    button.classList.add("inaccessible"); // replace "new-class" with your class name
+  });
+});
+
+
 const buttonSets = {
     1: [
         "I", "am", "a", "child", "Egypt", "man", "god", "Ptah", "enemy", "desert"
@@ -32,7 +100,7 @@ document.getElementById("lose-next").addEventListener("click", () => {
     updatePage();
 });
 
-function updatePage() {
+async function updatePage() {
     const img = document.getElementById('flashcard-image');
     img.src = `../../lessons/lesson1/sentences/sentence${counter}/lesson1_sentence${counter}.svg`;
     const foot = document.getElementById('win-footer');
@@ -43,6 +111,9 @@ function updatePage() {
     flashcard.style.backgroundColor = "white";
     renderButtons();
     randomizeAvatar();
+    updateAnswer();
+    await loadAnswers([1, 2]);
+    showCorrectAnswer(counter - 1);
 }
 
 function randomizeAvatar() {
