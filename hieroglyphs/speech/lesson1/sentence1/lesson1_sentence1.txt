@@ -1,3 +1,0 @@
-Translation: I am a child
-Lines: 1
-Vocabulary: I
