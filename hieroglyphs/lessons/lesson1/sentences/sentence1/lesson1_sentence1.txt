@@ -1,4 +1,0 @@
-Translation: I am a child
-Lines: 1
-Vocabulary: I
-Determinative: child, man, cobra, god, cat
