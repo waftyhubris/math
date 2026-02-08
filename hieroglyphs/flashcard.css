@@ -142,9 +142,14 @@ a:hover {
 }
 
 .vertical-right-divide {
-    max-width: 300px;
+    max-width: 500px;
 }
 
+.vertical-left-divide {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+}
 
 .bottom-scroll section {
     flex: 1;
@@ -181,6 +186,7 @@ a:hover {
 
 #vertical-flashcard {
     padding-top:15px;
+    padding-right:0px;
     flex-direction: column;
     gap:1.4rem;
     width: 170px;
@@ -196,7 +202,7 @@ a:hover {
 .vertical-speaker {
     width: 150px;
     padding-left: 10px;
-    padding-right:20px;
+    align-self: flex-end;
 }
 
 .speech {
@@ -205,6 +211,8 @@ a:hover {
 
 .vertical-speech {
     width: 70px;
+    align-self: flex-end;
+    margin-right: 15px;
 }
 
 #flashcard {
@@ -212,21 +220,25 @@ a:hover {
     border-bottom: 10px solid var(--sub-color);
 }
 
-#flashcard-image {
-    align-content: right;
-}
 
 #vertical-flashcard-container {
     justify-content: right;
-    padding-right:5px;
+    padding-right:0px;
     margin-right: 0px;
+    padding-left: 30px;
     max-width: 230px;
     border: 4px solid var(--sub-color);
     border-bottom: 10px solid var(--sub-color);
 }
 
+#sentence-vertical {
+    padding-top:20px;
+    padding-left: 400px;
+    margin-top: 0; 
+}
 
-#sentence {
+
+.container {
     padding-left: 10px;
     padding-right: 10px;
     padding-top:0px;
@@ -236,7 +248,7 @@ a:hover {
     justify-content: left!important;
 }
 
-#buttons {
+.bottom-buttons {
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -361,11 +373,11 @@ button.lose-next:active {
     border-bottom: 2px solid #ab2020;
 }
 
-#win-footer {
+#win-footer, #win-footer-vertical {
     background-color: #1e8f14
 }
 
-#lose-footer {
+#lose-footer, #lose-footer-vertical {
     background-color: #ab2020
 }
 

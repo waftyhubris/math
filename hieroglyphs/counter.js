@@ -1,4 +1,7 @@
 let counter = 1;
+let state = "horizontal";
+
+// Declaring all the button actions.
 
 document.getElementById("check-button").addEventListener("click", () => {
   const buttons = document.querySelectorAll("#sentence button");
@@ -23,23 +26,139 @@ document.getElementById("check-button").addEventListener("click", () => {
   });
 });
 
+document.getElementById("check-button-vertical").addEventListener("click", () => {
+  const buttons = document.querySelectorAll("#sentence-vertical button");
+  const flashcard = document.getElementById("vertical-flashcard-container");
+
+  const text = Array.from(buttons)
+    .map(b => b.textContent.trim())
+    .join(" ");
+
+  flashcard.classList.remove("correct", "incorrect");
+
+  if (text.toLowerCase() === document.getElementById("correct-answer-vertical").textContent.toLowerCase()) {
+    flashcard.style.backgroundColor = "#7fd877";
+    document.getElementById("win-footer-vertical").classList.add("show");
+  } else {
+    flashcard.style.backgroundColor = "#ffa4a4";
+    document.getElementById("lose-footer-vertical").classList.add("show");
+  }
+
+  buttons.forEach(button => {
+    button.classList.add("inaccessible");
+  });
+});
+
+
+const versentence = document.getElementById("sentence-vertical");
+const verbuttons = document.querySelectorAll("#buttons-vertical .word");
+
+verbuttons.forEach(button => {
+    button.addEventListener("click", () => {
+      const word = button.dataset.word;
+
+      const newButton = document.createElement("button");
+      newButton.className = "word";
+      newButton.textContent = word;
+
+      newButton.addEventListener("click", () => {
+          newButton.remove();
+          button.disabled = false;
+      });
+
+      versentence.appendChild(newButton);
+
+      button.disabled = true;
+  });
+});
+
+const horsentence = document.getElementById("sentence");
+const horbuttons = document.querySelectorAll("#buttons .word");
+
+horbuttons.forEach(button => {
+    button.addEventListener("click", () => {
+      const word = button.dataset.word;
+
+      const newButton = document.createElement("button");
+      newButton.className = "word";
+      newButton.textContent = word;
+
+      newButton.addEventListener("click", () => {
+          newButton.remove();
+          button.disabled = false;
+      });
+
+      horsentence.appendChild(newButton);
+
+      button.disabled = true;
+  });
+});
+
+
+
+// The custom sentence information for this particular lesson.
 
 const buttonSets = {
     1: [
-        "I", "am", "her", "child", "Egypt", "man", "god", "Ptah"
+        { text: "I" },
+        { text: "am" },
+        { text: "her" },
+        { text: "child", style: "boldBlue" },
+        { text: "Egypt"},
+        { text: "man" },
+        { text: "god"},
+        { text: "Ptah"}
     ],
     2: [
-        "he", "is", "the", "king", "of", "the", "gods", "desert"
+        { text: "he" },
+        { text: "is" },
+        { text: "the" },
+        { text: "king"},
+        { text: "of" },
+        { text: "the" },
+        { text: "gods"},
+        { text: "desert" }
     ],
     3: [
-        "I", "am", "Horus", "desert", "child", "the", "of", "great"
+        { text: "I" },
+        { text: "am" },
+        { text: "Horus"},
+        { text: "desert" },
+        { text: "child" },
+        { text: "the" },
+        { text: "of" },
+        { text: "great"}
     ],
     4: [
-        "Isis", "is", "a", "great", "goddess", "god", "queen", "of"
+        { text: "Isis"},
+        { text: "is" },
+        { text: "a" },
+        { text: "great"},
+        { text: "goddess"},
+        { text: "god" },
+        { text: "queen"},
+        { text: "of" }
     ],
     5: [
-        "their", "brother", "is", "a", "scribe", "king", "desert", "daughter"
+        { text: "their" },
+        { text: "brother" },
+        { text: "is" },
+        { text: "a" },
+        { text: "scribe", style: "boldBlue" },
+        { text: "king"},
+        { text: "desert" },
+        { text: "daughter"}
     ],
+    6: [
+        { text: "this" },
+        { text: "is" },
+        { text: "my" },
+        { text: "eternal", style: "boldBlue" },
+        { text: "tomb"},
+        { text: "mother"},
+        { text: "the" },
+        { text: "of" }
+    ]
 };
 
 const answerSet = {
@@ -57,6 +176,9 @@ const answerSet = {
     ],
     5: [
         "Their brother is a scribe"
+    ],
+    6: [
+        "This is my eternal tomb"
     ]
 };
 
@@ -79,36 +201,56 @@ const avatars = {
         "../../speaking_avatars/man.svg",
         "../../speaking_avatars/cobra.svg",
         "../../speaking_avatars/falcon.svg"
+    ],
+    6: [
+        "../../speaking_avatars/man.svg",
+        "../../speaking_avatars/falcon.svg"
     ]
 };
+
+// Going to the next lesson.
 
 document.getElementById("win-next").addEventListener("click", () => {
     counter++;
     if (counter >= 6) {
-        // counter = 1;
+        state="vertical";
         const horizontal = document.getElementById("horizontal-layout");
-        horizontal.classList.add("hidden");
         const vertical = document.getElementById("vertical-layout");
+        horizontal.classList.add("hidden");
+        vertical.classList.remove("hidden");
         vertical.classList.add("block");
+        horizontal.classList.remove("block");
     }
-    updatePage();
+    updatePage(state);
 });
 
 document.getElementById("lose-next").addEventListener("click", () => {
     counter++;
     if (counter >= 6) {
-        // counter = 1;
-        const page = document.getElementById("horizontal-layout");
-        page.classList.add("hidden");
+        state="vertical";
+        const horizontal = document.getElementById("horizontal-layout");
         const vertical = document.getElementById("vertical-layout");
+        horizontal.classList.add("hidden");
+        vertical.classList.remove("hidden");
         vertical.classList.add("block");
+        horizontal.classList.remove("block");
     }
-    updatePage();
+    updatePage(state);
 });
 
-function updatePage() {
-    document.getElementById("correct-answer").textContent = answerSet[counter];
-    const img = document.getElementById('flashcard-image');
+
+// Loading the next sentence.
+
+function updatePage(varstate) {
+    let img;
+    if (varstate === "vertical") {
+        document.getElementById("correct-answer-vertical").textContent = answerSet[counter];
+        img = document.getElementById('flashcard-image-vertical');
+    }
+    else {
+        document.getElementById("correct-answer").textContent = answerSet[counter];
+        img = document.getElementById('flashcard-image');
+    }
     img.src = `../../lessons/lesson1/sentences/sentence${counter}/lesson1_sentence${counter}.svg`;
     const foot = document.getElementById('win-footer');
     foot.classList.remove('show');
@@ -116,13 +258,21 @@ function updatePage() {
     foot2.classList.remove('show');
     const flashcard = document.getElementById('flashcard');
     flashcard.style.backgroundColor = "white";
-    renderButtons();
-    randomizeAvatar();
-    showCorrectAnswer(counter - 1);
+    renderButtons(varstate);
+    randomizeAvatar(varstate);
 }
 
-function randomizeAvatar() {
-    const img = document.getElementById("randomImage");
+
+// Randomising the avatar depending on the counter.
+
+function randomizeAvatar(varstate) {
+    let img;
+    if (varstate === "vertical") {
+        img = document.getElementById("randomImage-vertical");
+    }
+    else {
+        img = document.getElementById("randomImage");
+    }
     const currentAvatars = avatars[counter] || [];
 
     if (currentAvatars.length === 0) return;
@@ -131,12 +281,22 @@ function randomizeAvatar() {
     img.src = currentAvatars[randomIndex];
 }
 
-function renderButtons() {
-    const container = document.getElementById("buttons");
-    container.innerHTML = ""; // remove old buttons
 
-    const sentence = document.getElementById("sentence");
-    sentence.innerHTML = ""; // clear old sentence buttons
+// Loading in the buttons at the bottom of the page.
+
+function renderButtons(varstate) {
+    let container;
+    let sentence;
+    if (varstate === "vertical") {
+        container = document.getElementById("buttons-vertical");
+        sentence  = document.getElementById("sentence-vertical");
+    } else {
+        container = document.getElementById("buttons");
+        sentence  = document.getElementById("sentence");
+    }
+    
+    container.innerHTML = "";
+    sentence.innerHTML = "";
 
     const words = buttonSets[counter] || [];
     const buttons = [];
@@ -145,14 +305,22 @@ function renderButtons() {
     words.forEach(word => {
         const button = document.createElement("button");
         button.className = "word";
-        button.dataset.word = word;
-        button.textContent = word;
+        button.dataset.word = word.text;
+        button.textContent = word.text;
+        if (word.style === "boldBlue") {
+            button.style.fontWeight = "bold";
+            button.style.color = "#00a0d7ff";
+        }
 
         // Add click behavior for sentence
         button.addEventListener("click", () => {
             const newButton = document.createElement("button");
             newButton.className = "word";
-            newButton.textContent = word;
+            newButton.textContent = word.text;
+            if (word.style === "boldBlue") {
+                newButton.style.fontWeight = "bold";
+                newButton.style.color = "#00a0d7ff";
+            }
 
             newButton.addEventListener("click", () => {
                 newButton.remove();
