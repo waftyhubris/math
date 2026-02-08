@@ -116,8 +116,6 @@ a:hover {
     background-color: var(--main-color)!important;
 }
 
-
-
 .scroll section {
     flex: 1;
     padding: 0px 40px 0;
@@ -134,7 +132,13 @@ a:hover {
 
 #vertical-scroll section {
     margin-top: 125px;
-    height: calc(100vh - 250px);
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 150px);
+}
+
+#vertical-flashcard-container {
+    height: auto!important;
 }
 
 .vertical-left-divide, .vertical-right-divide {
@@ -142,7 +146,7 @@ a:hover {
 }
 
 .vertical-right-divide {
-    max-width: 500px;
+    max-width: 450px;
 }
 
 .vertical-left-divide {
@@ -165,7 +169,8 @@ a:hover {
 }
 
 .vertical-bottom-scroll section {
-    height: 30px;
+    height: 100%;
+    background-color: var(--main-color);
 }
 
 .logo {
@@ -194,6 +199,10 @@ a:hover {
     align-content: right;
 }
 
+#vertical-flashcard-container-container {
+    display: flex;
+    flex-direction: column;
+}
 
 .speaker {
     height: 280px;

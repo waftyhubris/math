@@ -153,12 +153,52 @@ const buttonSets = {
         { text: "this" },
         { text: "is" },
         { text: "my" },
-        { text: "eternal", style: "boldBlue" },
+        { text: "eternity", style: "boldBlue" },
         { text: "tomb"},
         { text: "mother"},
         { text: "the" },
+        { text: "for" }
+    ],
+    7: [
+        { text: "your" },
+        { text: "son" },
+        { text: "is" },
+        { text: "evil"},
+        { text: "great"},
+        { text: "a"},
+        { text: "scribe" },
         { text: "of" }
-    ]
+    ],
+    8: [
+        { text: "how" },
+        { text: "great" },
+        { text: "are" },
+        { text: "the"},
+        { text: "plans"},
+        { text: "of"},
+        { text: "the" },
+        { text: "gods" }
+    ],
+    9: [
+        { text: "how" },
+        { text: "beautiful" },
+        { text: "is" },
+        { text: "Isis"},
+        { text: "Thoth"},
+        { text: "of"},
+        { text: "the" },
+        { text: "daughter" }
+    ],
+    10: [
+        { text: "the" },
+        { text: "king" },
+        { text: "is" },
+        { text: "in"},
+        { text: "his"},
+        { text: "boat", style: "boldBlue" },
+        { text: "temple" },
+        { text: "god" }
+    ],
 };
 
 const answerSet = {
@@ -178,8 +218,20 @@ const answerSet = {
         "Their brother is a scribe"
     ],
     6: [
-        "This is my eternal tomb"
-    ]
+        "This is my tomb for eternity"
+    ],
+    7: [
+        "Your son is evil"
+    ],
+    8: [
+        "How great are the plans of the gods!"
+    ],
+    9: [
+        "How beautiful is Isis!"
+    ],
+    10: [
+        "The king is in his boat"
+    ],
 };
 
 const avatars = {
@@ -205,7 +257,27 @@ const avatars = {
     6: [
         "../../speaking_avatars/man.svg",
         "../../speaking_avatars/falcon.svg"
-    ]
+    ],
+    7: [
+        "../../speaking_avatars/man.svg",
+        "../../speaking_avatars/cobra.svg",
+        "../../speaking_avatars/falcon.svg"
+    ],
+    8: [
+        "../../speaking_avatars/man.svg",
+        "../../speaking_avatars/cobra.svg",
+        "../../speaking_avatars/falcon.svg"
+    ],
+    9: [
+        "../../speaking_avatars/man.svg",
+        "../../speaking_avatars/cobra.svg",
+        "../../speaking_avatars/falcon.svg"
+    ],
+    10: [
+        "../../speaking_avatars/man.svg",
+        "../../speaking_avatars/cobra.svg",
+        "../../speaking_avatars/falcon.svg"
+    ],
 };
 
 // Going to the next lesson.
@@ -214,12 +286,6 @@ document.getElementById("win-next").addEventListener("click", () => {
     counter++;
     if (counter >= 6) {
         state="vertical";
-        const horizontal = document.getElementById("horizontal-layout");
-        const vertical = document.getElementById("vertical-layout");
-        horizontal.classList.add("hidden");
-        vertical.classList.remove("hidden");
-        vertical.classList.add("block");
-        horizontal.classList.remove("block");
     }
     updatePage(state);
 });
@@ -228,12 +294,22 @@ document.getElementById("lose-next").addEventListener("click", () => {
     counter++;
     if (counter >= 6) {
         state="vertical";
-        const horizontal = document.getElementById("horizontal-layout");
-        const vertical = document.getElementById("vertical-layout");
-        horizontal.classList.add("hidden");
-        vertical.classList.remove("hidden");
-        vertical.classList.add("block");
-        horizontal.classList.remove("block");
+    }
+    updatePage(state);
+});
+
+document.getElementById("win-next-vertical").addEventListener("click", () => {
+    counter++;
+    if (counter >= 6) {
+        state="vertical";
+    }
+    updatePage(state);
+});
+
+document.getElementById("lose-next-vertical").addEventListener("click", () => {
+    counter++;
+    if (counter >= 6) {
+        state="vertical";
     }
     updatePage(state);
 });
@@ -243,20 +319,36 @@ document.getElementById("lose-next").addEventListener("click", () => {
 
 function updatePage(varstate) {
     let img;
+    let foot;
+    let foot2;
     if (varstate === "vertical") {
         document.getElementById("correct-answer-vertical").textContent = answerSet[counter];
         img = document.getElementById('flashcard-image-vertical');
+        const horizontal = document.getElementById("horizontal-layout");
+        const vertical = document.getElementById("vertical-layout");
+        horizontal.classList.add("hidden");
+        vertical.classList.remove("hidden");
+        vertical.classList.add("block");
+        horizontal.classList.remove("block");
+        foot = document.getElementById('win-footer-vertical');
+        foot2 = document.getElementById('lose-footer-vertical');
     }
     else {
         document.getElementById("correct-answer").textContent = answerSet[counter];
         img = document.getElementById('flashcard-image');
+        const horizontal = document.getElementById("horizontal-layout");
+        const vertical = document.getElementById("vertical-layout");
+        vertical.classList.add("hidden");
+        horizontal.classList.remove("hidden");
+        horizontal.classList.add("block");
+        vertical.classList.remove("block");
+        foot = document.getElementById('win-footer');
+        foot2 = document.getElementById('lose-footer');
     }
-    img.src = `../../lessons/lesson1/sentences/sentence${counter}/lesson1_sentence${counter}.svg`;
-    const foot = document.getElementById('win-footer');
     foot.classList.remove('show');
-    const foot2 = document.getElementById('lose-footer');
     foot2.classList.remove('show');
     const flashcard = document.getElementById('flashcard');
+    img.src = `../../lessons/lesson1/sentences/sentence${counter}/lesson1_sentence${counter}.svg`;
     flashcard.style.backgroundColor = "white";
     renderButtons(varstate);
     randomizeAvatar(varstate);
