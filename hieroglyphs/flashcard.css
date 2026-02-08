@@ -1,0 +1,430 @@
+:root {
+    --main-color:#ff6500ff;
+    --sub-color: rgb(174, 69, 0);
+    --pearl: #FFFDF7;
+    --offpearl: white;
+}
+
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+.desktop-layout {
+    overflow-y: hidden;
+}
+
+h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.25;
+    color:white;
+    padding-bottom: 2px;
+    font-weight: normal;
+    font-size: 35px;
+    z-index: 200;
+    width: 500px;
+    text-align: center;
+}
+
+h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    color:white;
+    padding-bottom: 2px;
+    font-weight: normal;
+    font-size: 30px;
+    z-index: 200;
+    text-align: center;
+    margin-top:0px!important;
+    padding-top:0px!important;
+}
+
+h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    color:white;
+    padding-bottom: 2px;
+    font-weight: normal;
+    font-size: 20px;
+    z-index: 200;
+    text-align: center;
+    margin-top:0px!important;
+    padding-top:0px!important;
+}
+
+h4 {
+    width: 500px;
+}
+
+h5 {
+    width: 600px;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background-color: var(--main-color);
+    padding-top: 5px;
+    padding-bottom: 40px;
+
+    display: flex;
+    justify-content: center;   /* centers the group in the header */
+}
+
+#vertical-header {
+    height: 100px;
+    padding-bottom: 20px
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;       /* vertical alignment of logo + text */
+    gap: 0;                 /* space between logo and title */
+}
+
+main {
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+a {
+    color: var(--main-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.scroll {
+  display: flex;          /* space between the sections */
+  align-items: flex-start;
+}
+
+.bottom-scroll {
+  display: flex;          /* space between the sections */
+  align-items: flex-start;
+}
+
+.divide {
+    background-color: var(--main-color)!important;
+}
+
+.scroll section {
+    flex: 1;
+    padding: 0px 40px 0;
+    margin-top: 165px;
+    justify-content: center;
+    align-content: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Roboto, Helvetica, Arial, sans-serif;
+    height: calc(100vh - 550px);
+    background-color: var(--pearl); 
+    box-sizing: border-box;               /* equal width columns */
+    padding-bottom:10px;
+}
+
+#vertical-scroll section {
+    margin-top: 125px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 150px);
+}
+
+#vertical-flashcard-container {
+    justify-content: right;
+    padding-right:0px;
+    margin-right: 0px;
+    max-width: 230px;
+    border: 4px solid var(--sub-color);
+    border-bottom: 10px solid var(--sub-color);
+    padding-bottom: 0px!important;
+    height: auto!important;
+}
+
+#vertical-flashcard {
+    background-color: inherit;
+}
+
+#vertical-flashcard-container-container {
+    height: calc(100vh - 20px)!important;
+    display: flex;
+    flex-direction: column;
+}
+
+#filler {
+    flex: 1;
+    background-color: var(--main-color)!important;
+}
+
+.vertical-left-divide, .vertical-right-divide {
+    background-color: var(--main-color)!important;
+}
+
+.vertical-right-divide {
+    max-width: 450px;
+}
+
+.vertical-left-divide {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+}
+
+.bottom-scroll section {
+    flex: 1;
+    padding: 0px 40px 0;
+    justify-content: center;
+    align-content: top;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Roboto, Helvetica, Arial, sans-serif;
+    height: calc(100vh - 550px);
+    background-color: var(--pearl); 
+    box-sizing: border-box;               /* equal width columns */
+    padding-bottom:10px;
+}
+
+.vertical-bottom-scroll section {
+    height: 100%;
+    background-color: var(--main-color);
+    padding-bottom:20px;
+}
+
+.logo {
+    width: 100px;
+    height: auto;
+    margin-top: 15vh; 
+    display: block;
+    margin: 0 auto;
+    padding-top: 0px;
+}
+
+.flashcard {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2rem;
+}
+
+#vertical-flashcard {
+    padding-top:15px;
+    padding-right:0px;
+    flex-direction: column;
+    gap:1.4rem;
+    width: 170px;
+    display: flex;
+    align-content: right;
+    height: auto!important;
+    margin-bottom: 0px;
+}
+
+.speaker {
+    height: 280px;
+}
+
+.vertical-speaker {
+    width: 150px;
+    padding-left: 10px;
+    align-self: flex-end;
+    margin-bottom:0px;
+    padding-bottom: 0px;
+}
+
+.speech {
+    height: 100px;
+}
+
+.vertical-speech {
+    width: 70px;
+    align-self: flex-end;
+    margin-right: 15px;
+}
+
+#flashcard {
+    border: 4px solid var(--sub-color);
+    border-bottom: 10px solid var(--sub-color);
+}
+
+#sentence-vertical {
+    padding-top:20px;
+    padding-left: 400px;
+    margin-top: 0; 
+}
+
+
+.container {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top:0px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: left!important;
+}
+
+.bottom-buttons {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+button {
+  padding-top:8px;
+  padding-bottom:10px;
+  padding-left:16px;
+  padding-right:16px;
+  margin-top:10px;
+  margin-bottom:10px;
+  font-weight: normal;
+  font-size: 1.2em;
+  border-radius: 16px;   /* ellipse / pill */
+  background: white;
+  color: black;
+  border: 2px solid var(--sub-color);
+  border-bottom: 4px solid var(--sub-color);
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Roboto, Helvetica, Arial, sans-serif;
+}
+
+button.check {
+    font-size: 1.4em;
+}
+
+button:active {
+    border-bottom: 2px solid var(--sub-color); /* optional: make it feel pressed */
+}
+
+button.word:disabled {
+  background: #e0e0e0;
+  color: #666;
+  border-color: #ccc;
+  cursor: pointer;        /* keep cursor consistent */
+}
+
+button.word:disabled:active {
+  border-bottom: 2px solid #ccc!important;
+}
+
+.sentence-section {
+    background-color: var(--main-color)!important;
+    vertical-align: top!important;
+    padding-top: 0px!important;
+    justify-content: top!important;
+    margin-top: 0px!important;
+}
+
+#check {
+    bottom: 0;
+    display: flex;
+    align-content: right;
+    justify-content: center;
+    padding: 10px;
+    margin-right:20px;
+    z-index:100;
+}
+
+.next {
+    bottom: 0;
+    display: flex;
+    align-content: right;
+    justify-content: center;
+    padding: 10px;
+    margin-right:20px;
+    z-index:100;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100px);
+    background-color: var(--sub-color);
+
+    display: flex;
+    justify-content: space-between;   /* centers the group in the header */
+}
+
+footer.result-footer {
+    background: var(--sub-color);
+    color: white;
+    transition: transform 0.2s ease;
+    transform: translateY(100%);
+
+    line-height: 10px;
+}
+
+.footer-stack {
+    padding-top:25px;
+    align-content: center;
+    padding-left: 130px;
+}
+
+footer.result-footer.show {
+  transform: translateY(0);
+}
+
+.win-next {
+    border: 2px solid #1e8f14;
+    border-bottom: 4px solid #1e8f14;
+}
+
+.lose-next {
+    border: 2px solid #ab2020;
+    border-bottom: 4px solid #ab2020;
+}
+
+button.win-next:active {
+    border-bottom: 2px solid #1e8f14;
+}
+
+button.lose-next:active {
+    border-bottom: 2px solid #ab2020;
+}
+
+#win-footer, #win-footer-vertical {
+    background-color: #1e8f14
+}
+
+#lose-footer, #lose-footer-vertical {
+    background-color: #ab2020
+}
+
+.next {
+    bottom: 0;
+    display: flex;
+    align-content: right;
+    justify-content: center;
+    padding: 10px;
+    margin-right:20px;
+    z-index:100;
+}
+
+button.inaccessible {
+    cursor: default;
+}
+
+button.inaccessible:active {
+    border: 2px solid var(--sub-color);
+    border-bottom: 4px solid var(--sub-color);
+    pointer-events: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.block {
+    display: block;
+}
