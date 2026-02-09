@@ -423,11 +423,3 @@ button.inaccessible:active {
 .block {
     display: block;
 }
-
-img {
-    visibility: hidden;
-}
-
-.images-loaded img {
-    visibility: visible;
-}
