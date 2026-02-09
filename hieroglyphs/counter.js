@@ -22,15 +22,15 @@ const IMAGES = [
 const imageCache = {};
 
 async function preloadImages() {
-  for (const src of IMAGES) {
-    const img = new Image();
-    img.src = src;
-    await img.decode();      // wait for decode
-    imageCache[src] = img;
-  }
+  await Promise.all(
+    IMAGES.map(async src => {
+      const img = new Image();
+      img.src = src;
+      await img.decode();
+      imageCache[src] = img;
+    })
+  );
 }
-
-await preloadImages();
 
 // Declaring all the button actions.
 
