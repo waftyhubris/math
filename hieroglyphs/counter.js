@@ -4,16 +4,19 @@ let state = "horizontal";
 // Preloading images
 
 const IMAGES = [
-  "../../lessons/lesson1/sentences/sentence1/lesson1_sentence1.svg",
-  "../../lessons/lesson1/sentences/sentence2/lesson1_sentence2.svg",
-  "../../lessons/lesson1/sentences/sentence3/lesson1_sentence3.svg",
-  "../../lessons/lesson1/sentences/sentence4/lesson1_sentence4.svg",
-  "../../lessons/lesson1/sentences/sentence5/lesson1_sentence5.svg",
-  "../../lessons/lesson1/sentences/sentence6/lesson1_sentence6.svg",
-  "../../lessons/lesson1/sentences/sentence7/lesson1_sentence7.svg",
-  "../../lessons/lesson1/sentences/sentence8/lesson1_sentence8.svg",
-  "../../lessons/lesson1/sentences/sentence9/lesson1_sentence9.svg",
-  "../../lessons/lesson1/sentences/sentence10/lesson1_sentence10.svg"
+  "../../lessons/lesson1/sentences/sentence1/lesson1_sentence1.png",
+  "../../lessons/lesson1/sentences/sentence2/lesson1_sentence2.png",
+  "../../lessons/lesson1/sentences/sentence3/lesson1_sentence3.png",
+  "../../lessons/lesson1/sentences/sentence4/lesson1_sentence4.png",
+  "../../lessons/lesson1/sentences/sentence5/lesson1_sentence5.png",
+  "../../lessons/lesson1/sentences/sentence6/lesson1_sentence6.png",
+  "../../lessons/lesson1/sentences/sentence7/lesson1_sentence7.png",
+  "../../lessons/lesson1/sentences/sentence8/lesson1_sentence8.png",
+  "../../lessons/lesson1/sentences/sentence9/lesson1_sentence9.png",
+  "../../lessons/lesson1/sentences/sentence10/lesson1_sentence10.png",
+  "../../speaking_avatars/man.png",
+  "../../speaking_avatars/cobra.png",
+  "../../speaking_avatars/falcon.png"
 ];
 
 const imageCache = {};
@@ -264,47 +267,48 @@ const answerSet = {
 
 const avatars = {
     1: [
-        "../../speaking_avatars/man.svg"
+        "../../speaking_avatars/man.png"
     ],
     2: [
-        "../../speaking_avatars/cobra.svg"
+        "../../speaking_avatars/cobra.png"
     ],
     3: [
-        "../../speaking_avatars/falcon.svg"
+        "../../speaking_avatars/falcon.png"
     ],
     4: [
-        "../../speaking_avatars/man.svg",
-        "../../speaking_avatars/cobra.svg",
-        "../../speaking_avatars/falcon.svg"
+        "../../speaking_avatars/man.png",
+        "../../speaking_avatars/cobra.png",
+        "../../speaking_avatars/falcon.png"
     ],
     5: [
-        "../../speaking_avatars/man.svg",
-        "../../speaking_avatars/cobra.svg",
-        "../../speaking_avatars/falcon.svg"
+        "../../speaking_avatars/man.png",
+        "../../speaking_avatars/cobra.png",
+        "../../speaking_avatars/falcon.png"
     ],
     6: [
-        "../../speaking_avatars/man.svg",
-        "../../speaking_avatars/falcon.svg"
+        "../../speaking_avatars/man.png",
+        "../../speaking_avatars/cobra.png",
+        "../../speaking_avatars/falcon.png"
     ],
     7: [
-        "../../speaking_avatars/man.svg",
-        "../../speaking_avatars/cobra.svg",
-        "../../speaking_avatars/falcon.svg"
+        "../../speaking_avatars/man.png",
+        "../../speaking_avatars/cobra.png",
+        "../../speaking_avatars/falcon.png"
     ],
     8: [
-        "../../speaking_avatars/man.svg",
-        "../../speaking_avatars/cobra.svg",
-        "../../speaking_avatars/falcon.svg"
+        "../../speaking_avatars/man.png",
+        "../../speaking_avatars/cobra.png",
+        "../../speaking_avatars/falcon.png"
     ],
     9: [
-        "../../speaking_avatars/man.svg",
-        "../../speaking_avatars/cobra.svg",
-        "../../speaking_avatars/falcon.svg"
+        "../../speaking_avatars/man.png",
+        "../../speaking_avatars/cobra.png",
+        "../../speaking_avatars/falcon.png"
     ],
     10: [
-        "../../speaking_avatars/man.svg",
-        "../../speaking_avatars/cobra.svg",
-        "../../speaking_avatars/falcon.svg"
+        "../../speaking_avatars/man.png",
+        "../../speaking_avatars/cobra.png",
+        "../../speaking_avatars/falcon.png"
     ],
 };
 
@@ -399,8 +403,7 @@ function updatePage(varstate) {
     }
     foot.classList.remove('show');
     foot2.classList.remove('show');
-    const src = `../../lessons/lesson1/sentences/sentence${counter}/lesson1_sentence${counter}.svg`;
-    img.src = src;
+    img.src = `../../lessons/lesson1/sentences/sentence${counter}/lesson1_sentence${counter}.png`;
     flashcard.style.backgroundColor = "white";
     renderButtons(varstate);
     randomizeAvatar(varstate);
