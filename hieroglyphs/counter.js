@@ -21,13 +21,16 @@ const IMAGES = [
 
 const imageCache = {};
 
-function preloadImages() {
-  IMAGES.forEach(src => {
+async function preloadImages() {
+  for (const src of IMAGES) {
     const img = new Image();
     img.src = src;
+    await img.decode();      // wait for decode
     imageCache[src] = img;
-  });
+  }
 }
+
+await preloadImages();
 
 // Declaring all the button actions.
 
