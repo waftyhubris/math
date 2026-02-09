@@ -1,6 +1,32 @@
 let counter = 1;
 let state = "horizontal";
 
+// Making sure that all images load at the same time
+
+const images = document.querySelectorAll("img");
+let loaded = 0;
+
+images.forEach(img => {
+  if (img.complete) {
+    loaded++;
+  } else {
+    img.addEventListener("load", () => {
+      loaded++;
+      if (loaded === images.length) showImages();
+    });
+    img.addEventListener("error", () => {
+      loaded++;
+      if (loaded === images.length) showImages();
+    });
+  }
+});
+
+if (loaded === images.length) showImages();
+
+function showImages() {
+  document.body.classList.add("images-loaded");
+}
+
 // Declaring all the button actions.
 
 document.getElementById("check-button").addEventListener("click", () => {
@@ -287,6 +313,10 @@ const avatars = {
 
 document.getElementById("win-next").addEventListener("click", () => {
     counter++;
+    if (counter >= 11) {
+        counter =1;
+        state="horizontal";
+    }
     if (counter >= 6) {
         state="vertical";
     }
@@ -295,6 +325,10 @@ document.getElementById("win-next").addEventListener("click", () => {
 
 document.getElementById("lose-next").addEventListener("click", () => {
     counter++;
+    if (counter >= 11) {
+        counter =1;
+        state="horizontal";
+    }
     if (counter >= 6) {
         state="vertical";
     }
@@ -315,6 +349,10 @@ document.getElementById("win-next-vertical").addEventListener("click", () => {
 
 document.getElementById("lose-next-vertical").addEventListener("click", () => {
     counter++;
+    if (counter >= 11) {
+        counter =1;
+        state="horizontal";
+    }
     if (counter >= 6) {
         state="vertical";
     }

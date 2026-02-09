@@ -68,10 +68,10 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    height: 120px;
+    height: 100px;
     background-color: var(--main-color);
     padding-top: 5px;
-    padding-bottom: 40px;
+    padding-bottom: 60px;
 
     display: flex;
     justify-content: center;   /* centers the group in the header */
@@ -79,7 +79,7 @@ header {
 
 #vertical-header {
     height: 100px;
-    padding-bottom: 20px
+    padding-bottom: 10px
 }
 
 .header-inner {
@@ -131,7 +131,7 @@ a:hover {
 }
 
 #vertical-scroll section {
-    margin-top: 125px;
+    margin-top: 115px;
     display: flex;
     flex-direction: column;
     height: calc(100vh - 150px);
@@ -146,10 +146,6 @@ a:hover {
     border-bottom: 10px solid var(--sub-color);
     padding-bottom: 0px!important;
     height: auto!important;
-}
-
-#vertical-flashcard {
-    background-color: inherit;
 }
 
 #vertical-flashcard-container-container {
@@ -229,11 +225,10 @@ a:hover {
 }
 
 .vertical-speaker {
-    width: 150px;
-    padding-left: 10px;
+    height: 200px;
     align-self: flex-end;
-    margin-bottom:0px;
-    padding-bottom: 0px;
+    padding-bottom: 10px;
+    padding-right: 10px;
 }
 
 .speech {
@@ -241,7 +236,7 @@ a:hover {
 }
 
 .vertical-speech {
-    width: 70px;
+    width: 75px;
     align-self: flex-end;
     margin-right: 15px;
 }
@@ -427,4 +422,12 @@ button.inaccessible:active {
 
 .block {
     display: block;
+}
+
+img {
+    visibility: hidden;
+}
+
+.images-loaded img {
+    visibility: visible;
 }
