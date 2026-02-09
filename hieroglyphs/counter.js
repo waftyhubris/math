@@ -32,8 +32,6 @@ async function preloadImages() {
   );
 }
 
-await preloadImages();
-
 // Declaring all the button actions.
 
 document.getElementById("check-button").addEventListener("click", () => {
