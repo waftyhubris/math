@@ -4,19 +4,19 @@ let state = "horizontal";
 // Preloading images
 
 const IMAGES = [
-  "../../lessons/lesson1/sentences/sentence1/lesson1_sentence1.png",
-  "../../lessons/lesson1/sentences/sentence2/lesson1_sentence2.png",
-  "../../lessons/lesson1/sentences/sentence3/lesson1_sentence3.png",
-  "../../lessons/lesson1/sentences/sentence4/lesson1_sentence4.png",
-  "../../lessons/lesson1/sentences/sentence5/lesson1_sentence5.png",
-  "../../lessons/lesson1/sentences/sentence6/lesson1_sentence6.png",
-  "../../lessons/lesson1/sentences/sentence7/lesson1_sentence7.png",
-  "../../lessons/lesson1/sentences/sentence8/lesson1_sentence8.png",
-  "../../lessons/lesson1/sentences/sentence9/lesson1_sentence9.png",
-  "../../lessons/lesson1/sentences/sentence10/lesson1_sentence10.png",
-  "../../speaking_avatars/man.png",
-  "../../speaking_avatars/cobra.png",
-  "../../speaking_avatars/falcon.png"
+  "../../lessons/lesson1/sentences/sentence1/lesson1_sentence1.svg",
+  "../../lessons/lesson1/sentences/sentence2/lesson1_sentence2.svg",
+  "../../lessons/lesson1/sentences/sentence3/lesson1_sentence3.svg",
+  "../../lessons/lesson1/sentences/sentence4/lesson1_sentence4.svg",
+  "../../lessons/lesson1/sentences/sentence5/lesson1_sentence5.svg",
+  "../../lessons/lesson1/sentences/sentence6/lesson1_sentence6.svg",
+  "../../lessons/lesson1/sentences/sentence7/lesson1_sentence7.svg",
+  "../../lessons/lesson1/sentences/sentence8/lesson1_sentence8.svg",
+  "../../lessons/lesson1/sentences/sentence9/lesson1_sentence9.svg",
+  "../../lessons/lesson1/sentences/sentence10/lesson1_sentence10.svg",
+  "../../speaking_avatars/man.svg",
+  "../../speaking_avatars/cobra.svg",
+  "../../speaking_avatars/falcon.svg"
 ];
 
 const imageCache = {};
@@ -31,6 +31,8 @@ async function preloadImages() {
     })
   );
 }
+
+await preloadImages();
 
 // Declaring all the button actions.
 
@@ -270,48 +272,52 @@ const answerSet = {
 
 const avatars = {
     1: [
-        "../../speaking_avatars/man.png"
+        "../../speaking_avatars/man.svg"
     ],
     2: [
-        "../../speaking_avatars/cobra.png"
+        "../../speaking_avatars/cobra.svg"
     ],
     3: [
-        "../../speaking_avatars/falcon.png"
+        "../../speaking_avatars/falcon.svg"
     ],
     4: [
-        "../../speaking_avatars/man.png",
-        "../../speaking_avatars/cobra.png",
-        "../../speaking_avatars/falcon.png"
+        "../../speaking_avatars/owl.svg"
     ],
     5: [
-        "../../speaking_avatars/man.png",
-        "../../speaking_avatars/cobra.png",
-        "../../speaking_avatars/falcon.png"
+        "../../speaking_avatars/man.svg",
+        "../../speaking_avatars/cobra.svg",
+        "../../speaking_avatars/falcon.svg",
+        "../../speaking_avatars/owl.svg"
     ],
     6: [
-        "../../speaking_avatars/man.png",
-        "../../speaking_avatars/cobra.png",
-        "../../speaking_avatars/falcon.png"
+        "../../speaking_avatars/man.svg",
+        "../../speaking_avatars/cobra.svg",
+        "../../speaking_avatars/falcon.svg",
+        "../../speaking_avatars/owl.svg"
     ],
     7: [
-        "../../speaking_avatars/man.png",
-        "../../speaking_avatars/cobra.png",
-        "../../speaking_avatars/falcon.png"
+        "../../speaking_avatars/man.svg",
+        "../../speaking_avatars/cobra.svg",
+        "../../speaking_avatars/falcon.svg",
+        "../../speaking_avatars/owl.svg"
     ],
     8: [
-        "../../speaking_avatars/man.png",
-        "../../speaking_avatars/cobra.png",
-        "../../speaking_avatars/falcon.png"
+        "../../speaking_avatars/man.svg",
+        "../../speaking_avatars/cobra.svg",
+        "../../speaking_avatars/falcon.svg",
+        "../../speaking_avatars/owl.svg"
     ],
     9: [
-        "../../speaking_avatars/man.png",
-        "../../speaking_avatars/cobra.png",
-        "../../speaking_avatars/falcon.png"
+        "../../speaking_avatars/man.svg",
+        "../../speaking_avatars/cobra.svg",
+        "../../speaking_avatars/falcon.svg",
+        "../../speaking_avatars/owl.svg"
     ],
     10: [
-        "../../speaking_avatars/man.png",
-        "../../speaking_avatars/cobra.png",
-        "../../speaking_avatars/falcon.png"
+        "../../speaking_avatars/man.svg",
+        "../../speaking_avatars/cobra.svg",
+        "../../speaking_avatars/falcon.svg",
+        "../../speaking_avatars/owl.svg"
     ],
 };
 
@@ -379,6 +385,7 @@ function updatePage(varstate) {
     if (varstate === "vertical") {
         document.getElementById("correct-answer-vertical").textContent = answerSet[counter];
         img = document.getElementById('flashcard-image-vertical');
+        img.src = `../../lessons/lesson1/sentences/sentence${counter}/lesson1_sentence${counter}.svg`;
         flashcard = document.getElementById('vertical-flashcard');
         const horizontal = document.getElementById("horizontal-layout");
         const vertical = document.getElementById("vertical-layout");
@@ -394,6 +401,7 @@ function updatePage(varstate) {
     else {
         document.getElementById("correct-answer").textContent = answerSet[counter];
         img = document.getElementById('flashcard-image');
+        img.src = `../../lessons/lesson1/sentences/sentence${counter}/lesson1_sentence${counter}.svg`;
         flashcard = document.getElementById('flashcard');
         const horizontal = document.getElementById("horizontal-layout");
         const vertical = document.getElementById("vertical-layout");
@@ -406,7 +414,6 @@ function updatePage(varstate) {
     }
     foot.classList.remove('show');
     foot2.classList.remove('show');
-    img.src = `../../lessons/lesson1/sentences/sentence${counter}/lesson1_sentence${counter}.png`;
     flashcard.style.backgroundColor = "white";
     renderButtons(varstate);
     randomizeAvatar(varstate);
