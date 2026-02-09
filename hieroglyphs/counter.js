@@ -1,6 +1,31 @@
 let counter = 1;
 let state = "horizontal";
 
+// Preloading images
+
+const IMAGES = [
+  "../../lessons/lesson1/sentences/sentence1/lesson1_sentence1.svg",
+  "../../lessons/lesson1/sentences/sentence2/lesson1_sentence2.svg",
+  "../../lessons/lesson1/sentences/sentence3/lesson1_sentence3.svg",
+  "../../lessons/lesson1/sentences/sentence4/lesson1_sentence4.svg",
+  "../../lessons/lesson1/sentences/sentence5/lesson1_sentence5.svg",
+  "../../lessons/lesson1/sentences/sentence6/lesson1_sentence6.svg",
+  "../../lessons/lesson1/sentences/sentence7/lesson1_sentence7.svg",
+  "../../lessons/lesson1/sentences/sentence8/lesson1_sentence8.svg",
+  "../../lessons/lesson1/sentences/sentence9/lesson1_sentence9.svg",
+  "../../lessons/lesson1/sentences/sentence10/lesson1_sentence10.svg"
+];
+
+const imageCache = {};
+
+function preloadImages() {
+  IMAGES.forEach(src => {
+    const img = new Image();
+    img.src = src;
+    imageCache[src] = img;
+  });
+}
+
 // Declaring all the button actions.
 
 document.getElementById("check-button").addEventListener("click", () => {
@@ -374,7 +399,8 @@ function updatePage(varstate) {
     }
     foot.classList.remove('show');
     foot2.classList.remove('show');
-    img.src = `../../lessons/lesson1/sentences/sentence${counter}/lesson1_sentence${counter}.svg`;
+    const src = `../../lessons/lesson1/sentences/sentence${counter}/lesson1_sentence${counter}.svg`;
+    img.src = src;
     flashcard.style.backgroundColor = "white";
     renderButtons(varstate);
     randomizeAvatar(varstate);
