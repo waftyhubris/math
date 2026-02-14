@@ -44,7 +44,8 @@ h2 {
 }
 
 h3 {
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Roboto, Helvetica, Arial, sans-serif;
     color:white;
     padding-bottom: 2px;
     font-weight: normal;
@@ -417,9 +418,103 @@ button.inaccessible:active {
 }
 
 .hidden {
-    display: none;
+    display: none!important;
 }
 
-.block {
-    display: block;
+
+
+/* for multi-choice questions */
+
+#multichoice-header {
+    height: 100px;
+    padding-bottom: 10px
+}
+
+#multichoice-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.multichoice-question {
+    margin-top: 105px;
+    flex: 1;
+    background-color: var(--main-color);
+}
+
+.multichoice-text {
+    color: white;
+    font-size: 25px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: baseline; /* ensures vertical alignment on text baseline */
+    margin-bottom: 30px;
+    margin-top: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Roboto, Helvetica, Arial, sans-serif;
+}
+
+.multichoice-text p {
+    display: inline;  /* inline so it sits on the same line */
+    margin: 0;        /* remove default paragraph spacing */
+}
+
+.multichoice-text i {
+    display: inline; 
+}
+
+.multichoice-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+}
+
+.multichoice-option {
+    width: 250px;
+    margin-top:0px;
+    margin-bottom: 30px;
+    height: 250px;
+    border: 3px solid var(--sub-color);
+    border-bottom: 7px solid var(--sub-color);
+    border-radius: 0px!important;
+    background-color: white;
+}
+
+.correctly-selected {
+    background-color: #7fd877!important;
+}
+
+.incorrectly-selected {
+    background-color: #ffa4a4!important;
+}
+
+.multichoice-option:active {
+    border-bottom: 3px solid var(--sub-color); /* optional: make it feel pressed */
+}
+
+.multichoice-option:disabled {
+    cursor: default;
+}
+
+.multichoice-option:disabled:active {
+    border-bottom: 7px solid var(--sub-color)!important;
+}
+
+.multichoice-option.selected {
+  background-color: rgb(153, 228, 255);
+}
+
+.multichoice-image {
+    width: 160px;
+}
+
+.multichoice-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: var(--main-color);
+    padding-bottom: 30px;
 }

@@ -57,6 +57,7 @@ document.getElementById("check-button").addEventListener("click", () => {
   });
 });
 
+
 document.getElementById("check-button-vertical").addEventListener("click", () => {
   const buttons = document.querySelectorAll("#sentence-vertical button");
   const flashcard = document.getElementById("vertical-flashcard");
@@ -106,6 +107,7 @@ verbuttons.forEach(button => {
   });
 });
 
+
 const horsentence = document.getElementById("sentence");
 const horbuttons = document.querySelectorAll("#buttons .word");
 
@@ -128,6 +130,35 @@ horbuttons.forEach(button => {
   });
 });
 
+
+const multibuttons = document.querySelectorAll(".multichoice-option");
+multibuttons.forEach(button => {
+  button.addEventListener("click", () => {
+    multibuttons.forEach(b => b.classList.remove("selected"));
+    button.classList.add("selected");
+  });
+});
+
+
+document.getElementById("check-button-multi").addEventListener("click", function () {
+  const selected = document.querySelector(".multichoice-option.selected");
+  if (!selected) return;
+
+  const correct = document.querySelector(".multichoice-option.correct");
+
+  if (selected.classList.contains("correct")) {
+    selected.classList.add("correctly-selected");
+  } else {
+    selected.classList.add("incorrectly-selected");
+    correct.classList.add("correctly-selected");
+  }
+  document.getElementById("check-button-multi").classList.add("hidden");
+  document.getElementById("next-multi").classList.remove("hidden");
+
+  document.querySelectorAll(".multichoice-option").forEach(b => {
+    b.disabled = true;
+  });
+});
 
 
 // The custom sentence information for this particular lesson.
@@ -232,7 +263,7 @@ const buttonSets = {
         { text: "boat", style: "boldBlue" },
         { text: "temple" },
         { text: "god" }
-    ],
+    ]
 };
 
 const answerSet = {
@@ -265,7 +296,15 @@ const answerSet = {
     ],
     10: [
         "The king is in his boat"
-    ],
+    ]
+};
+
+const flashcardSet = {
+    11: ["Click the symbol representing the sound",  "ḫ."],
+    12: ["Click the symbols representing to the sounds",  "ḏd."],
+    13: ["Click the logogram representing the word 'scribe'.",  ""],
+    14: ["Click the determinative following the word for boat,",  "dpt."],
+    15: ["Click the word which means 'plan'.",  ""],
 };
 
 const avatars = {
@@ -316,58 +355,61 @@ const avatars = {
         "../../speaking_avatars/cobra.svg",
         "../../speaking_avatars/falcon.svg",
         "../../speaking_avatars/owl.svg"
-    ],
+    ]
 };
 
 // Going to the next lesson.
 
 document.getElementById("win-next").addEventListener("click", () => {
     counter++;
-    if (counter >= 11) {
-        counter =1;
-        state="horizontal";
-    }
-    if (counter >= 6) {
-        state="vertical";
-    }
+    state = updateState(counter);
     updatePage(state);
 });
 
 document.getElementById("lose-next").addEventListener("click", () => {
     counter++;
-    if (counter >= 11) {
-        counter =1;
-        state="horizontal";
-    }
-    if (counter >= 6) {
-        state="vertical";
-    }
+    state = updateState(counter);
     updatePage(state);
 });
 
 document.getElementById("win-next-vertical").addEventListener("click", () => {
     counter++;
-    if (counter >= 11) {
-        counter =1;
-        state="horizontal";
-    }
-    if (counter >= 6) {
-        state="vertical";
-    }
+    state = updateState(counter);
     updatePage(state);
 });
 
 document.getElementById("lose-next-vertical").addEventListener("click", () => {
     counter++;
-    if (counter >= 11) {
-        counter =1;
-        state="horizontal";
-    }
-    if (counter >= 6) {
-        state="vertical";
-    }
+    state = updateState(counter);
     updatePage(state);
 });
+
+document.getElementById("next-multi").addEventListener("click", () => {
+    counter++;
+    state = updateState(counter);
+    updatePage(state);
+});
+
+
+
+// Updating the page state depending on the counter
+
+function updateState(varcounter) {
+    if (varcounter < 6) {
+        return "horizontal";
+    }
+    if (6 <= varcounter && 10>= varcounter) {
+        return "vertical";
+    }
+    if (varcounter >= 16) {
+        counter =1;
+        return "horizontal";
+    }
+    if (varcounter >= 11) {
+        return "multichoice";
+    }
+}
+
 
 
 // Loading the next sentence.
@@ -375,44 +417,57 @@ document.getElementById("lose-next-vertical").addEventListener("click", () => {
 function updatePage(varstate) {
 
     // Change flashcards
+    const horizontal = document.getElementById("horizontal-layout");
+    const vertical = document.getElementById("vertical-layout");
+    const multichoice = document.getElementById("multichoice-layout")
+    if (varstate === "multichoice") {
+        document.querySelectorAll(".multichoice-option").forEach(b => {
+            b.disabled = false;
+            b.classList.remove("correctly-selected");
+            b.classList.remove("incorrectly-selected");
+            b.classList.remove("selected");
+            document.getElementById("check-button-multi").classList.remove("hidden");
+            document.getElementById("next-multi").classList.add("hidden");
+        });
 
-    let img;
-    let foot;
-    let foot2;
-    let flashcard;
-    if (varstate === "vertical") {
-        document.getElementById("correct-answer-vertical").textContent = answerSet[counter];
-        img = document.getElementById('flashcard-image-vertical');
-        img.src = `../../lessons/lesson1/sentences/sentence${counter}/lesson1_sentence${counter}.svg`;
-        flashcard = document.getElementById('vertical-flashcard');
-        const horizontal = document.getElementById("horizontal-layout");
-        const vertical = document.getElementById("vertical-layout");
         horizontal.classList.add("hidden");
-        vertical.classList.remove("hidden");
-        vertical.classList.add("block");
-        horizontal.classList.remove("block");
-        const continer = document.getElementById("vertical-flashcard-container");
-        continer.style.backgroundColor = "white";
-        foot = document.getElementById('win-footer-vertical');
-        foot2 = document.getElementById('lose-footer-vertical');
+        vertical.classList.add("hidden");
+        multichoice.classList.remove("hidden");
+        document.getElementById("multichoice-stem").textContent =flashcardSet[counter][0];
+        document.getElementById("multichoice-variable").textContent =flashcardSet[counter][1];
+        randomiseMultichoice();
     }
     else {
-        document.getElementById("correct-answer").textContent = answerSet[counter];
-        img = document.getElementById('flashcard-image');
-        img.src = `../../lessons/lesson1/sentences/sentence${counter}/lesson1_sentence${counter}.svg`;
-        flashcard = document.getElementById('flashcard');
-        const horizontal = document.getElementById("horizontal-layout");
-        const vertical = document.getElementById("vertical-layout");
-        vertical.classList.add("hidden");
-        horizontal.classList.remove("hidden");
-        horizontal.classList.add("block");
-        vertical.classList.remove("block");
-        foot = document.getElementById('win-footer');
-        foot2 = document.getElementById('lose-footer');
+        let img;
+        let flashcard;
+        if (varstate === "vertical") {
+            document.getElementById("correct-answer-vertical").textContent = answerSet[counter];
+            img = document.getElementById('flashcard-image-vertical');
+            img.src = `../../lessons/lesson1/sentences/sentence${counter}/lesson1_sentence${counter}.svg`;
+            flashcard = document.getElementById('vertical-flashcard');
+            horizontal.classList.add("hidden");
+            vertical.classList.remove("hidden");
+            multichoice.classList.add("hidden");
+            const continer = document.getElementById("vertical-flashcard-container");
+            continer.style.backgroundColor = "white";
+            foot = document.getElementById('win-footer-vertical');
+            foot2 = document.getElementById('lose-footer-vertical');
+        }
+        else {
+            document.getElementById("correct-answer").textContent = answerSet[counter];
+            img = document.getElementById('flashcard-image');
+            img.src = `../../lessons/lesson1/sentences/sentence${counter}/lesson1_sentence${counter}.svg`;
+            flashcard = document.getElementById('flashcard');
+            vertical.classList.add("hidden");
+            horizontal.classList.remove("hidden");
+            multichoice.classList.add("hidden");
+            foot = document.getElementById('win-footer');
+            foot2 = document.getElementById('lose-footer');
+        }
+        flashcard.style.backgroundColor = "white";
     }
     foot.classList.remove('show');
     foot2.classList.remove('show');
-    flashcard.style.backgroundColor = "white";
     renderButtons(varstate);
     randomizeAvatar(varstate);
 }
@@ -430,7 +485,14 @@ function randomizeAvatar(varstate) {
     }
     const currentAvatars = avatars[counter] || [];
 
-    if (currentAvatars.length === 0) return;
+    if (currentAvatars.length === 0) {
+        currentAvatars = [
+        "../../speaking_avatars/man.svg",
+        "../../speaking_avatars/cobra.svg",
+        "../../speaking_avatars/falcon.svg",
+        "../../speaking_avatars/owl.svg"
+    ];
+    };
 
     const randomIndex = Math.floor(Math.random() * currentAvatars.length);
     img.src = currentAvatars[randomIndex];
@@ -498,5 +560,36 @@ function renderButtons(varstate) {
     // Append buttons in new order
     buttons.forEach(btn => container.appendChild(btn));
 }
+
+
+// Randomising the multiple choice options.
+
+function randomiseMultichoice() {
+  const containers = document.querySelectorAll(".multichoice-options");
+  const buttons = Array.from(document.querySelectorAll(".multichoice-option"));
+  buttons.forEach(b => b.classList.remove("correct"));
+
+  buttons.forEach((button, index) => {
+    const img = button.querySelector("img");
+    img.src = `../../lessons/lesson1/multichoice/multichoice${counter}/multichoice${counter}_option${index + 1}.svg`;
+
+    if (index === 0) button.classList.add("correct");
+  });
+
+  // Shuffle buttons
+  for (let i = buttons.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [buttons[i], buttons[j]] = [buttons[j], buttons[i]];
+  }
+  containers[0].innerHTML = "";
+  containers[1].innerHTML = "";
+
+  containers[0].appendChild(buttons[0]);
+  containers[0].appendChild(buttons[1]);
+  containers[1].appendChild(buttons[2]);
+  containers[1].appendChild(buttons[3]);
+}
+
+
 
 updatePage();

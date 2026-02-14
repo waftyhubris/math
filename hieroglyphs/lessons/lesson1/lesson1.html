@@ -21,9 +21,13 @@
   <link rel="prefetch" href="../../speaking_avatars/cobra.svg">
   <link rel="prefetch" href="../../speaking_avatars/man.svg">
   <link rel="prefetch" href="../../speaking_avatars/falcon.svg">
+  <link rel="prefetch" href="../../speaking_avatars/owl.svg">
 </head>
 <body>
 <main>
+
+    <!-- Only displays for horizontally displayed questions -->
+
     <div id="horizontal-layout">
 
         <header>
@@ -104,11 +108,8 @@
         </footer>
     </div>
 
-
-
-
-
-
+    
+    <!-- Only displays for vertically displayed questions -->
 
     <div id="vertical-layout" class="hidden">
 
@@ -159,6 +160,70 @@
                 <button class="check" id="check-button-vertical">Check</button>
             </div>
         </footer>
+
+        <footer id="win-footer-vertical" class="result-footer">
+            <div></div>
+
+            <div class="footer-stack">
+                <h2>Great work!</h2>
+            </div>
+
+            <div class="next">
+                <button class="win-next" id="win-next-vertical">Next</button>
+            </div>
+        </footer>
+        
+        <footer id="lose-footer-vertical" class="result-footer">
+            <div></div>
+            
+            <div class="footer-stack">
+                <h2>Not quite.</h2>
+                <h3>Correct answer: <i id="correct-answer-vertical"></i></h3>
+            </div>
+
+            <div class="next">
+                <button class="lose-next" id="lose-next-vertical">Next</button>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- Only displays for multichoice character questions -->
+
+    <div id="multichoice-layout" class="hidden">
+
+        <header id="multichoice-header">
+
+            <div class="header-inner">
+                <a href="../../hieroglyphs.html">
+                    <img src="../../hieroglyphs_logo.png" alt="Pretty bird" class="logo">
+                </a>
+                <h1>The Hieroglyphics Archive</h1>
+            </div>
+        </header>
+
+        <div class="multichoice-question">
+            <div class="multichoice-text">
+                <p id="multichoice-stem"></p> <i id="multichoice-variable"></i>
+            </div>
+            <div class="multichoice-options">
+                <button class="multichoice-option" id="option1"><img src="../../lessons/lesson1/multichoice/multichoice1/multichoice1_option3.svg" class="multichoice-image"></img></button>
+                <button class="multichoice-option" id="option2"><img src="../../lessons/lesson1/multichoice/multichoice1/multichoice1_option2.svg" class="multichoice-image"></img></button>
+            </div>
+            <div class="multichoice-options">
+                <button class="multichoice-option" id="option3"><img src="../../lessons/lesson1/multichoice/multichoice1/multichoice1_option1.svg" class="multichoice-image"></img></button>
+                <button class="multichoice-option" id="option4"><img src="../../lessons/lesson1/multichoice/multichoice1/multichoice1_option4.svg" class="multichoice-image"></img></button>
+            </div>
+        </div>
+
+        <div class="multichoice-footer">
+            <button class="check" id="check-button-multi">Check</button>
+            <button class="check hidden" id="next-multi">Next</button>
+        </div>
+
+
+
+                  
 
         <footer id="win-footer-vertical" class="result-footer">
             <div></div>
