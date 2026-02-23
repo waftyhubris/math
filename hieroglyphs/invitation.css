@@ -19,7 +19,7 @@ body {
 
 main {
     padding: 0;
-    padding-top: 15vh;
+    padding-top: 18vh;
     box-sizing: border-box;
     font-size: clamp(16px, 3.5vw, 17.25px);
 }
@@ -66,7 +66,7 @@ h4 {
 }
 
 .logo {
-    width: clamp(100px, 25vw, 250px);
+    width: clamp(100px, 25vw, 200px);
     height: auto;
     margin-top: 15vh; 
     display: block;

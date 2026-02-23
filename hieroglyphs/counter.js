@@ -167,15 +167,15 @@ document.getElementById("check-button").addEventListener("click", async () => {
             button.classList.add("shake");
         });
 
+        await new Promise(resolve => setTimeout(resolve, 500));
+
         for (let i = buttons.length - 1; i >= 0; i--) {
             const button = buttons[i];
-            const reverseIndex = buttons.length - 1 - i; // for stagger timing
-
-            button.style.animationDelay = `${reverseIndex * 0.1+0.5}s`;
+            await new Promise(resolve => setTimeout(resolve, 100));
             button.click();
         }
 
-        await new Promise(resolve => setTimeout(resolve, buttons.length*100+600));
+        await new Promise(resolve => setTimeout(resolve, 150));
         const container = document.getElementById("buttons");
         const unbuttons = container.querySelectorAll("button");
         const words = correctAnswer.trim().split(' ');
