@@ -32,11 +32,20 @@ async function preloadImages() {
   );
 }
 
+// Effect of clicking anywhere.
+
+document.addEventListener("click", (event) => {
+    if (!event.target.classList.contains("speech")) {
+        removeGloss();
+    }
+});
+
 // Effect of pressing keyboard buttons.
 
 let typedBuffer = "";
 
 document.addEventListener("keydown", async (e) => {
+    removeGloss();
   const activeTag = document.activeElement.tagName;
   if (["INPUT", "TEXTAREA"].includes(activeTag)) return;
 
@@ -121,8 +130,16 @@ async function tryMatchWord() {
 // Declaring all the button actions.
 
 document.getElementById("check-button").addEventListener("click", async () => {
+    removeGloss();
   const buttons = document.querySelectorAll("#sentence button");
   const flashcard = document.getElementById("flashcard");
+  buttons.forEach(button => {
+        button.classList.add("inaccessible");
+    });
+    const bottomButtons = document.querySelectorAll("#buttons button");
+    bottomButtons.forEach(button => {
+        button.classList.add("inaccessible");
+    })
 
   const text = Array.from(buttons)
     .map(b => b.textContent.trim())
@@ -149,7 +166,7 @@ document.getElementById("check-button").addEventListener("click", async () => {
     });
     
   } else {
-        flashcard.style.backgroundColor = "#ffbaba";
+        flashcard.style.backgroundColor = "#ffc9aa";
         // document.getElementById("lose-footer").classList.add("show");
         document.getElementById("check-button").classList.add("hidden");
         document.getElementById("win-next").classList.add("inaccessible");
@@ -161,7 +178,7 @@ document.getElementById("check-button").addEventListener("click", async () => {
 
 
         buttons.forEach((button, index) => {
-            button.style.backgroundColor = "#fec8c8";
+            button.style.backgroundColor = "#ffdbc6";
             button.classList.remove("pop");
             button.style.animationDelay = `${index * 0.02}s`;
             button.classList.add("shake");
@@ -188,6 +205,8 @@ document.getElementById("check-button").addEventListener("click", async () => {
                 ) {
                     await new Promise(resolve => setTimeout(resolve, 100));
                     button.click();
+                    const newSentenceButtons = document.querySelectorAll("#sentence button");
+                    newSentenceButtons[newSentenceButtons.length - 1].classList.add("inaccessible");
                     break; // stop after first match
                 }
             }
@@ -196,15 +215,6 @@ document.getElementById("check-button").addEventListener("click", async () => {
         await new Promise(resolve => setTimeout(resolve, 500));
         document.getElementById("win-next").classList.remove("inaccessible");
     }
-
-    buttons.forEach(button => {
-        button.classList.add("inaccessible");
-    });
-
-  const bottomButtons = document.querySelectorAll("#buttons button");
-  bottomButtons.forEach(button => {
-    button.classList.add("inaccessible");
-  })
 });
 
 
@@ -271,6 +281,34 @@ document.getElementById("check-button-multi").addEventListener("click", function
 vocabulary = [
     'I', 'am', 'you', 'are', 'he', 'is', 'she', 'it', 'this', 'his', 'her', 'the', 'the', 'of', 'of', 'child', 'children', 'Egypt', 'man', 'god', 'gods', 'Ptah', 'king', 'desert', 'Horus', 'Ptah', 'Isis', 'Osiris', 'Set', 'Bastet', 'Thoth', 'great', 'queen', 'brother', 'daughter', 'scribe', 'eternity', 'tomb', 'evil', 'beautiful', 'plan', 'temple'
 ];
+
+const egyptianWords = {
+    1: [
+        {pronunciation: "jnk", translation: "I"},
+        {pronunciation: "ẖrd", translation: "child"},
+        {pronunciation: "=s", translation: "her"}
+    ],
+    2: [
+        {pronunciation: "ntf", translation: "he"},
+        {pronunciation: "nsw", translation: "king"},
+        {pronunciation: "nṯr.w", translation: "gods"}
+    ],
+    3: [
+        {pronunciation: "jnk", translation: "I"},
+        {pronunciation: "ḥrw", translation: "Horus"}
+    ],
+    4: [
+        {pronunciation: "ꜣs.t", translation: "Isis"},
+        {pronunciation: "nṯr.t", translation: "goddess"},
+        {pronunciation: "wr.t", translation: "great"}
+    ],
+    5: [
+        {pronunciation: "sš", translation: "scribe"},
+        {pronunciation: "pw", translation: "enclitic particle"},
+        {pronunciation: "sn", translation: "brother"},
+        {pronunciation: "=sn", translation: "their"},
+    ],
+}
 
 const buttonSets = {
     1: [
@@ -496,6 +534,7 @@ function updateState(varcounter) {
 // Loading the next sentence.
 
 function updatePage(varstate) {
+    removeSpeech();
 
     // Change flashcards
     const horizontal = document.getElementById("horizontal-layout");
@@ -535,8 +574,39 @@ function updatePage(varstate) {
         }
         else {
             document.getElementById("correct-answer").textContent = answerSet[counter];
-            img = document.getElementById('flashcard-image');
-            img.src = `../../lessons/lesson1/sentences/sentence${counter}/lesson1_sentence${counter}.svg`;
+            let index = 1;
+
+            function tryLoadNext() {
+                const div = Object.assign(document.createElement("div"), {className: "word-gloss", id: `word-index${index}`});
+                const subdiv = Object.assign(document.createElement("div"), {className: "gloss", id: `word-index${index}`});
+                const pronunciation = document.createElement("i");
+                pronunciation.textContent = egyptianWords[counter][index-1].pronunciation;
+                const translation = document.createTextNode(egyptianWords[counter][index-1].translation);
+                subdiv.append(pronunciation, ": ", translation);
+                const img = new Image();
+                img.src = `../../lessons/lesson1/sentences/sentence${counter}/lesson1_sentence${counter}_word${index}.svg`;
+                img.classList.add("speech");
+                img.addEventListener("click", () => {
+                    if (subdiv.classList.contains("show")) {
+                        removeGloss();
+                    }
+                    else {
+                        removeGloss();
+                        subdiv.classList.toggle("show");
+                    }
+                });
+                div.appendChild(img);
+                div.appendChild(subdiv);
+                img.onload = () => {
+                    document.getElementById("flashcard-sentence").appendChild(div);
+                    index++;
+                    tryLoadNext();
+                };
+                img.onerror = () => {
+                };
+            }
+
+            tryLoadNext();
             flashcard = document.getElementById('flashcard');
             document.getElementById("check-button").classList.remove("hidden");
             document.getElementById("win-next").classList.add("hidden");
@@ -552,6 +622,24 @@ function updatePage(varstate) {
     foot2.classList.remove('show');
     renderButtons(varstate);
     randomizeAvatar(varstate);
+}
+
+
+// Remove gloss, which should happen whenever most buttons are pressed.
+
+function removeGloss() {
+    const glossElements = document.querySelectorAll(".gloss");
+    glossElements.forEach(el => {
+        el.classList.remove("show");
+    });
+}
+
+
+// Remove speech, which should happen when next is pressed.
+
+function removeSpeech() {
+    const sentence = document.getElementById("flashcard-sentence");
+    sentence.innerHTML = "";
 }
 
 
@@ -618,6 +706,7 @@ function renderButtons(varstate) {
             newButton.className = "word";
             newButton.classList.add("pop");
             newButton.textContent = word.text;
+            
             if (word.style === "boldBlue") {
                 newButton.style.fontWeight = "bold";
                 newButton.style.color = "#00a0d7ff";

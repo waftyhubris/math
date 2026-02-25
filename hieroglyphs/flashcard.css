@@ -398,6 +398,36 @@ footer button {
     justify-self: end;
 }
 
+/* for the word gloss  */
+
+.word-gloss {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.gloss {
+  position: absolute;
+  bottom: 100%;          /* place above image */
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 15px;
+  font-size: 20px;
+
+  padding: 8px 12px;
+  background: var(--sub-color);
+  color: rgb(255, 255, 255);
+  border-radius: 8px;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.gloss.show {
+  opacity: 1;
+}
+
 
 /* for the horizontal flashcard layout */
 
@@ -427,6 +457,14 @@ header {
     margin-bottom:60px;
     border-radius: 0px!important;
     background-color: var(--pearl);
+    max-width: 800px;
+}
+
+#flashcard-sentence {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 40px 2px;
 }
 
 .scroll {
