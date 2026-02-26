@@ -49,13 +49,19 @@ document.addEventListener("keydown", async (e) => {
   const activeTag = document.activeElement.tagName;
   if (["INPUT", "TEXTAREA"].includes(activeTag)) return;
 
-  // BACKSPACE
   if (e.key === "Backspace") {
     if (typedBuffer.length > 0) {
       typedBuffer = typedBuffer.slice(0, -1);
     } else {
-      const sentence = document.getElementById("sentence");
-      const buttons = sentence.querySelectorAll("button");
+        let sentence;
+        let buttons;
+        if (state === "vertical") {
+            sentence = document.getElementById("sentence-vertical");
+        }
+        else {
+            sentence = document.getElementById("sentence");
+        }
+        buttons = sentence.querySelectorAll("button");
       if (buttons.length > 0) {
         const last = buttons[buttons.length - 1];
         if (!last.classList.contains("inaccessible")) {
@@ -76,24 +82,37 @@ document.addEventListener("keydown", async (e) => {
 
     if (e.key === "Enter") {
         let matched = false;
-        const nextButton = document.getElementById("win-next");
-        if (!nextButton.classList.contains("hidden") && !nextButton.classList.contains("inaccessible")) {
-            nextButton.click();
-        }
-        else {
-            if (typedBuffer.length > 0) {
-                matched = await tryMatchWord();
+        if (state === "multichoice") {
+            const checkButton = document.getElementById("check-button-multi");
+            if (!checkButton.classList.contains("hidden") && !checkButton.classList.contains("inaccessible")) {
+                checkButton.click();
             }
-
-            if (typedBuffer.length === 0 || matched) {
-                const checkButton = document.getElementById("check-button");
-                if (checkButton && !checkButton.classList.contains("hidden")) {
-                    checkButton.click();
+            else {
+                const nextButton = document.getElementById("next-multi");
+                if (!nextButton.classList.contains("hidden") && !nextButton.classList.contains("inaccessible")) {
+                    nextButton.click();
                 }
             }
-            typedBuffer = "";
         }
+        else {
+            const nextButton = document.getElementById("win-next");
+            if (!nextButton.classList.contains("hidden") && !nextButton.classList.contains("inaccessible")) {
+                nextButton.click();
+            }
+            else {
+                if (typedBuffer.length > 0) {
+                    matched = await tryMatchWord();
+                }
 
+                if (typedBuffer.length === 0 || matched) {
+                    const checkButton = document.getElementById("check-button");
+                    if (checkButton && !checkButton.classList.contains("hidden")) {
+                        checkButton.click();
+                    }
+                }
+                typedBuffer = "";
+            }
+        }
         e.preventDefault();
     }
 
@@ -131,9 +150,17 @@ async function tryMatchWord() {
 
 document.getElementById("check-button").addEventListener("click", async () => {
     removeGloss();
-  const buttons = document.querySelectorAll("#sentence button");
-  const flashcard = document.getElementById("flashcard");
-  buttons.forEach(button => {
+    let buttons;
+    let flashcard;
+    if (state === "vertical") {
+        flashcard = document.getElementById("vertical-flashcard");
+        buttons = document.querySelectorAll("#sentence-vertical button");
+    }
+    else {
+        flashcard = document.getElementById("flashcard");
+        buttons = document.querySelectorAll("#sentence button");
+    }
+    buttons.forEach(button => {
         button.classList.add("inaccessible");
     });
     const bottomButtons = document.querySelectorAll("#buttons button");
@@ -147,10 +174,9 @@ document.getElementById("check-button").addEventListener("click", async () => {
 
   flashcard.classList.remove("correct", "incorrect");
 
-  const correctAnswer = document.getElementById("correct-answer").textContent.toLowerCase().replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ").trim();
+  const correctAnswer = answerSet[counter][0].toLowerCase().replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ").trim();
   if (text.toLowerCase().replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ").trim() === correctAnswer) {
     flashcard.style.backgroundColor = "rgb(162, 255, 153)";
-    // document.getElementById("win-footer").classList.add("show");
     document.getElementById("check-button").classList.add("hidden");
     document.getElementById("win-next").classList.remove("hidden");
     flashcard.classList.remove("bounce");
@@ -167,7 +193,6 @@ document.getElementById("check-button").addEventListener("click", async () => {
     
   } else {
         flashcard.style.backgroundColor = "#ffc9aa";
-        // document.getElementById("lose-footer").classList.add("show");
         document.getElementById("check-button").classList.add("hidden");
         document.getElementById("win-next").classList.add("inaccessible");
         document.getElementById("win-next").classList.remove("hidden");
@@ -218,39 +243,15 @@ document.getElementById("check-button").addEventListener("click", async () => {
 });
 
 
-
-document.getElementById("check-button-vertical").addEventListener("click", () => {
-  const buttons = document.querySelectorAll("#sentence-vertical button");
-  const flashcard = document.getElementById("vertical-flashcard");
-  const continer = document.getElementById("vertical-flashcard-container");
-
-  const text = Array.from(buttons)
-    .map(b => b.textContent.trim())
-    .join(" ");
-
-  flashcard.classList.remove("correct", "incorrect");
-
-  if (text.toLowerCase().replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ").trim() === document.getElementById("correct-answer-vertical").textContent.toLowerCase().replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ").trim()) {
-    flashcard.style.backgroundColor = "#7fd877";
-    continer.style.backgroundColor = "#7fd877";
-    document.getElementById("win-footer-vertical").classList.add("show");
-  } else {
-    flashcard.style.backgroundColor = "#ffa4a4";
-    continer.style.backgroundColor = "#ffa4a4";
-    document.getElementById("lose-footer-vertical").classList.add("show");
-  }
-
-  buttons.forEach(button => {
-    button.classList.add("inaccessible");
-  });
-});
-
-
 const multibuttons = document.querySelectorAll(".multichoice-option");
 multibuttons.forEach(button => {
   button.addEventListener("click", () => {
-    multibuttons.forEach(b => b.classList.remove("selected"));
+    multibuttons.forEach(b => {
+        b.classList.remove("selected");
+        b.style.backgroundColor = "white";
+    });
     button.classList.add("selected");
+    button.style.backgroundColor = "rgb(193, 238, 255)";
   });
 });
 
@@ -261,11 +262,13 @@ document.getElementById("check-button-multi").addEventListener("click", function
 
   const correct = document.querySelector(".multichoice-option.correct");
 
-  if (selected.classList.contains("correct")) {
-    selected.classList.add("correctly-selected");
-  } else {
-    selected.classList.add("incorrectly-selected");
-    correct.classList.add("correctly-selected");
+    if (selected.classList.contains("correct")) {
+        selected.style.backgroundColor = "rgb(162, 255, 153)";
+        selected.classList.add("bounce");
+    } else {
+        selected.style.backgroundColor = "#ffdbc6";
+        selected.classList.add("shake");
+        correct.style.backgroundColor = "rgb(162, 255, 153)";
   }
   document.getElementById("check-button-multi").classList.add("hidden");
   document.getElementById("next-multi").classList.remove("hidden");
@@ -308,6 +311,36 @@ const egyptianWords = {
         {pronunciation: "sn", translation: "brother"},
         {pronunciation: "=sn", translation: "their"},
     ],
+    6: [
+        {pronunciation: "jz", translation: "tomb"},
+        {pronunciation: "=j", translation: "my"},
+        {pronunciation: "ḏ.t", translation: "eternity"},
+        {pronunciation: "pw", translation: "enclitic particle"},
+    ],
+    7: [
+        {pronunciation: "bjn", translation: "evil"},
+        {pronunciation: "sn", translation: "brother"},
+        {pronunciation: "=k", translation: "your"}
+    ],
+    8: [
+        {pronunciation: "jqr", translation: "excellent"},
+        {pronunciation: ".wy", translation: "how"},
+        {pronunciation: "sḫr.w", translation: "plans"},
+        {pronunciation: "n.w", translation: "of"},
+        {pronunciation: "nṯr.w", translation: "gods"}
+    ],
+    9: [
+        {pronunciation: "nfr", translation: "beautiful"},
+        {pronunciation: ".wy", translation: "how"},
+        {pronunciation: "ꜣs.t", translation: "Isis"}
+    ],
+    10: [
+        {pronunciation: "jw", translation: "proclitic particle"},
+        {pronunciation: "nsw", translation: "king"},
+        {pronunciation: "m", translation: "in"},
+        {pronunciation: "dp.t", translation: "boat"},
+        {pronunciation: "=f", translation: "his"}
+    ]
 }
 
 const buttonSets = {
@@ -485,23 +518,11 @@ document.getElementById("win-next").addEventListener("click", () => {
     updatePage(state);
 });
 
-document.getElementById("lose-next").addEventListener("click", () => {
-    counter++;
-    state = updateState(counter);
-    updatePage(state);
-});
-
-document.getElementById("win-next-vertical").addEventListener("click", () => {
-    counter++;
-    state = updateState(counter);
-    updatePage(state);
-});
-
-document.getElementById("lose-next-vertical").addEventListener("click", () => {
-    counter++;
-    state = updateState(counter);
-    updatePage(state);
-});
+// document.getElementById("lose-next").addEventListener("click", () => {
+//     counter++;
+//     state = updateState(counter);
+//     updatePage(state);
+// });
 
 document.getElementById("next-multi").addEventListener("click", () => {
     counter++;
@@ -541,11 +562,13 @@ function updatePage(varstate) {
     const vertical = document.getElementById("vertical-layout");
     const multichoice = document.getElementById("multichoice-layout")
     if (varstate === "multichoice") {
+        document.getElementById("translation-footer").classList.add("hidden");
         document.querySelectorAll(".multichoice-option").forEach(b => {
             b.disabled = false;
-            b.classList.remove("correctly-selected");
-            b.classList.remove("incorrectly-selected");
+            b.style.backgroundColor = "white";
             b.classList.remove("selected");
+            b.classList.remove("shake");
+            b.classList.remove("bounce");
         });
         document.getElementById("check-button-multi").classList.remove("hidden");
         document.getElementById("next-multi").classList.add("hidden");
@@ -557,69 +580,60 @@ function updatePage(varstate) {
         randomiseMultichoice();
     }
     else {
-        let img;
+        document.getElementById("translation-footer").classList.remove("hidden");
         let flashcard;
         if (varstate === "vertical") {
-            document.getElementById("correct-answer-vertical").textContent = answerSet[counter];
-            img = document.getElementById('flashcard-image-vertical');
-            img.src = `../../lessons/lesson1/sentences/sentence${counter}/lesson1_sentence${counter}.svg`;
             flashcard = document.getElementById('vertical-flashcard');
+            egyptianSentence = document.getElementById('vertical-flashcard-sentence');
             horizontal.classList.add("hidden");
             vertical.classList.remove("hidden");
             multichoice.classList.add("hidden");
-            const continer = document.getElementById("vertical-flashcard-container");
-            continer.style.backgroundColor = "white";
-            foot = document.getElementById('win-footer-vertical');
-            foot2 = document.getElementById('lose-footer-vertical');
         }
         else {
-            document.getElementById("correct-answer").textContent = answerSet[counter];
-            let index = 1;
-
-            function tryLoadNext() {
-                const div = Object.assign(document.createElement("div"), {className: "word-gloss", id: `word-index${index}`});
-                const subdiv = Object.assign(document.createElement("div"), {className: "gloss", id: `word-index${index}`});
-                const pronunciation = document.createElement("i");
-                pronunciation.textContent = egyptianWords[counter][index-1].pronunciation;
-                const translation = document.createTextNode(egyptianWords[counter][index-1].translation);
-                subdiv.append(pronunciation, ": ", translation);
-                const img = new Image();
-                img.src = `../../lessons/lesson1/sentences/sentence${counter}/lesson1_sentence${counter}_word${index}.svg`;
-                img.classList.add("speech");
-                img.addEventListener("click", () => {
-                    if (subdiv.classList.contains("show")) {
-                        removeGloss();
-                    }
-                    else {
-                        removeGloss();
-                        subdiv.classList.toggle("show");
-                    }
-                });
-                div.appendChild(img);
-                div.appendChild(subdiv);
-                img.onload = () => {
-                    document.getElementById("flashcard-sentence").appendChild(div);
-                    index++;
-                    tryLoadNext();
-                };
-                img.onerror = () => {
-                };
-            }
-
-            tryLoadNext();
             flashcard = document.getElementById('flashcard');
-            document.getElementById("check-button").classList.remove("hidden");
-            document.getElementById("win-next").classList.add("hidden");
+            egyptianSentence = document.getElementById('flashcard-sentence');
             vertical.classList.add("hidden");
             horizontal.classList.remove("hidden");
             multichoice.classList.add("hidden");
-            foot = document.getElementById('win-footer');
-            foot2 = document.getElementById('lose-footer');
         }
+        document.getElementById("check-button").classList.remove("hidden");
+        document.getElementById("win-next").classList.add("hidden");
+
         flashcard.style.backgroundColor = "white";
+        let index = 1;
+
+        function tryLoadNext() {
+            const div = Object.assign(document.createElement("div"), {className: "word-gloss", id: `word-index${index}`});
+            const subdiv = Object.assign(document.createElement("div"), {className: "gloss", id: `word-index${index}`});
+            const pronunciation = document.createElement("i");
+            pronunciation.textContent = egyptianWords[counter][index-1].pronunciation;
+            const translation = document.createTextNode(egyptianWords[counter][index-1].translation);
+            subdiv.append(pronunciation, ": ", translation);
+            const img = new Image();
+            img.src = `../../lessons/lesson1/sentences/sentence${counter}/lesson1_sentence${counter}_word${index}.svg`;
+            img.classList.add("speech");
+            img.addEventListener("click", () => {
+                if (subdiv.classList.contains("show")) {
+                    removeGloss();
+                }
+                else {
+                    removeGloss();
+                    subdiv.classList.toggle("show");
+                }
+            });
+            div.appendChild(img);
+            div.appendChild(subdiv);
+            img.onload = () => {
+                egyptianSentence.appendChild(div);
+                index++;
+                tryLoadNext();
+            };
+            img.onerror = () => {
+            };
+        }
+
+        tryLoadNext();
     }
-    foot.classList.remove('show');
-    foot2.classList.remove('show');
     renderButtons(varstate);
     randomizeAvatar(varstate);
 }
@@ -638,7 +652,13 @@ function removeGloss() {
 // Remove speech, which should happen when next is pressed.
 
 function removeSpeech() {
-    const sentence = document.getElementById("flashcard-sentence");
+    let sentence;
+    if (state === "vertical") {
+        sentence = document.getElementById("vertical-flashcard-sentence");
+    }
+    else {
+        sentence = document.getElementById("flashcard-sentence");
+    }
     sentence.innerHTML = "";
 }
 
@@ -672,16 +692,15 @@ function randomizeAvatar(varstate) {
 // Loading in the buttons at the bottom of the page.
 
 function renderButtons(varstate) {
-    let container;
+    const container = document.getElementById("buttons");
     let sentence;
     if (varstate === "vertical") {
-        container = document.getElementById("buttons-vertical");
         sentence  = document.getElementById("sentence-vertical");
-    } else {
-        container = document.getElementById("buttons");
+    }
+    else {
         sentence  = document.getElementById("sentence");
     }
-    
+
     container.innerHTML = "";
     sentence.innerHTML = "";
 

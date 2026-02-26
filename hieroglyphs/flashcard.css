@@ -87,11 +87,6 @@ h5 {
   animation: shake 0.4s ease;
 }
 
-#vertical-header {
-    height: 100px;
-    padding-bottom: 10px
-}
-
 .header-inner {
     display: flex;
     align-items: center;       /* vertical alignment of logo + text */
@@ -107,55 +102,6 @@ a:hover {
     text-decoration: underline;
 }
 
-#vertical-scroll section {
-    margin-top: 115px;
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 150px);
-}
-
-#vertical-flashcard-container {
-    justify-content: right;
-    padding-right:0px;
-    margin-right: 0px;
-    max-width: 230px;
-    border: 4px solid var(--sub-color);
-    border-bottom: 10px solid var(--sub-color);
-    padding-bottom: 0px!important;
-    height: auto!important;
-}
-
-#vertical-flashcard-container-container {
-    height: calc(100vh - 20px)!important;
-    display: flex;
-    flex-direction: column;
-}
-
-#filler {
-    flex: 1;
-    background-color: var(--main-color)!important;
-}
-
-.vertical-left-divide, .vertical-right-divide {
-    background-color: var(--main-color)!important;
-}
-
-.vertical-right-divide {
-    max-width: 450px;
-}
-
-.vertical-left-divide {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-}
-
-.vertical-bottom-scroll section {
-    height: 100%;
-    background-color: var(--main-color);
-    padding-bottom:20px;
-}
-
 .logo {
     width: 100px;
     height: auto;
@@ -163,37 +109,6 @@ a:hover {
     display: block;
     margin: 0 auto;
     padding-top: 0px;
-}
-
-#vertical-flashcard {
-    padding-top:15px;
-    padding-right:0px;
-    flex-direction: column;
-    gap:1.4rem;
-    width: 170px;
-    display: flex;
-    align-content: right;
-    height: auto!important;
-    margin-bottom: 0px;
-}
-
-.vertical-speaker {
-    height: 200px;
-    align-self: flex-end;
-    padding-bottom: 10px;
-    padding-right: 10px;
-}
-
-.vertical-speech {
-    width: 75px;
-    align-self: flex-end;
-    margin-right: 15px;
-}
-
-#sentence-vertical {
-    padding-top:20px;
-    padding-left: 400px;
-    margin-top: 0; 
 }
 
 
@@ -269,72 +184,7 @@ button.word:disabled:active {
   animation: popOut 0.1s ease-in forwards;
 }
 
-#check {
-    bottom: 0;
-    display: flex;
-    align-content: right;
-    justify-content: center;
-    padding: 10px;
-    margin-right:20px;
-    z-index:100;
-}
-
-.next {
-    bottom: 0;
-    display: flex;
-    align-content: right;
-    justify-content: center;
-    padding: 10px;
-    margin-right:20px;
-    z-index:100;
-}
-
-footer.result-footer {
-    background: var(--sub-color);
-    color: white;
-    transition: transform 0.2s ease;
-    transform: translateY(100%);
-
-    line-height: 10px;
-}
-
-.footer-stack {
-    padding-top:25px;
-    align-content: center;
-    padding-left: 130px;
-}
-
-footer.result-footer.show {
-  transform: translateY(0);
-}
-
-.win-next {
-    border: 2px solid #1e8f14;
-    border-bottom: 4px solid #1e8f14;
-}
-
-.lose-next {
-    border: 2px solid #ab2020;
-    border-bottom: 4px solid #ab2020;
-}
-
-button.win-next:active {
-    border-bottom: 2px solid #1e8f14;
-}
-
-button.lose-next:active {
-    border-bottom: 2px solid #ab2020;
-}
-
-#win-footer, #win-footer-vertical {
-    background-color: #1e8f14
-}
-
-#lose-footer, #lose-footer-vertical {
-    background-color: #ab2020
-}
-
-.next {
+.next, #check {
     bottom: 0;
     display: flex;
     align-content: right;
@@ -424,6 +274,20 @@ footer button {
   transition: opacity 0.2s ease;
 }
 
+.gloss::after {
+  content: "";
+  position: absolute;
+  top: 98%;              /* place directly below box */
+  left: 50%;
+  transform: translateX(-50%);
+  
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid var(--sub-color); /* triangle color */
+}
+
 .gloss.show {
   opacity: 1;
 }
@@ -445,6 +309,10 @@ header {
 }
 
 #flashcard {
+    max-width: 800px;
+}
+
+.flashcard {
     border: 4px solid var(--sub-color);
     border-bottom: 10px solid var(--sub-color);
     display: flex;
@@ -452,19 +320,11 @@ header {
     justify-content: center;
     padding: 20px;
     gap: 2rem;
-    z-index: 100000;
+    z-index: 1000;
     margin-top:5px;
     margin-bottom:60px;
     border-radius: 0px!important;
     background-color: var(--pearl);
-    max-width: 800px;
-}
-
-#flashcard-sentence {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 40px 2px;
 }
 
 .scroll {
@@ -515,6 +375,65 @@ header {
 }
 
 
+/* for the vertical flashcard layout */
+
+#vertical-flashcard-sentence {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;      /* allow new column */
+    max-height: 520px;        /* required — defines when wrapping happens */
+    row-gap: 4px;
+    column-gap: 18px;
+}
+
+#vertical-scroll section {
+    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 160px);
+}
+
+.vertical-left-divide {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    width: 400px;
+}
+
+#vertical-flashcard {
+    padding-top:15px;
+    padding-right:0px;
+    flex-direction: row;
+    gap:1.4rem;
+    width: auto;
+    display: flex;
+    align-content: right;
+    height: auto!important;
+    margin-bottom: 0px;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.vertical-speaker {
+    height: 200px;
+    align-self: flex-end;
+    padding-bottom: 0px;
+    padding-right: 10px;
+}
+
+#vertical-flashcard-sentence .speech {
+    height: auto;
+    width: 80px;
+    align-self: flex-end;
+    margin-right: 0px;
+}
+
+#sentence-vertical {
+    padding-top:40px;
+    margin-top: 0; 
+}
+
+
 
 /* for multi-choice questions */
 
@@ -533,6 +452,7 @@ header {
     margin-top: 105px;
     flex: 1;
     background-color: var(--main-color);
+    z-index: 10000;
 }
 
 .multichoice-text {
@@ -582,10 +502,6 @@ header {
 
 .incorrectly-selected {
     background-color: #ffa4a4!important;
-}
-
-.multichoice-option:active {
-    border-bottom: 3px solid var(--sub-color); /* optional: make it feel pressed */
 }
 
 .multichoice-option:disabled {
