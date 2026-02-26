@@ -26,21 +26,21 @@
 <body>
 <main>
 
+    <header>
+        <div class="header-inner">
+            <a href="../../hieroglyphs.html">
+                <img src="../../hieroglyphs_logo.png" alt="Pretty bird" class="logo">
+            </a>
+            <h1>The Hieroglyphics Archive</h1>
+        </div>
+    </header>
+
     <!-- Only displays for horizontally displayed questions -->
 
     <div id="horizontal-layout">
 
-        <header>
-            <div class="header-inner">
-                <a href="../../hieroglyphs.html">
-                    <img src="../../hieroglyphs_logo.png" alt="Pretty bird" class="logo">
-                </a>
-                <h1>The Hieroglyphics Archive</h1>
-            </div>
-        </header>
-
         <div class="scroll">
-            <button id="flashcard">
+            <button id="flashcard" class="flashcard">
                 <div id="flashcard-sentence"></div>
                 <img id ="randomImage" src="" alt="speaking_character" class="speaker">
             </button>
@@ -48,49 +48,9 @@
 
         <div class="bottom-scroll">
             <section class="sentence-section">
-
                 <div id="sentence" class="container"></div>
             </section>
         </div>
-
-        <footer>
-            <div class="footer-left">
-            </div>
-
-            <div id="buttons" class="bottom-buttons">
-            </div>
-
-            <div class="footer-right" id="check">
-                <button class="check" id="check-button">Check</button>
-                <button class="check hidden" id="win-next">Next</button>
-            </div>
-        </footer>
-        
-
-        <footer id="win-footer" class="result-footer">
-            <div></div>
-
-            <div class="footer-stack">
-                <h2>Great work!</h2>
-            </div>
-
-            <div class="next">
-                <button class="win-next" id="win-next">Next</button>
-            </div>
-        </footer>
-        
-        <footer id="lose-footer" class="result-footer">
-            <div></div>
-            
-            <div class="footer-stack">
-                <h2>Not quite.</h2>
-                <h3>Correct answer: <i id="correct-answer"></i></h3>
-            </div>
-
-            <div class="next">
-                <button class="lose-next" id="lose-next">Next</button>
-            </div>
-        </footer>
     </div>
 
     
@@ -98,94 +58,23 @@
 
     <div id="vertical-layout" class="hidden">
 
-        <header id="vertical-header">
-            <div class="header-inner">
-                <a href="../../hieroglyphs.html">
-                    <img src="../../hieroglyphs_logo.png" alt="Pretty bird" class="logo">
-                </a>
-                <h1>The Hieroglyphics Archive</h1>
-            </div>
-        </header>
-
         <div class="scroll" id="vertical-scroll">
             <section class="vertical-left-divide">
                 <div id="sentence-vertical" class="container"></div>
             </section>
-            
-                <div id="vertical-flashcard-container-container">
-                    <section id="vertical-flashcard-container">
-                        <div class="flashcard" id="vertical-flashcard">
-                            <img src="../../lessons/lesson1/sentences/sentence6/lesson1_sentence6.svg"
-                                alt="speech_bubble"
-                                class="vertical-speech"
-                                id="flashcard-image-vertical">
-                            <img id="randomImage-vertical"
-                                src="../../speaking_avatars/falcon.svg"
-                                alt="speaking_character"
-                                class="vertical-speaker">
-                        </div>
 
-                        
-                    </section>
-
-                    <div id="filler">
-                    </div>
-                </div>
-
-            <section class="vertical-right-divide"></section>
+            <button id="vertical-flashcard" class="flashcard">
+                <div id="vertical-flashcard-sentence"></div>
+                <!-- <img src="../../lessons/lesson1/sentences/sentence6/lesson1_sentence6.svg" class="vertical-speech" id="flashcard-image-vertical"> -->
+                <img id="randomImage-vertical" src="" class="vertical-speaker">
+            </button>
         </div>
-
-        <footer>
-            <div></div>
-
-            <div id="buttons-vertical" class="bottom-buttons">
-            </div>
-
-            <div id="check">
-                <button class="check" id="check-button-vertical">Check</button>
-            </div>
-        </footer>
-
-        <footer id="win-footer-vertical" class="result-footer">
-            <div></div>
-
-            <div class="footer-stack">
-                <h2>Great work!</h2>
-            </div>
-
-            <div class="next">
-                <button class="win-next" id="win-next-vertical">Next</button>
-            </div>
-        </footer>
-        
-        <footer id="lose-footer-vertical" class="result-footer">
-            <div></div>
-            
-            <div class="footer-stack">
-                <h2>Not quite.</h2>
-                <h3>Correct answer: <i id="correct-answer-vertical"></i></h3>
-            </div>
-
-            <div class="next">
-                <button class="lose-next" id="lose-next-vertical">Next</button>
-            </div>
-        </footer>
     </div>
 
 
     <!-- Only displays for multichoice character questions -->
 
     <div id="multichoice-layout" class="hidden">
-
-        <header id="multichoice-header">
-
-            <div class="header-inner">
-                <a href="../../hieroglyphs.html">
-                    <img src="../../hieroglyphs_logo.png" alt="Pretty bird" class="logo">
-                </a>
-                <h1>The Hieroglyphics Archive</h1>
-            </div>
-        </header>
 
         <div class="multichoice-question">
             <div class="multichoice-text">
@@ -205,36 +94,21 @@
             <button class="check" id="check-button-multi">Check</button>
             <button class="check hidden" id="next-multi">Next</button>
         </div>
-
-
-
-                  
-
-        <footer id="win-footer-vertical" class="result-footer">
-            <div></div>
-
-            <div class="footer-stack">
-                <h2>Great work!</h2>
-            </div>
-
-            <div class="next">
-                <button class="win-next" id="win-next-vertical">Next</button>
-            </div>
-        </footer>
-        
-        <footer id="lose-footer-vertical" class="result-footer">
-            <div></div>
-            
-            <div class="footer-stack">
-                <h2>Not quite.</h2>
-                <h3>Correct answer: <i id="correct-answer-vertical"></i></h3>
-            </div>
-
-            <div class="next">
-                <button class="lose-next" id="lose-next-vertical">Next</button>
-            </div>
-        </footer>
     </div>
+
+
+    <footer id="translation-footer">
+        <div class="footer-left">
+        </div>
+
+        <div id="buttons" class="bottom-buttons">
+        </div>
+
+        <div class="footer-right" id="check">
+            <button class="check" id="check-button">Check</button>
+            <button class="check hidden" id="win-next">Next</button>
+        </div>
+    </footer>
 
     <script src="../../counter.js"></script>
 
