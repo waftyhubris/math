@@ -328,7 +328,7 @@ const lessonInformation = {};
 async function loadAllLessons() {
     const promises = [];
 
-    for (let i = 1; i <= 15; i++) {
+    for (let i = 1; i <= 1; i++) {
         const path = `lessons/lesson1/sentences/sentence${i}/lesson1_sentence${i}.txt`;
         promises.push(loadIntoLessonInformation(path, i));
     }
