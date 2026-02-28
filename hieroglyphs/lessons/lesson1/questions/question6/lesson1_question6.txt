@@ -1,4 +1,5 @@
-state: vertical
-words: jz,tomb; =j,my; ḏ.t,eternity; pw,enclitic particle
-mandatoryButtons: this; is; my; tomb; for; eternity
-answer: This is my tomb for eternity
+state: horizontal
+words: jnk,I; ẖrd,child; =s,her
+mandatoryButtons: I; am; her; child,boldBlue
+answer: I am her child
+avatars: man

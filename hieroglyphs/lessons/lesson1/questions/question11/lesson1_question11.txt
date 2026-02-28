@@ -1,3 +1,5 @@
-state: multichoice
-question: Click the symbol representing the sound
-transliteration: ḫ
+state: vertical
+words: jz,tomb; =j,my; ḏ.t,eternity; pw,enclitic particle
+mandatoryButtons: this; is; my; tomb; for; eternity
+answer: This is my tomb for eternity
+avatars: man, owl, cobra, falcon

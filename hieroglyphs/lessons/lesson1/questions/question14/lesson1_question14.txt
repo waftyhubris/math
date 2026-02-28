@@ -1,3 +1,5 @@
-state: multichoice
-question: Click the determinative following the word for boat,
-transliteration: dp.t
+state: vertical
+words: nfr,beautiful; .wy,how; ꜣs.t,Isis
+mandatoryButtons: how; beautiful; is; Isis
+answer: How beautiful is Isis!
+avatars: man, owl, cobra, falcon

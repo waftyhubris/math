@@ -1,5 +1,6 @@
 let counter = 1;
 let state = "horizontal";
+let previousAvatar = "";
 const lessonInformation = {};
 
 // Effect of clicking anywhere.
@@ -90,7 +91,6 @@ document.addEventListener("keydown", async (e) => {
     typedBuffer = "";
   }
 
-  // Normal character typing
   if (e.key.length === 1) {
     typedBuffer += e.key;
   }
@@ -200,7 +200,13 @@ document.getElementById("check-button").addEventListener("click", async () => {
                 ) {
                     await new Promise(resolve => setTimeout(resolve, 100));
                     button.click();
-                    const newSentenceButtons = document.querySelectorAll("#sentence button");
+                    let newSentenceButtons
+                    if (state === "horizontal") {
+                        newSentenceButtons = document.querySelectorAll("#sentence button");
+                    }
+                    else if (state === "vertical") {
+                        newSentenceButtons = document.querySelectorAll("#sentence-vertical button");
+                    }
                     newSentenceButtons[newSentenceButtons.length - 1].classList.add("inaccessible");
                     break; // stop after first match
                 }
@@ -266,25 +272,6 @@ document.getElementById("check-button-multi").addEventListener("click", function
 //             { text: "child", style: "boldBlue" }
 //         ]
 //     },
-
-//     6: {
-//         state: "vertical",
-//         words: [
-//             {pronunciation: "jz", translation: "tomb"},
-//             {pronunciation: "=j", translation: "my"},
-//             {pronunciation: "ḏ.t", translation: "eternity"},
-//             {pronunciation: "pw", translation: "enclitic particle"},
-//         ],
-//         mandatoryButtons: [
-//             { text: "this" },
-//             { text: "is" },
-//             { text: "my" },
-//             { text: "eternity", style: "boldBlue" },
-//             { text: "tomb"},
-//             { text: "for" }
-//         ]
-//     },
-
 //     11: {
 //         state: "multichoice",
 //         question: "Click the symbol representing the sound",
@@ -293,6 +280,7 @@ document.getElementById("check-button-multi").addEventListener("click", function
 // }
 
 // Load all 15 files first
+
 async function loadAllLessons() {
     const promises = [];
 
@@ -356,6 +344,10 @@ async function loadIntoLessonInformation(url, counter) {
             entry.answer = value;
         }
 
+        else if (key === "avatars") {
+            entry.avatars = value.split(", ");
+        }
+
         else if (key === "question") {
             entry.question = value;
         }
@@ -366,70 +358,13 @@ async function loadIntoLessonInformation(url, counter) {
     }
 
     lessonInformation[counter] = entry;
-}
+};
+
 
 vocabulary = [
     'I', 'am', 'you', 'are', 'he', 'is', 'she', 'it', 'this', 'his', 'her', 'the', 'the', 'of', 'of', 'child', 'children', 'Egypt', 'man', 'god', 'gods', 'Ptah', 'king', 'desert', 'Horus', 'Ptah', 'Isis', 'Osiris', 'Set', 'Bastet', 'Thoth', 'great', 'queen', 'brother', 'daughter', 'scribe', 'eternity', 'tomb', 'evil', 'beautiful', 'plan', 'temple'
 ];
 
-const flashcardSet = {
-    11: ["Click the symbol representing the sound",  "ḫ."],
-    12: ["Click the symbols representing to the sounds",  "ḏd."],
-    13: ["Click the logogram representing the word 'scribe'.",  ""],
-    14: ["Click the determinative following the word for boat,",  "dpt."],
-    15: ["Click the word which means 'plan'.",  ""],
-};
-
-const avatars = {
-    1: [
-        "../../speaking_avatars/man.svg"
-    ],
-    2: [
-        "../../speaking_avatars/cobra.svg"
-    ],
-    3: [
-        "../../speaking_avatars/falcon.svg"
-    ],
-    4: [
-        "../../speaking_avatars/owl.svg"
-    ],
-    5: [
-        "../../speaking_avatars/man.svg",
-        "../../speaking_avatars/cobra.svg",
-        "../../speaking_avatars/falcon.svg",
-        "../../speaking_avatars/owl.svg"
-    ],
-    6: [
-        "../../speaking_avatars/man.svg",
-        "../../speaking_avatars/cobra.svg",
-        "../../speaking_avatars/falcon.svg",
-        "../../speaking_avatars/owl.svg"
-    ],
-    7: [
-        "../../speaking_avatars/man.svg",
-        "../../speaking_avatars/cobra.svg",
-        "../../speaking_avatars/falcon.svg",
-        "../../speaking_avatars/owl.svg"
-    ],
-    8: [
-        "../../speaking_avatars/man.svg",
-        "../../speaking_avatars/cobra.svg",
-        "../../speaking_avatars/falcon.svg",
-        "../../speaking_avatars/owl.svg"
-    ],
-    9: [
-        "../../speaking_avatars/man.svg",
-        "../../speaking_avatars/cobra.svg",
-        "../../speaking_avatars/falcon.svg",
-        "../../speaking_avatars/owl.svg"
-    ],
-    10: [
-        "../../speaking_avatars/man.svg",
-        "../../speaking_avatars/cobra.svg",
-        "../../speaking_avatars/falcon.svg",
-        "../../speaking_avatars/owl.svg"
-    ]
-};
 
 // Going to the next lesson.
 
@@ -489,6 +424,12 @@ function updatePage(varstate) {
             vertical.classList.add("hidden");
             horizontal.classList.remove("hidden");
             multichoice.classList.add("hidden");
+        }
+        if (Math.floor(Math.random() * (3)) === 2) {
+            flashcard.classList.add("flippy")
+        }
+        else {
+            flashcard.classList.remove("flippy")
         }
         document.getElementById("check-button").classList.remove("hidden");
         document.getElementById("win-next").classList.add("hidden");
@@ -569,19 +510,25 @@ function randomizeAvatar(varstate) {
     else {
         img = document.getElementById("randomImage");
     }
-    const currentAvatars = avatars[counter] || [];
+    const currentAvatars = lessonInformation[counter].avatars || [];
 
-    if (currentAvatars.length === 0) {
+    if (currentAvatars[0].length === 0) {
         currentAvatars = [
-        "../../speaking_avatars/man.svg",
-        "../../speaking_avatars/cobra.svg",
-        "../../speaking_avatars/falcon.svg",
-        "../../speaking_avatars/owl.svg"
+        "man",
+        "cobra",
+        "falcon",
+        "owl"
     ];
     };
 
-    const randomIndex = Math.floor(Math.random() * currentAvatars.length);
-    img.src = currentAvatars[randomIndex];
+    let randomIndex = Math.floor(Math.random() * currentAvatars.length);
+    let currentAvatar = currentAvatars[randomIndex];
+    while (currentAvatar === previousAvatar) {
+        randomIndex = Math.floor(Math.random() * currentAvatars.length);
+        currentAvatar = currentAvatars[randomIndex];
+    }
+    img.src = '../../speaking_avatars/' + currentAvatar + '.svg';
+    previousAvatar = currentAvatar;
 }
 
 
@@ -700,7 +647,8 @@ function randomiseMultichoice() {
 (async () => {
     try {
         await loadAllLessons();
-        updatePage();
+        state = lessonInformation[counter].state;
+        updatePage(state);
     } catch (err) {
         console.error(err);
     }

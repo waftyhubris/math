@@ -1,4 +1,5 @@
-state: vertical
-words: nfr,beautiful; .wy,how; ꜣs.t,Isis
-mandatoryButtons: how; beautiful; is; Isis
-answer: How beautiful is Isis!
+state: horizontal
+words: ꜣs.t,Isis; nṯr.t,goddess; wr.t,great
+mandatoryButtons: Isis; is; a; great; goddess
+answer: Isis is a great goddess
+avatars: owl

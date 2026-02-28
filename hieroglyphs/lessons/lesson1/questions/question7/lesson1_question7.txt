@@ -1,4 +1,5 @@
-state: vertical
-words: bjn,evil; sn,brother; =k,your
-mandatoryButtons: your; brother; is; evil
-answer: Your brother is evil
+state: horizontal
+words: ntf,he; nsw,king; nṯr.w,gods
+mandatoryButtons: he; is; the; king; of; the; gods
+answer: he is the king of the gods
+avatars: cobra

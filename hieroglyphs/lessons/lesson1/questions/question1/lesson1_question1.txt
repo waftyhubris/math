@@ -1,4 +1,3 @@
-state: horizontal
-words: jnk,I; ẖrd,child; =s,her
-mandatoryButtons: I; am; her; child,boldBlue
-answer: I am her child
+state: multichoice
+question: Click the symbol representing the sound
+transliteration: ḫ

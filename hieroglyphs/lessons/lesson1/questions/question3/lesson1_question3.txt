@@ -1,4 +1,3 @@
-state: horizontal
-words: jnk,I; ḥrw,Horus
-mandatoryButtons: I; am; Horus
-answer: I am Horus
+state: multichoice
+question: Click the logogram representing the word 'scribe'
+transliteration: 

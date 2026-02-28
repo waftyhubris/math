@@ -1,3 +1,5 @@
-state: multichoice
-question: Click the word which means 'plan'
-transliteration: 
+state: vertical
+words: jw,proclitic particle; nsw,king; m,in; dp.t,boat; =f,his
+mandatoryButtons: the; king; is; in; his; boat
+answer: The king is in his boat
+avatars: man, owl, cobra, falcon

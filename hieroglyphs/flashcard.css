@@ -312,19 +312,37 @@ header {
     max-width: 800px;
 }
 
+#flashcard-sentence {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 15px;
+    column-gap: 0px;
+    align-items: flex-start;
+    flex-direction: row;
+}
+
+.flippy #flashcard-sentence {
+    flex-direction: row-reverse!important;
+}
+
 .flashcard {
     border: 4px solid var(--sub-color);
     border-bottom: 10px solid var(--sub-color);
     display: flex;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: left;
     padding: 20px;
     gap: 2rem;
     z-index: 1000;
-    margin-top:5px;
-    margin-bottom:60px;
-    border-radius: 0px!important;
+    margin-top: 5px;
+    margin-bottom: 60px;
+    border-radius: 0px !important;
     background-color: var(--pearl);
+    flex-direction: row;
+}
+
+.flashcard.flippy {
+    flex-direction: row-reverse!important;
 }
 
 .scroll {
@@ -370,8 +388,16 @@ header {
     height: 220px;
 }
 
+.flippy .speaker {
+    transform: scaleX(-1)!important;
+}
+
 .speech {
     height: 85px;
+}
+
+.flippy .speech {
+    transform: scaleX(-1)!important;
 }
 
 
@@ -402,7 +428,8 @@ header {
 
 #vertical-flashcard {
     padding-top:15px;
-    padding-right:0px;
+    padding-right:15px;
+    padding-left:15px;
     flex-direction: row;
     gap:1.4rem;
     width: auto;
@@ -418,7 +445,10 @@ header {
     height: 200px;
     align-self: flex-end;
     padding-bottom: 0px;
-    padding-right: 10px;
+}
+
+.flippy .vertical-speaker {
+    transform: scaleX(-1)!important;
 }
 
 #vertical-flashcard-sentence .speech {
@@ -463,8 +493,8 @@ header {
     gap: 10px;
     justify-content: center;
     align-items: baseline; /* ensures vertical alignment on text baseline */
-    margin-bottom: 30px;
-    margin-top: 20px;
+    margin-bottom: 40px;
+    margin-top: 60px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
                  Roboto, Helvetica, Arial, sans-serif;
 }
@@ -482,14 +512,18 @@ header {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 40px;
+    gap: 50px;
+}
+
+.multichoice-image {
+    width: 120px;
 }
 
 .multichoice-option {
-    width: 250px;
+    width: 200px;
     margin-top:0px;
     margin-bottom: 30px;
-    height: 250px;
+    height: 200px;
     border: 3px solid var(--sub-color);
     border-bottom: 7px solid var(--sub-color);
     border-radius: 0px!important;
@@ -504,14 +538,10 @@ header {
     border-bottom: 7px solid var(--sub-color)!important;
 }
 
-.multichoice-image {
-    width: 160px;
-}
-
 .multichoice-footer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     background-color: var(--main-color);
-    padding-bottom: 30px;
+    padding-bottom: 60px;
 }

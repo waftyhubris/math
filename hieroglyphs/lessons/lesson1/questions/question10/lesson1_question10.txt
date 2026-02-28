@@ -1,4 +1,5 @@
-state: vertical
-words: jw,proclitic particle; nsw,king; m,in; dp.t,boat; =f,his
-mandatoryButtons: the; king; is; in; his; boat
-answer: The king is in his boat
+state: horizontal
+words: sš,scribe; pw,enclitic particle; sn,brother; =sn,their
+mandatoryButtons: their; brother; is; a; scribe
+answer: Their brother is a scribe
+avatars: man, owl, cobra, falcon
