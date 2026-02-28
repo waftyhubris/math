@@ -1,0 +1,4 @@
+state: horizontal
+words: ntf,he; nsw,king; nṯr.w,gods
+mandatoryButtons: he; is; the; king; of; the; gods
+answer: he is the king of the gods

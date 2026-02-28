@@ -496,24 +496,12 @@ header {
     background-color: white;
 }
 
-.correctly-selected {
-    background-color: #7fd877!important;
-}
-
-.incorrectly-selected {
-    background-color: #ffa4a4!important;
-}
-
 .multichoice-option:disabled {
     cursor: default;
 }
 
 .multichoice-option:disabled:active {
     border-bottom: 7px solid var(--sub-color)!important;
-}
-
-.multichoice-option.selected {
-  background-color: rgb(153, 228, 255);
 }
 
 .multichoice-image {

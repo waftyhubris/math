@@ -1,0 +1,4 @@
+state: vertical
+words: bjn,evil; sn,brother; =k,your
+mandatoryButtons: your; brother; is; evil
+answer: Your brother is evil

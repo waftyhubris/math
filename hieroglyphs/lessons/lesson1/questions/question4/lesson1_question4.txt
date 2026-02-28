@@ -1,0 +1,4 @@
+state: horizontal
+words: ꜣs.t,Isis; nṯr.t,goddess; wr.t,great
+mandatoryButtons: Isis; is; a; great; goddess
+answer: Isis is a great goddess

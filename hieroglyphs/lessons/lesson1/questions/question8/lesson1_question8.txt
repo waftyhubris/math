@@ -1,0 +1,4 @@
+state: vertical
+words: jqr,excellent; .wy,how; sḫr.w,plans; n.w,of; nṯr.w,gods
+mandatoryButtons: how; great; are; the; plans; of; the; gods
+answer: How great are the plans of the gods

@@ -1,0 +1,4 @@
+state: vertical
+words: jw,proclitic particle; nsw,king; m,in; dp.t,boat; =f,his
+mandatoryButtons: the; king; is; in; his; boat
+answer: The king is in his boat

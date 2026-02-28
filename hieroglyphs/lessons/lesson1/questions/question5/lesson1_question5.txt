@@ -1,0 +1,4 @@
+state: horizontal
+words: sš,scribe; pw,enclitic particle; sn,brother; =sn,their
+mandatoryButtons: their; brother; is; a; scribe
+answer: Their brother is a scribe

@@ -1,0 +1,4 @@
+state: horizontal
+words: jnk,I; ḥrw,Horus
+mandatoryButtons: I; am; Horus
+answer: I am Horus

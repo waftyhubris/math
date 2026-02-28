@@ -1,36 +1,6 @@
 let counter = 1;
 let state = "horizontal";
-
-// Preloading images
-
-const IMAGES = [
-  "../../lessons/lesson1/sentences/sentence1/lesson1_sentence1.svg",
-  "../../lessons/lesson1/sentences/sentence2/lesson1_sentence2.svg",
-  "../../lessons/lesson1/sentences/sentence3/lesson1_sentence3.svg",
-  "../../lessons/lesson1/sentences/sentence4/lesson1_sentence4.svg",
-  "../../lessons/lesson1/sentences/sentence5/lesson1_sentence5.svg",
-  "../../lessons/lesson1/sentences/sentence6/lesson1_sentence6.svg",
-  "../../lessons/lesson1/sentences/sentence7/lesson1_sentence7.svg",
-  "../../lessons/lesson1/sentences/sentence8/lesson1_sentence8.svg",
-  "../../lessons/lesson1/sentences/sentence9/lesson1_sentence9.svg",
-  "../../lessons/lesson1/sentences/sentence10/lesson1_sentence10.svg",
-  "../../speaking_avatars/man.svg",
-  "../../speaking_avatars/cobra.svg",
-  "../../speaking_avatars/falcon.svg"
-];
-
-const imageCache = {};
-
-async function preloadImages() {
-  await Promise.all(
-    IMAGES.map(async src => {
-      const img = new Image();
-      img.src = src;
-      await img.decode();
-      imageCache[src] = img;
-    })
-  );
-}
+const lessonInformation = {};
 
 // Effect of clicking anywhere.
 
@@ -174,7 +144,7 @@ document.getElementById("check-button").addEventListener("click", async () => {
 
   flashcard.classList.remove("correct", "incorrect");
 
-  const correctAnswer = answerSet[counter][0].toLowerCase().replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ").trim();
+  const correctAnswer = lessonInformation[counter].answer.toLowerCase().replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ").trim();
   if (text.toLowerCase().replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ").trim() === correctAnswer) {
     flashcard.style.backgroundColor = "rgb(162, 255, 153)";
     document.getElementById("check-button").classList.add("hidden");
@@ -322,14 +292,12 @@ document.getElementById("check-button-multi").addEventListener("click", function
 //     }
 // }
 
-const lessonInformation = {};
-
 // Load all 15 files first
 async function loadAllLessons() {
     const promises = [];
 
-    for (let i = 1; i <= 1; i++) {
-        const path = `../../lessons/lesson1/sentences/sentence${i}/lesson1_sentence${i}.txt`;
+    for (let i = 1; i <= 15; i++) {
+        const path = `../../lessons/lesson1/questions/question${i}/lesson1_question${i}.txt`;
         promises.push(loadIntoLessonInformation(path, i));
     }
 
@@ -383,183 +351,26 @@ async function loadIntoLessonInformation(url, counter) {
                 return obj;
             });
         }
+
+        else if (key === "answer") {
+            entry.answer = value;
+        }
+
+        else if (key === "question") {
+            entry.question = value;
+        }
+
+        else if (key === "transliteration") {
+            entry.transliteration = value;
+        }
     }
 
     lessonInformation[counter] = entry;
 }
 
-// Start loading
-loadAllLessons().catch(err => console.error(err));
-
 vocabulary = [
     'I', 'am', 'you', 'are', 'he', 'is', 'she', 'it', 'this', 'his', 'her', 'the', 'the', 'of', 'of', 'child', 'children', 'Egypt', 'man', 'god', 'gods', 'Ptah', 'king', 'desert', 'Horus', 'Ptah', 'Isis', 'Osiris', 'Set', 'Bastet', 'Thoth', 'great', 'queen', 'brother', 'daughter', 'scribe', 'eternity', 'tomb', 'evil', 'beautiful', 'plan', 'temple'
 ];
-
-const egyptianWords = {
-    1: [
-        {pronunciation: "jnk", translation: "I"},
-        {pronunciation: "ẖrd", translation: "child"},
-        {pronunciation: "=s", translation: "her"}
-    ],
-    2: [
-        {pronunciation: "ntf", translation: "he"},
-        {pronunciation: "nsw", translation: "king"},
-        {pronunciation: "nṯr.w", translation: "gods"}
-    ],
-    3: [
-        {pronunciation: "jnk", translation: "I"},
-        {pronunciation: "ḥrw", translation: "Horus"}
-    ],
-    4: [
-        {pronunciation: "ꜣs.t", translation: "Isis"},
-        {pronunciation: "nṯr.t", translation: "goddess"},
-        {pronunciation: "wr.t", translation: "great"}
-    ],
-    5: [
-        {pronunciation: "sš", translation: "scribe"},
-        {pronunciation: "pw", translation: "enclitic particle"},
-        {pronunciation: "sn", translation: "brother"},
-        {pronunciation: "=sn", translation: "their"},
-    ],
-    6: [
-        {pronunciation: "jz", translation: "tomb"},
-        {pronunciation: "=j", translation: "my"},
-        {pronunciation: "ḏ.t", translation: "eternity"},
-        {pronunciation: "pw", translation: "enclitic particle"},
-    ],
-    7: [
-        {pronunciation: "bjn", translation: "evil"},
-        {pronunciation: "sn", translation: "brother"},
-        {pronunciation: "=k", translation: "your"}
-    ],
-    8: [
-        {pronunciation: "jqr", translation: "excellent"},
-        {pronunciation: ".wy", translation: "how"},
-        {pronunciation: "sḫr.w", translation: "plans"},
-        {pronunciation: "n.w", translation: "of"},
-        {pronunciation: "nṯr.w", translation: "gods"}
-    ],
-    9: [
-        {pronunciation: "nfr", translation: "beautiful"},
-        {pronunciation: ".wy", translation: "how"},
-        {pronunciation: "ꜣs.t", translation: "Isis"}
-    ],
-    10: [
-        {pronunciation: "jw", translation: "proclitic particle"},
-        {pronunciation: "nsw", translation: "king"},
-        {pronunciation: "m", translation: "in"},
-        {pronunciation: "dp.t", translation: "boat"},
-        {pronunciation: "=f", translation: "his"}
-    ]
-};
-
-const buttonSets = {
-    1: [
-        { text: "I" },
-        { text: "am" },
-        { text: "her" },
-        { text: "child", style: "boldBlue" }
-    ],
-    2: [
-        { text: "he" },
-        { text: "is" },
-        { text: "the" },
-        { text: "king"},
-        { text: "of" },
-        { text: "the" },
-        { text: "gods"}
-    ],
-    3: [
-        { text: "I" },
-        { text: "am" },
-        { text: "Horus"}
-    ],
-    4: [
-        { text: "Isis"},
-        { text: "is" },
-        { text: "a" },
-        { text: "great"},
-        { text: "goddess"}
-    ],
-    5: [
-        { text: "their" },
-        { text: "brother" },
-        { text: "is" },
-        { text: "a" },
-        { text: "scribe", style: "boldBlue" }
-    ],
-    6: [
-        { text: "this" },
-        { text: "is" },
-        { text: "my" },
-        { text: "eternity", style: "boldBlue" },
-        { text: "tomb"},
-        { text: "for" }
-    ],
-    7: [
-        { text: "your" },
-        { text: "brother" },
-        { text: "is" },
-        { text: "evil"}
-    ],
-    8: [
-        { text: "how" },
-        { text: "great" },
-        { text: "are" },
-        { text: "the"},
-        { text: "plans"},
-        { text: "of"},
-        { text: "the" },
-        { text: "gods" }
-    ],
-    9: [
-        { text: "how" },
-        { text: "beautiful" },
-        { text: "is" },
-        { text: "Isis"}
-    ],
-    10: [
-        { text: "the" },
-        { text: "king" },
-        { text: "is" },
-        { text: "in"},
-        { text: "his"},
-        { text: "boat", style: "boldBlue" }
-    ]
-};
-
-const answerSet = {
-    1: [
-        "I am her child"
-    ],
-    2: [
-        "He is the king of the gods"
-    ],
-    3: [
-        "I am Horus"
-    ],
-    4: [
-        "Isis is a great goddess"
-    ],
-    5: [
-        "Their brother is a scribe"
-    ],
-    6: [
-        "This is my tomb for eternity"
-    ],
-    7: [
-        "Your brother is evil"
-    ],
-    8: [
-        "How great are the plans of the gods!"
-    ],
-    9: [
-        "How beautiful is Isis!"
-    ],
-    10: [
-        "The king is in his boat"
-    ]
-};
 
 const flashcardSet = {
     11: ["Click the symbol representing the sound",  "ḫ."],
@@ -624,42 +435,15 @@ const avatars = {
 
 document.getElementById("win-next").addEventListener("click", () => {
     counter++;
-    state = updateState(counter);
+    state = lessonInformation[counter].state;
     updatePage(state);
 });
-
-// document.getElementById("lose-next").addEventListener("click", () => {
-//     counter++;
-//     state = updateState(counter);
-//     updatePage(state);
-// });
 
 document.getElementById("next-multi").addEventListener("click", () => {
     counter++;
-    state = updateState(counter);
+    state = lessonInformation[counter].state;
     updatePage(state);
 });
-
-
-
-// Updating the page state depending on the counter
-
-function updateState(varcounter) {
-    if (varcounter < 6) {
-        return "horizontal";
-    }
-    if (6 <= varcounter && 10>= varcounter) {
-        return "vertical";
-    }
-    if (varcounter >= 16) {
-        counter =1;
-        return "horizontal";
-    }
-    if (varcounter >= 11) {
-        return "multichoice";
-    }
-}
-
 
 
 // Loading the next sentence.
@@ -685,8 +469,8 @@ function updatePage(varstate) {
         horizontal.classList.add("hidden");
         vertical.classList.add("hidden");
         multichoice.classList.remove("hidden");
-        document.getElementById("multichoice-stem").textContent =flashcardSet[counter][0];
-        document.getElementById("multichoice-variable").textContent =flashcardSet[counter][1];
+        document.getElementById("multichoice-stem").textContent = lessonInformation[counter].question;
+        document.getElementById("multichoice-variable").textContent = lessonInformation[counter].transliteration;
         randomiseMultichoice();
     }
     else {
@@ -716,11 +500,13 @@ function updatePage(varstate) {
             const div = Object.assign(document.createElement("div"), {className: "word-gloss", id: `word-index${index}`});
             const subdiv = Object.assign(document.createElement("div"), {className: "gloss", id: `word-index${index}`});
             const pronunciation = document.createElement("i");
-            pronunciation.textContent = egyptianWords[counter][index-1].pronunciation;
-            const translation = document.createTextNode(egyptianWords[counter][index-1].translation);
+            pronunciation.textContent = lessonInformation[counter].words[index-1].pronunciation;
+            // egyptianWords[counter][index-1].pronunciation;
+            const translation = document.createTextNode(lessonInformation[counter].words[index-1].translation);
+            // const translation = document.createTextNode(egyptianWords[counter][index-1].translation);
             subdiv.append(pronunciation, ": ", translation);
             const img = new Image();
-            img.src = `../../lessons/lesson1/sentences/sentence${counter}/lesson1_sentence${counter}_word${index}.svg`;
+            img.src = `../../lessons/lesson1/questions/question${counter}/lesson1_question${counter}_word${index}.svg`;
             img.classList.add("speech");
             img.addEventListener("click", () => {
                 if (subdiv.classList.contains("show")) {
@@ -814,7 +600,7 @@ function renderButtons(varstate) {
     container.innerHTML = "";
     sentence.innerHTML = "";
 
-    const words = buttonSets[counter] || [];
+    const words = lessonInformation[counter].mandatoryButtons;
     fillWordsRandomly(words, vocabulary, 12);
     const buttons = [];
 
@@ -891,7 +677,7 @@ function randomiseMultichoice() {
 
   buttons.forEach((button, index) => {
     const img = button.querySelector("img");
-    img.src = `../../lessons/lesson1/multichoice/multichoice${counter}/multichoice${counter}_option${index + 1}.svg`;
+    img.src = `../../lessons/lesson1/questions/question${counter}/lesson1_question${counter}_option${index + 1}.svg`;
 
     if (index === 0) button.classList.add("correct");
   });
@@ -911,6 +697,11 @@ function randomiseMultichoice() {
 }
 
 
-
-
-updatePage();
+(async () => {
+    try {
+        await loadAllLessons();
+        updatePage();
+    } catch (err) {
+        console.error(err);
+    }
+})();

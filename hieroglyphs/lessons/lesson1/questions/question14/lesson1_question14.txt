@@ -1,0 +1,3 @@
+state: multichoice
+question: Click the determinative following the word for boat,
+transliteration: dp.t

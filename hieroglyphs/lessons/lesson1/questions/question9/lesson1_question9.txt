@@ -1,0 +1,4 @@
+state: vertical
+words: nfr,beautiful; .wy,how; ꜣs.t,Isis
+mandatoryButtons: how; beautiful; is; Isis
+answer: How beautiful is Isis!
