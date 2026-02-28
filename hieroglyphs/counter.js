@@ -411,12 +411,17 @@ function updatePage(varstate) {
     else {
         document.getElementById("translation-footer").classList.remove("hidden");
         let flashcard;
+        let flippyIndex = Math.floor(Math.random() * (3));
         if (varstate === "vertical") {
+            vertical.classList.remove("flippy");
             flashcard = document.getElementById('vertical-flashcard');
             egyptianSentence = document.getElementById('vertical-flashcard-sentence');
             horizontal.classList.add("hidden");
             vertical.classList.remove("hidden");
             multichoice.classList.add("hidden");
+            if (flippyIndex === 2) {
+                vertical.classList.add("flippy");
+            }
         }
         else {
             flashcard = document.getElementById('flashcard');
@@ -425,7 +430,7 @@ function updatePage(varstate) {
             horizontal.classList.remove("hidden");
             multichoice.classList.add("hidden");
         }
-        if (Math.floor(Math.random() * (3)) === 2) {
+        if (flippyIndex === 2) {
             flashcard.classList.add("flippy")
         }
         else {
