@@ -279,7 +279,117 @@ document.getElementById("check-button-multi").addEventListener("click", function
 });
 
 
-// The custom sentence information for this particular lesson.
+// The custom sentence information for this particular lesson. The formatting resembles the following:
+
+// lessonInformation = {
+//     1: {
+//         state: "horizontal",
+//         words: [
+//             {pronunciation: "jnk", translation: "I"},
+//             {pronunciation: "ẖrd", translation: "child"},
+//             {pronunciation: "=s", translation: "her"}
+//         ],
+//         mandatoryButtons: [
+//             { text: "I" },
+//             { text: "am" },
+//             { text: "her" },
+//             { text: "child", style: "boldBlue" }
+//         ]
+//     },
+
+//     6: {
+//         state: "vertical",
+//         words: [
+//             {pronunciation: "jz", translation: "tomb"},
+//             {pronunciation: "=j", translation: "my"},
+//             {pronunciation: "ḏ.t", translation: "eternity"},
+//             {pronunciation: "pw", translation: "enclitic particle"},
+//         ],
+//         mandatoryButtons: [
+//             { text: "this" },
+//             { text: "is" },
+//             { text: "my" },
+//             { text: "eternity", style: "boldBlue" },
+//             { text: "tomb"},
+//             { text: "for" }
+//         ]
+//     },
+
+//     11: {
+//         state: "multichoice",
+//         question: "Click the symbol representing the sound",
+//         transliteration: "ḫ"
+//     }
+// }
+
+const lessonInformation = {};
+
+// Load all 15 files first
+async function loadAllLessons() {
+    const promises = [];
+
+    for (let i = 1; i <= 15; i++) {
+        const path = `lessons/lesson1/sentences/sentence${i}/lesson1_sentence${i}.txt`;
+        promises.push(loadIntoLessonInformation(path, i));
+    }
+
+    await Promise.all(promises);
+
+    console.log("All lessons loaded.");
+    console.log(lessonInformation);
+}
+
+async function loadIntoLessonInformation(url, counter) {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+        throw new Error(`Failed to fetch ${url} (${response.status})`);
+    }
+
+    const text = await response.text();
+    const lines = text.split(/\r?\n/);
+
+    const entry = {};
+
+    for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed) continue;
+
+        const colonIndex = trimmed.indexOf(":");
+        if (colonIndex === -1) continue;
+
+        const key = trimmed.slice(0, colonIndex).trim();
+        const value = trimmed.slice(colonIndex + 1).trim();
+
+        if (key === "state") {
+            entry.state = value;
+        }
+
+        else if (key === "words") {
+            entry.words = value.split(";").map(pair => {
+                const [pronunciation, translation] = pair.split(",");
+                return {
+                    pronunciation: pronunciation.trim(),
+                    translation: translation.trim()
+                };
+            });
+        }
+
+        else if (key === "mandatoryButtons") {
+            entry.mandatoryButtons = value.split(";").map(item => {
+                const parts = item.split(",");
+                const obj = { text: parts[0].trim() };
+                if (parts[1]) obj.style = parts[1].trim();
+                return obj;
+            });
+        }
+    }
+
+    lessonInformation[counter] = entry;
+}
+
+// Start loading
+loadAllLessons().catch(err => console.error(err));
 
 vocabulary = [
     'I', 'am', 'you', 'are', 'he', 'is', 'she', 'it', 'this', 'his', 'her', 'the', 'the', 'of', 'of', 'child', 'children', 'Egypt', 'man', 'god', 'gods', 'Ptah', 'king', 'desert', 'Horus', 'Ptah', 'Isis', 'Osiris', 'Set', 'Bastet', 'Thoth', 'great', 'queen', 'brother', 'daughter', 'scribe', 'eternity', 'tomb', 'evil', 'beautiful', 'plan', 'temple'
@@ -341,7 +451,7 @@ const egyptianWords = {
         {pronunciation: "dp.t", translation: "boat"},
         {pronunciation: "=f", translation: "his"}
     ]
-}
+};
 
 const buttonSets = {
     1: [
