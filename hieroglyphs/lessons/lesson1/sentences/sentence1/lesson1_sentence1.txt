@@ -1,0 +1,3 @@
+state: horizontal
+words: jnk,i; ẖrd,child; =s,her
+mandatoryButtons: I; am; her; child,boldBlue
