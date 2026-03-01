@@ -1,7 +1,11 @@
 let counter = 1;
-let state = "horizontal";
+let state = "multichoice";
 let previousAvatar = "";
-const lessonInformation = {};
+let availableLessonLength = 15;
+let lessonLength = 12;
+let randomQuestionOrder;
+let draftLessonInformation = {};
+let lessonInformation = {};
 
 // Effect of clicking anywhere.
 
@@ -163,6 +167,8 @@ document.getElementById("check-button").addEventListener("click", async () => {
     
   } else {
         flashcard.style.backgroundColor = "#ffc9aa";
+        lessonLength++;
+        lessonInformation[lessonLength] = structuredClone(lessonInformation[counter]);
         document.getElementById("check-button").classList.add("hidden");
         document.getElementById("win-next").classList.add("inaccessible");
         document.getElementById("win-next").classList.remove("hidden");
@@ -243,6 +249,8 @@ document.getElementById("check-button-multi").addEventListener("click", function
         selected.classList.add("bounce");
     } else {
         selected.style.backgroundColor = "#ffdbc6";
+        lessonLength++;
+        lessonInformation[lessonLength] = structuredClone(lessonInformation[counter]);
         selected.classList.add("shake");
         correct.style.backgroundColor = "rgb(162, 255, 153)";
   }
@@ -255,36 +263,32 @@ document.getElementById("check-button-multi").addEventListener("click", function
 });
 
 
-// The custom sentence information for this particular lesson. The formatting resembles the following:
+// Going to the next lesson.
 
-// lessonInformation = {
-//     1: {
-//         state: "horizontal",
-//         words: [
-//             {pronunciation: "jnk", translation: "I"},
-//             {pronunciation: "ẖrd", translation: "child"},
-//             {pronunciation: "=s", translation: "her"}
-//         ],
-//         mandatoryButtons: [
-//             { text: "I" },
-//             { text: "am" },
-//             { text: "her" },
-//             { text: "child", style: "boldBlue" }
-//         ]
-//     },
-//     11: {
-//         state: "multichoice",
-//         question: "Click the symbol representing the sound",
-//         transliteration: "ḫ"
-//     }
-// }
+document.getElementById("win-next").addEventListener("click", () => {
+    counter++;
+    state = lessonInformation[counter].state;
+    document.getElementById("flashcard").classList.remove("bounce");
+    document.getElementById("flashcard").classList.remove("shake");
+    document.getElementById("vertical-flashcard").classList.remove("bounce");
+    document.getElementById("vertical-flashcard").classList.remove("shake");
+    updatePage(state);
+});
 
-// Load all 15 files first
+document.getElementById("next-multi").addEventListener("click", () => {
+    counter++;
+    state = lessonInformation[counter].state;
+    updatePage(state);
+});
+
+
+
+// Load all 15 questions first
 
 async function loadAllLessons() {
     const promises = [];
 
-    for (let i = 1; i <= 15; i++) {
+    for (let i = 1; i <= availableLessonLength; i++) {
         const path = `../../lessons/lesson1/questions/question${i}/lesson1_question${i}.txt`;
         promises.push(loadIntoLessonInformation(path, i));
     }
@@ -295,7 +299,7 @@ async function loadAllLessons() {
     console.log(lessonInformation);
 }
 
-async function loadIntoLessonInformation(url, counter) {
+async function loadIntoLessonInformation(url, i) {
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -357,28 +361,133 @@ async function loadIntoLessonInformation(url, counter) {
         }
     }
 
-    lessonInformation[counter] = entry;
+    entry.questionIndex = i;
+    draftLessonInformation[i] = entry;
 };
+
+
+// Randomise lesson order under the instructions of lesson1.txt.
+
+async function randomiseLessons() {
+    const response = await fetch("lesson1.txt");
+    if (!response.ok) throw new Error(`Failed to fetch lesson1.txt (${response.status})`);
+
+    const text = await response.text();
+    const lines = text.split(/\r?\n/).filter(Boolean);
+
+    const config = {};
+    for (const line of lines) {
+        const [key, value] = line.split(":").map(s => s.trim());
+        config[key] = value;
+    }
+
+    const available = parseInt(config.availableQuestionCount);
+    const desired = parseInt(config.desiredQuestionCount);
+
+    const mandatory = config.mandatory
+        ? config.mandatory.split(";").map(s => parseInt(s.trim()))
+        : [];
+
+    const allNumbers = Array.from({ length: available }, (_, i) => i + 1);
+
+    const directChains = config.directConsequent
+        ? config.directConsequent.split(";").map(s =>
+            s.trim().split(",").map(n => parseInt(n.trim()))
+        )
+        : [];
+
+    const indirectRules = config.indirectConsequent
+        ? config.indirectConsequent.split(";").map(s => {
+            const [lhs, rhs] = s.trim().split(",");
+            return { before: lhs.split(".").map(n => parseInt(n.trim())), after: parseInt(rhs.trim()) };
+        })
+        : [];
+
+    const selected = new Set(mandatory);
+    const shuffled = allNumbers.sort(() => Math.random() - 0.5);
+    for (const n of shuffled) {
+        if (selected.size >= desired) break;
+        selected.add(n);
+    }
+    if (selected.size !== desired) throw new Error("Not enough questions to satisfy desiredQuestionCount");
+
+    const numberToChain = new Map();
+    const chains = [];
+
+    for (const chain of directChains) {
+        const filteredChain = chain.filter(n => selected.has(n));
+        if (filteredChain.length < 2) continue;
+        chains.push(filteredChain);
+        for (const n of filteredChain) numberToChain.set(n, filteredChain);
+    }
+
+    for (const n of selected) {
+        if (!numberToChain.has(n)) {
+            const chain = [n];
+            chains.push(chain);
+            numberToChain.set(n, chain);
+        }
+    }
+
+    const graph = new Map();
+    const indegree = new Map();
+
+    for (const chain of chains) {
+        graph.set(chain, new Set());
+        indegree.set(chain, 0);
+    }
+
+    function addEdgeChain(aChain, bChain) {
+        if (!graph.has(aChain) || !graph.has(bChain)) return;
+        if (!graph.get(aChain).has(bChain)) {
+            graph.get(aChain).add(bChain);
+            indegree.set(bChain, indegree.get(bChain) + 1);
+        }
+    }
+
+    for (const rule of indirectRules) {
+        if (!selected.has(rule.after)) continue;
+        const afterChain = numberToChain.get(rule.after);
+        for (const b of rule.before) {
+            if (!selected.has(b)) continue;
+            const beforeChain = numberToChain.get(b);
+            if (beforeChain !== afterChain) addEdgeChain(beforeChain, afterChain);
+        }
+    }
+
+    for (const chain of chains) {
+        for (let i = 0; i < chain.length - 1; i++) {
+            const aChain = numberToChain.get([chain[i]]);
+            const bChain = numberToChain.get([chain[i+1]]);
+        }
+    }
+
+    const result = [];
+    const zero = Array.from(graph.keys()).filter(c => indegree.get(c) === 0);
+
+    while (zero.length) {
+        zero.sort(() => Math.random() - 0.5);
+        const chain = zero.pop();
+        result.push(...chain);
+
+        for (const dep of graph.get(chain)) {
+            indegree.set(dep, indegree.get(dep) - 1);
+            if (indegree.get(dep) === 0) zero.push(dep);
+        }
+    }
+
+    if (result.length !== selected.size) throw new Error("Cyclic dependency detected");
+
+    return result;
+}
+
+
+// Declaring vocabulary: one day, this should be automated
 
 
 vocabulary = [
     'I', 'am', 'you', 'are', 'he', 'is', 'she', 'it', 'this', 'his', 'her', 'the', 'the', 'of', 'of', 'child', 'children', 'Egypt', 'man', 'god', 'gods', 'Ptah', 'king', 'desert', 'Horus', 'Ptah', 'Isis', 'Osiris', 'Set', 'Bastet', 'Thoth', 'great', 'queen', 'brother', 'daughter', 'scribe', 'eternity', 'tomb', 'evil', 'beautiful', 'plan', 'temple'
 ];
-
-
-// Going to the next lesson.
-
-document.getElementById("win-next").addEventListener("click", () => {
-    counter++;
-    state = lessonInformation[counter].state;
-    updatePage(state);
-});
-
-document.getElementById("next-multi").addEventListener("click", () => {
-    counter++;
-    state = lessonInformation[counter].state;
-    updatePage(state);
-});
 
 
 // Loading the next sentence.
@@ -452,7 +561,7 @@ function updatePage(varstate) {
             // const translation = document.createTextNode(egyptianWords[counter][index-1].translation);
             subdiv.append(pronunciation, ": ", translation);
             const img = new Image();
-            img.src = `../../lessons/lesson1/questions/question${counter}/lesson1_question${counter}_word${index}.svg`;
+            img.src = `../../lessons/lesson1/questions/question${lessonInformation[counter].questionIndex}/lesson1_question${lessonInformation[counter].questionIndex}_word${index}.svg`;
             img.classList.add("speech");
             img.addEventListener("click", () => {
                 if (subdiv.classList.contains("show")) {
@@ -528,9 +637,11 @@ function randomizeAvatar(varstate) {
 
     let randomIndex = Math.floor(Math.random() * currentAvatars.length);
     let currentAvatar = currentAvatars[randomIndex];
-    while (currentAvatar === previousAvatar) {
-        randomIndex = Math.floor(Math.random() * currentAvatars.length);
-        currentAvatar = currentAvatars[randomIndex];
+    if (currentAvatars.length > 1) {
+        while (currentAvatar === previousAvatar) {
+            randomIndex = Math.floor(Math.random() * currentAvatars.length);
+            currentAvatar = currentAvatars[randomIndex];
+        }
     }
     img.src = '../../speaking_avatars/' + currentAvatar + '.svg';
     previousAvatar = currentAvatar;
@@ -598,7 +709,6 @@ function renderButtons(varstate) {
         buttons.push(button);
     });
 
-    // --- Randomize buttons using Fisher-Yates ---
     for (let i = buttons.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [buttons[i], buttons[j]] = [buttons[j], buttons[i]];
@@ -629,7 +739,7 @@ function randomiseMultichoice() {
 
   buttons.forEach((button, index) => {
     const img = button.querySelector("img");
-    img.src = `../../lessons/lesson1/questions/question${counter}/lesson1_question${counter}_option${index + 1}.svg`;
+    img.src = `../../lessons/lesson1/questions/question${lessonInformation[counter].questionIndex}/lesson1_question${lessonInformation[counter].questionIndex}_option${index + 1}.svg`;
 
     if (index === 0) button.classList.add("correct");
   });
@@ -649,9 +759,15 @@ function randomiseMultichoice() {
 }
 
 
+// Running the main function.
+
 (async () => {
     try {
         await loadAllLessons();
+        randomQuestionOrder = await randomiseLessons();
+        for (let i = 1; i <= lessonLength; i++) {
+            lessonInformation[i] = draftLessonInformation[randomQuestionOrder[i - 1]];
+        }
         state = lessonInformation[counter].state;
         updatePage(state);
     } catch (err) {
