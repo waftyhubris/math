@@ -1,0 +1,5 @@
+state: horizontal
+words: ntf,he; ꜣpd,bird
+mandatoryButtons: he; is; a; bird
+answer: He is a bird
+avatars: man, owl, cobra, falcon

@@ -1,0 +1,5 @@
+state: horizontal
+words: nts,she; ẖrd,child
+mandatoryButtons: she; is; a; child
+answer: She is a child
+avatars: man, owl, cobra, falcon

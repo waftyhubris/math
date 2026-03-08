@@ -1,11 +1,18 @@
 let counter = 1;
 let state = "multichoice";
 let previousAvatar = "";
-let availableLessonLength = 15;
-let lessonLength = 12;
+let available;
+let desired;
 let randomQuestionOrder;
 let draftLessonInformation = {};
 let lessonInformation = {};
+const params = new URLSearchParams(window.location.search);
+const chapter = params.get("chapter");
+const lesson = params.get("lesson");
+const lessonPath = `chapters/chapter` + chapter + 
+                        `/lessons` + 
+                        `/lesson` + lesson + 
+                        `/`;
 
 // Effect of clicking anywhere.
 
@@ -67,6 +74,12 @@ document.addEventListener("keydown", async (e) => {
                 if (!nextButton.classList.contains("hidden") && !nextButton.classList.contains("inaccessible")) {
                     nextButton.click();
                 }
+            }
+        }
+        else if (state === "match") {
+            const nextButton = document.getElementById("next-match");
+            if (!nextButton.classList.contains("hidden") && !nextButton.classList.contains("inaccessible")) {
+                nextButton.click();
             }
         }
         else {
@@ -150,7 +163,7 @@ document.getElementById("check-button").addEventListener("click", async () => {
 
   const correctAnswer = lessonInformation[counter].answer.toLowerCase().replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ").trim();
   if (text.toLowerCase().replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ").trim() === correctAnswer) {
-    flashcard.style.backgroundColor = "rgb(162, 255, 153)";
+    flashcard.classList.add("correctly-selected");
     document.getElementById("check-button").classList.add("hidden");
     document.getElementById("win-next").classList.remove("hidden");
     flashcard.classList.remove("bounce");
@@ -159,16 +172,16 @@ document.getElementById("check-button").addEventListener("click", async () => {
     flashcard.classList.add("bounce");
 
     buttons.forEach((button, index) => {
-        button.style.backgroundColor = "#c1f8bc";
+        button.classList.add("correctly-selected");
         button.classList.remove("pop")
         button.style.animationDelay = `${index * 0.02}s`;
         button.classList.add("bounce");
     });
     
   } else {
-        flashcard.style.backgroundColor = "#ffc9aa";
-        lessonLength++;
-        lessonInformation[lessonLength] = structuredClone(lessonInformation[counter]);
+        flashcard.classList.add("incorrectly-selected");
+        desired++;
+        lessonInformation[desired] = structuredClone(lessonInformation[counter]);
         document.getElementById("check-button").classList.add("hidden");
         document.getElementById("win-next").classList.add("inaccessible");
         document.getElementById("win-next").classList.remove("hidden");
@@ -179,7 +192,7 @@ document.getElementById("check-button").addEventListener("click", async () => {
 
 
         buttons.forEach((button, index) => {
-            button.style.backgroundColor = "#ffdbc6";
+            button.classList.add("incorrectly-selected");
             button.classList.remove("pop");
             button.style.animationDelay = `${index * 0.02}s`;
             button.classList.add("shake");
@@ -228,12 +241,15 @@ document.getElementById("check-button").addEventListener("click", async () => {
 const multibuttons = document.querySelectorAll(".multichoice-option");
 multibuttons.forEach(button => {
   button.addEventListener("click", () => {
-    multibuttons.forEach(b => {
-        b.classList.remove("selected");
-        b.style.backgroundColor = "white";
-    });
-    button.classList.add("selected");
-    button.style.backgroundColor = "rgb(193, 238, 255)";
+    if (button.classList.contains("selected")) {
+        button.classList.remove("selected");
+    }
+    else {
+        multibuttons.forEach(b => {
+            b.classList.remove("selected");
+        });
+        button.classList.add("selected");
+    }
   });
 });
 
@@ -245,14 +261,14 @@ document.getElementById("check-button-multi").addEventListener("click", function
   const correct = document.querySelector(".multichoice-option.correct");
 
     if (selected.classList.contains("correct")) {
-        selected.style.backgroundColor = "rgb(162, 255, 153)";
+        selected.classList.add("correctly-selected");
         selected.classList.add("bounce");
     } else {
-        selected.style.backgroundColor = "#ffdbc6";
-        lessonLength++;
-        lessonInformation[lessonLength] = structuredClone(lessonInformation[counter]);
+        selected.classList.add("incorrectly-selected");
+        desired++;
+        lessonInformation[desired] = structuredClone(lessonInformation[counter]);
         selected.classList.add("shake");
-        correct.style.backgroundColor = "rgb(162, 255, 153)";
+        correct.classList.add("correctly-selected");
   }
   document.getElementById("check-button-multi").classList.add("hidden");
   document.getElementById("next-multi").classList.remove("hidden");
@@ -261,6 +277,86 @@ document.getElementById("check-button-multi").addEventListener("click", function
     b.disabled = true;
   });
 });
+
+
+// Declaring the match button actions, which are a little more complicated.
+
+let selectedSide = null;
+
+document.querySelectorAll(".match-option").forEach(btn => {
+    btn.addEventListener("click", handleMatchClick);
+});
+
+function handleMatchClick(e) {
+    const btn = e.currentTarget;
+    if (btn.disabled) return;
+    if (btn.classList.contains("incorrectly-selected")) return;
+
+    const side = btn.id.startsWith("left") ? "left" : "right";
+
+    if (btn.classList.contains("selected")) {
+        btn.classList.remove("selected");
+        return;
+    }
+
+    const selected = document.querySelector(".match-option.selected");
+
+    if (!selected) {
+        btn.classList.add("selected");
+        return;
+    }
+
+    const selectedSide = selected.id.startsWith("left") ? "left" : "right";
+
+    if (side === selectedSide) {
+        selected.classList.remove("selected");
+        btn.classList.add("selected");
+        return;
+    }
+
+    checkMatch(selected, btn);
+}
+
+function checkMatch(a, b) {
+    const correct = a.dataset.match === b.dataset.match;
+
+    a.classList.remove("selected");
+    b.classList.remove("selected");
+
+    if (correct) {
+        a.classList.add("correctly-selected");
+        a.classList.add("bounce");
+        b.classList.add("correctly-selected");
+        setTimeout(() => {
+            b.classList.add("bounce");
+        }, 30);
+        a.disabled = true;
+        b.disabled = true;
+        checkIfFinished();
+    } else {
+        lessonInformation[counter].incorrectFlag = true;
+        a.classList.add("incorrectly-selected");
+        a.classList.add("shake");
+        b.classList.add("incorrectly-selected");
+        setTimeout(() => {
+            b.classList.add("shake");
+        }, 30);
+        
+        setTimeout(() => {
+            a.classList.remove("incorrectly-selected");
+            a.classList.remove("shake");
+            b.classList.remove("incorrectly-selected");
+            b.classList.remove("shake");
+        }, 800);
+    }
+}
+
+function checkIfFinished() {
+    const remaining = document.querySelectorAll(".match-option:not(:disabled)");
+    if (remaining.length === 0) {
+        document.getElementById("next-match").classList.remove("hidden");
+    }
+}
 
 
 // Going to the next lesson.
@@ -281,15 +377,45 @@ document.getElementById("next-multi").addEventListener("click", () => {
     updatePage(state);
 });
 
+document.getElementById("next-match").addEventListener("click", () => {
+    if (lessonInformation[counter].incorrectFlag) {
+        desired++;
+        lessonInformation[desired] = structuredClone(lessonInformation[counter]);
+        lessonInformation[desired].incorrectFlag = false;
+    }
+    counter++;
+    state = lessonInformation[counter].state;
+    updatePage(state);
+});
 
 
-// Load all 15 questions first
+// Get question count first.
+
+async function loadQuestionCount() {
+    const response = await fetch(lessonPath + "text.txt");
+    if (!response.ok) throw new Error(`Failed to fetch lesson1.txt (${response.status})`);
+
+    const text = await response.text();
+    const lines = text.split(/\r?\n/).filter(Boolean);
+
+    const config = {};
+    for (const line of lines) {
+        const [key, value] = line.split(":").map(s => s.trim());
+        config[key] = value;
+    }
+
+    available = parseInt(config.availableQuestionCount);
+    desired = parseInt(config.desiredQuestionCount);
+}
+
+
+// Load all questions second.
 
 async function loadAllLessons() {
     const promises = [];
 
-    for (let i = 1; i <= availableLessonLength; i++) {
-        const path = `../../lessons/lesson1/questions/question${i}/lesson1_question${i}.txt`;
+    for (let i = 1; i <= available; i++) {
+        const path = lessonPath + `questions/question${i}/text.txt`;
         promises.push(loadIntoLessonInformation(path, i));
     }
 
@@ -359,6 +485,56 @@ async function loadIntoLessonInformation(url, i) {
         else if (key === "transliteration") {
             entry.transliteration = value;
         }
+
+        else if (key === "new") {
+            entry.new = parseInt(value);
+        }
+    }
+
+    if (entry.state === "match") {
+        entry.incorrectFlag = false;
+
+        const response = await fetch(lessonPath + "new-vocabulary/text.txt");
+        if (!response.ok) {
+            throw new Error("Failed to fetch vocabulary count");
+        }
+
+        const text = await response.text();
+        const firstLine = text.split(/\r?\n/)[0];
+        const vocabCount = parseInt(firstLine.split(":")[1].trim(), 10);
+
+        const numbers = [];
+        for (let i = 1; i <= vocabCount; i++) numbers.push(i);
+        for (let i = numbers.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+        }
+        const chosen = numbers.slice(0, entry.new).sort((a, b) => a - b);
+
+        const result = [];
+        for (const i of chosen) {
+            const wordResponse = await fetch(lessonPath + "new-vocabulary/word" + i + ".txt");
+            if (!wordResponse.ok) {
+                throw new Error("Failed to fetch word " + i);
+            }
+
+            const wordText = await wordResponse.text();
+            const lines = wordText.split(/\r?\n/);
+
+            let meaning = "";
+            for (const line of lines) {
+                if (line.startsWith("meaning:")) {
+                    meaning = line.split(":")[1].trim();
+                    break;
+                }
+            }
+
+            result.push({
+                source: lessonPath + "new-vocabulary/word" + i + ".svg",
+                meaning: meaning
+            });
+        }
+        entry.entries = result;
     }
 
     entry.questionIndex = i;
@@ -366,10 +542,10 @@ async function loadIntoLessonInformation(url, i) {
 };
 
 
-// Randomise lesson order under the instructions of lesson1.txt.
+// lesson order under the instructions of lesson1.txt.
 
 async function randomiseLessons() {
-    const response = await fetch("lesson1.txt");
+    const response = await fetch(lessonPath + "text.txt");
     if (!response.ok) throw new Error(`Failed to fetch lesson1.txt (${response.status})`);
 
     const text = await response.text();
@@ -380,9 +556,6 @@ async function randomiseLessons() {
         const [key, value] = line.split(":").map(s => s.trim());
         config[key] = value;
     }
-
-    const available = parseInt(config.availableQuestionCount);
-    const desired = parseInt(config.desiredQuestionCount);
 
     const mandatory = config.mandatory
         ? config.mandatory.split(";").map(s => parseInt(s.trim()))
@@ -498,13 +671,16 @@ function updatePage(varstate) {
     // Change flashcards
     const horizontal = document.getElementById("horizontal-layout");
     const vertical = document.getElementById("vertical-layout");
-    const multichoice = document.getElementById("multichoice-layout")
+    const multichoice = document.getElementById("multichoice-layout");
+    const match = document.getElementById("match-layout");
     if (varstate === "multichoice") {
         document.getElementById("translation-footer").classList.add("hidden");
         document.querySelectorAll(".multichoice-option").forEach(b => {
             b.disabled = false;
             b.style.backgroundColor = "white";
             b.classList.remove("selected");
+            b.classList.remove("correctly-selected");
+            b.classList.remove("incorrectly-selected");
             b.classList.remove("shake");
             b.classList.remove("bounce");
         });
@@ -513,9 +689,48 @@ function updatePage(varstate) {
         horizontal.classList.add("hidden");
         vertical.classList.add("hidden");
         multichoice.classList.remove("hidden");
+        match.classList.add("hidden");
         document.getElementById("multichoice-stem").textContent = lessonInformation[counter].question;
         document.getElementById("multichoice-variable").textContent = lessonInformation[counter].transliteration;
         randomiseMultichoice();
+    }
+    else if (varstate === "match") {
+        document.getElementById("next-match").classList.add("hidden");
+        document.getElementById("translation-footer").classList.add("hidden");
+        horizontal.classList.add("hidden");
+        vertical.classList.add("hidden");
+        multichoice.classList.add("hidden");
+        match.classList.remove("hidden");
+
+        selectedSide = null;
+        document.querySelectorAll(".match-option").forEach(btn => {
+            btn.classList.remove("correctly-selected");
+            btn.classList.remove("bounce");
+            btn.disabled = false;
+        });
+
+        let entries = lessonInformation[counter].entries;
+
+        function shuffle(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+        }
+
+        const left = [...entries];
+        const right = [...entries];
+        shuffle(left);
+        shuffle(right);
+
+        for (let i = 0; i < entries.length; i++) {
+            const leftBtn = document.getElementById("left-option" + (i+1));
+            const rightBtn = document.getElementById("right-option" + (i+1));
+            leftBtn.innerHTML = `<img src="${left[i].source}">`;
+            rightBtn.textContent = right[i].meaning;
+            leftBtn.dataset.match = left[i].meaning;
+            rightBtn.dataset.match = right[i].meaning;
+        }
     }
     else {
         document.getElementById("translation-footer").classList.remove("hidden");
@@ -528,9 +743,7 @@ function updatePage(varstate) {
             horizontal.classList.add("hidden");
             vertical.classList.remove("hidden");
             multichoice.classList.add("hidden");
-            if (flippyIndex === 2) {
-                vertical.classList.add("flippy");
-            }
+            match.classList.add("hidden");
         }
         else {
             flashcard = document.getElementById('flashcard');
@@ -538,6 +751,7 @@ function updatePage(varstate) {
             vertical.classList.add("hidden");
             horizontal.classList.remove("hidden");
             multichoice.classList.add("hidden");
+            match.classList.add("hidden");
         }
         if (flippyIndex === 2) {
             flashcard.classList.add("flippy")
@@ -548,7 +762,8 @@ function updatePage(varstate) {
         document.getElementById("check-button").classList.remove("hidden");
         document.getElementById("win-next").classList.add("hidden");
 
-        flashcard.style.backgroundColor = "white";
+        flashcard.classList.remove("correctly-selected");
+        flashcard.classList.remove("incorrectly-selected");
         let index = 1;
 
         function tryLoadNext() {
@@ -556,12 +771,10 @@ function updatePage(varstate) {
             const subdiv = Object.assign(document.createElement("div"), {className: "gloss", id: `word-index${index}`});
             const pronunciation = document.createElement("i");
             pronunciation.textContent = lessonInformation[counter].words[index-1].pronunciation;
-            // egyptianWords[counter][index-1].pronunciation;
             const translation = document.createTextNode(lessonInformation[counter].words[index-1].translation);
-            // const translation = document.createTextNode(egyptianWords[counter][index-1].translation);
             subdiv.append(pronunciation, ": ", translation);
             const img = new Image();
-            img.src = `../../lessons/lesson1/questions/question${lessonInformation[counter].questionIndex}/lesson1_question${lessonInformation[counter].questionIndex}_word${index}.svg`;
+            img.src = lessonPath + `questions/question${lessonInformation[counter].questionIndex}/word${index}.svg`;
             img.classList.add("speech");
             img.addEventListener("click", () => {
                 if (subdiv.classList.contains("show")) {
@@ -643,7 +856,7 @@ function randomizeAvatar(varstate) {
             currentAvatar = currentAvatars[randomIndex];
         }
     }
-    img.src = '../../speaking_avatars/' + currentAvatar + '.svg';
+    img.src = 'speaking_avatars/' + currentAvatar + '.svg';
     previousAvatar = currentAvatar;
 }
 
@@ -739,7 +952,7 @@ function randomiseMultichoice() {
 
   buttons.forEach((button, index) => {
     const img = button.querySelector("img");
-    img.src = `../../lessons/lesson1/questions/question${lessonInformation[counter].questionIndex}/lesson1_question${lessonInformation[counter].questionIndex}_option${index + 1}.svg`;
+    img.src = lessonPath + `questions/question${lessonInformation[counter].questionIndex}/option${index + 1}.svg`;
 
     if (index === 0) button.classList.add("correct");
   });
@@ -763,9 +976,10 @@ function randomiseMultichoice() {
 
 (async () => {
     try {
+        await loadQuestionCount();
         await loadAllLessons();
         randomQuestionOrder = await randomiseLessons();
-        for (let i = 1; i <= lessonLength; i++) {
+        for (let i = 1; i <= desired; i++) {
             lessonInformation[i] = draftLessonInformation[randomQuestionOrder[i - 1]];
         }
         state = lessonInformation[counter].state;

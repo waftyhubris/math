@@ -1,0 +1,5 @@
+state: vertical
+words: ẖrd,child; nḏs,small
+mandatoryButtons: a; small; child
+answer: A small child
+avatars: man, owl, cobra, falcon

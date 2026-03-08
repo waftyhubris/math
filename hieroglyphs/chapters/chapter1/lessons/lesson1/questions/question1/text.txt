@@ -1,0 +1,5 @@
+state: horizontal
+words: ntf,he; ẖrd,child
+mandatoryButtons: he; is; a; child
+answer: He is a child
+avatars: man, owl, cobra, falcon

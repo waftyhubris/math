@@ -89,8 +89,8 @@ h5 {
 
 .header-inner {
     display: flex;
-    align-items: center;       /* vertical alignment of logo + text */
-    gap: 0;                 /* space between logo and title */
+    align-items: center;
+    gap: 0;
 }
 
 a {
@@ -248,6 +248,8 @@ footer button {
     justify-self: end;
 }
 
+
+
 /* for the word gloss  */
 
 .word-gloss {
@@ -258,7 +260,7 @@ footer button {
 
 .gloss {
   position: absolute;
-  bottom: 100%;          /* place above image */
+  bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
   margin-bottom: 15px;
@@ -277,7 +279,7 @@ footer button {
 .gloss::after {
   content: "";
   position: absolute;
-  top: 98%;              /* place directly below box */
+  top: 98%;
   left: 50%;
   transform: translateX(-50%);
   
@@ -285,7 +287,7 @@ footer button {
   height: 0;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
-  border-top: 8px solid var(--sub-color); /* triangle color */
+  border-top: 8px solid var(--sub-color);
 }
 
 .gloss.show {
@@ -305,7 +307,7 @@ header {
     padding-top: 5px;
     padding-bottom: 60px;
     display: flex;
-    justify-content: center;   /* centers the group in the header */
+    justify-content: center;
 }
 
 #flashcard {
@@ -346,7 +348,7 @@ header {
 }
 
 .scroll {
-  display: flex;          /* space between the sections */
+  display: flex;
   align-items: flex-start;
   justify-content: center;
   background-color: var(--main-color);
@@ -354,7 +356,7 @@ header {
 }
 
 .bottom-scroll {
-  display: flex;          /* space between the sections */
+  display: flex;
   align-items: flex-start;
   justify-content: center;
   background-color: var(--main-color)!important;
@@ -393,7 +395,8 @@ header {
 }
 
 .speech {
-    height: 85px;
+    height: 70px;
+    margin: 5px;
 }
 
 .flippy .speech {
@@ -459,7 +462,7 @@ header {
 
 #vertical-flashcard-sentence .speech {
     height: auto;
-    width: 80px;
+    width: 70px;
     align-self: flex-end;
     margin-right: 0px;
 }
@@ -472,11 +475,6 @@ header {
 
 
 /* for multi-choice questions */
-
-#multichoice-header {
-    height: 100px;
-    padding-bottom: 10px
-}
 
 #multichoice-layout {
     display: flex;
@@ -498,7 +496,7 @@ header {
     flex-direction: row;
     gap: 10px;
     justify-content: center;
-    align-items: baseline; /* ensures vertical alignment on text baseline */
+    align-items: baseline;
     margin-bottom: 40px;
     margin-top: 60px;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -506,8 +504,8 @@ header {
 }
 
 .multichoice-text p {
-    display: inline;  /* inline so it sits on the same line */
-    margin: 0;        /* remove default paragraph spacing */
+    display: inline;
+    margin: 0;
 }
 
 .multichoice-text i {
@@ -534,6 +532,7 @@ header {
     border-bottom: 7px solid var(--sub-color);
     border-radius: 0px!important;
     background-color: white;
+    transition: background-color 0.07s;
 }
 
 .multichoice-option:disabled {
@@ -549,5 +548,61 @@ header {
     flex-wrap: wrap;
     justify-content: center;
     background-color: var(--main-color);
-    padding-bottom: 60px;
+    padding-bottom: 30px;
+}
+
+
+
+/* for match questions */
+
+#match-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.match-question {
+    margin-top: 85px;
+    flex: 1;
+    background-color: var(--main-color);
+    padding-top: 80px;
+}
+
+.match-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.match-option {
+    width: 230px;
+    margin-top:0px;
+    margin-bottom: 30px;
+    height: 90px;
+    border: 3px solid var(--sub-color);
+    border-bottom: 7px solid var(--sub-color);
+    border-radius: 0px!important;
+    z-index: 10000;
+    background-color: white;
+    transition: background-color 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.match-option img {
+    height: 42px;
+}
+
+.selected  { 
+    background: rgb(193, 238, 255)!important; 
+}
+
+.correctly-selected { 
+    background: rgb(147, 255, 137)!important; 
+}
+
+.incorrectly-selected   { 
+    background: #ffccae!important; 
 }

@@ -1,0 +1,5 @@
+state: vertical
+words: ꜣpd,bird; nḏs,small
+mandatoryButtons: a; small; bird
+answer: A small bird
+avatars: man, owl, cobra, falcon

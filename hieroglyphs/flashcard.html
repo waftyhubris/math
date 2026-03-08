@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/svg+xml" href="hieroglyphs_favicon.svg">
+  <link rel="apple-touch-icon" href="shot_favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>The Hieroglyphics Archive</title>
+  <link rel="stylesheet" href="flashcard.css">
+</head>
+<body>
+<main>
+
+    <header>
+        <div class="header-inner">
+            <a href="hieroglyphs.html">
+                <img src="hieroglyphs_logo.png" alt="Pretty bird" class="logo">
+            </a>
+            <h1>The Hieroglyphics Archive</h1>
+        </div>
+    </header>
+
+    <!-- Only displays for horizontally displayed questions -->
+
+    <div id="horizontal-layout">
+
+        <div class="scroll">
+            <button id="flashcard" class="flashcard">
+                <div id="flashcard-sentence"></div>
+                <img id ="randomImage" src="" class="speaker">
+            </button>
+        </div>
+
+        <div class="bottom-scroll">
+            <section class="sentence-section">
+                <div id="sentence" class="container"></div>
+            </section>
+        </div>
+    </div>
+
+    
+    <!-- Only displays for vertically displayed questions -->
+
+    <div id="vertical-layout" class="hidden">
+
+        <div class="scroll" id="vertical-scroll">
+            <section class="vertical-left-divide">
+                <div id="sentence-vertical" class="container"></div>
+            </section>
+
+            <button id="vertical-flashcard" class="flashcard">
+                <div id="vertical-flashcard-sentence"></div>
+                <img id="randomImage-vertical" src="" class="vertical-speaker">
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Only displays for multichoice character questions -->
+
+    <div id="multichoice-layout" class="hidden">
+
+        <div class="multichoice-question">
+            <div class="multichoice-text">
+                <p id="multichoice-stem"></p> <i id="multichoice-variable"></i>
+            </div>
+            <div class="multichoice-options">
+                <button class="multichoice-option" id="option1"><img src="" class="multichoice-image"></img></button>
+                <button class="multichoice-option" id="option2"><img src="" class="multichoice-image"></img></button>
+            </div>
+            <div class="multichoice-options">
+                <button class="multichoice-option" id="option3"><img src="" class="multichoice-image"></img></button>
+                <button class="multichoice-option" id="option4"><img src="" class="multichoice-image"></img></button>
+            </div>
+        </div>
+
+        <div class="multichoice-footer">
+            <button class="check" id="check-button-multi">Check</button>
+            <button class="check hidden" id="next-multi">Next</button>
+        </div>
+    </div>
+
+
+    <!-- Only displays for match questions -->
+
+    <div id="match-layout" class="hidden">
+
+        <div class="match-question">
+            <div class="match-options">
+                <button class="match-option" id="left-option1"></button>
+                <button class="match-option" id="right-option1"></button>
+            </div>
+            <div class="match-options">
+                <button class="match-option" id="left-option2"></button>
+                <button class="match-option" id="right-option2"></button>
+            </div>
+            <div class="match-options">
+                <button class="match-option" id="left-option3"></button>
+                <button class="match-option" id="right-option3"></button>
+            </div>
+            <div class="match-options">
+                <button class="match-option" id="left-option4"></button>
+                <button class="match-option" id="right-option4"></button>
+            </div>
+            <div class="match-options">
+                <button class="match-option" id="left-option5"></button>
+                <button class="match-option" id="right-option5"></button>
+            </div>
+        </div>
+
+        <div class="multichoice-footer">
+            <button class="check hidden pop" id="next-match">Next</button>
+        </div>
+    </div>
+
+
+    <footer id="translation-footer">
+        <div class="footer-left">
+        </div>
+
+        <div id="buttons" class="bottom-buttons">
+        </div>
+
+        <div class="footer-right" id="check">
+            <button class="check" id="check-button">Check</button>
+            <button class="check hidden" id="win-next">Next</button>
+        </div>
+    </footer>
+
+    <script src="counter.js"></script>
+
+</main>
+</body>
