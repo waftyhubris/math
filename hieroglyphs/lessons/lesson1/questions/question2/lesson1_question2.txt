@@ -1,3 +1,0 @@
-state: multichoice
-question: Click the symbols representing to the sounds
-transliteration: ḏd

@@ -1,3 +1,0 @@
-state: multichoice
-question: Click the symbol representing the sound
-transliteration: ḫ
