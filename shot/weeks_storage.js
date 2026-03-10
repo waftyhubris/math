@@ -7,7 +7,7 @@ const week1HTML = `
     </p>
     <img src="week_1.png" alt="Horizontal filtration on double complex" class = "weekly">
     <p>
-        The notes and video will be made available after the talk.
+        Click to access a <a href="https://youtu.be/_6vNPEQPklo">recording</a> of the talk, or notes on the spectral sequence of a <a href="notes/week-1/Filtered Complex.pdf">filtered</a> and <a href="notes/week-1/Double Complex.pdf">double complex</a>.
     </p>
 `;
 
