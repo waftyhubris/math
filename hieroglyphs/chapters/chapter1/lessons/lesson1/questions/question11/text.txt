@@ -1,0 +1,5 @@
+state: horizontal
+mandatoryButtons: a; small; bird; and; a; small; child
+answer: A small bird and a small child
+avatars: man, owl, cobra, falcon
+betterWords: 1.1.3; 1.1.2; 1.1.4; 1.1.1; 1.1.2

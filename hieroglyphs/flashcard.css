@@ -295,7 +295,7 @@ footer button {
 }
 
 
-/* for the horizontal flashcard layout */
+/* for the header */
 
 header {
     position: fixed;
@@ -306,21 +306,43 @@ header {
     background-color: var(--main-color);
     padding-top: 5px;
     padding-bottom: 60px;
-    display: flex;
-    justify-content: center;
 }
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.header-left {
+    position: absolute;
+    left: 20px;
+}
+
+#heart {
+    margin: 10px;
+    height: 55px;
+}
+
+
+/* for the horizontal flashcard layout */
+
 
 #flashcard {
     max-width: 800px;
+    width: fit-content;
 }
 
 #flashcard-sentence {
-    display: flex;
+    display: inline-flex;
     flex-wrap: wrap;
-    row-gap: 15px;
+    row-gap: 20px;
     column-gap: 0px;
     align-items: flex-start;
     flex-direction: row;
+    margin-right: 0px!important;
+    margin-left: 0px!important;
 }
 
 .flippy #flashcard-sentence {
@@ -395,13 +417,9 @@ header {
 }
 
 .speech {
-    height: 70px;
-    margin: 5px;
+    height: 60px;
+    margin: 3px;
 }
-
-/* svg path {
-  fill: black;
-} */
 
 .flippy .speech {
     transform: scaleX(-1)!important;
@@ -422,6 +440,10 @@ header {
     max-height: 520px;
     row-gap: 4px;
     column-gap: 18px;
+}
+
+.flippy #vertical-flashcard-sentence {
+    flex-wrap: wrap-reverse!important;
 }
 
 #vertical-scroll section {
@@ -466,7 +488,7 @@ header {
 
 #vertical-flashcard-sentence .speech {
     height: auto;
-    width: 70px;
+    width: 60px;
     align-self: flex-end;
     margin-right: 0px;
 }
@@ -524,7 +546,8 @@ header {
 }
 
 .multichoice-image {
-    width: 120px;
+    height: 70px;
+    max-width: 160px;
 }
 
 .multichoice-option {

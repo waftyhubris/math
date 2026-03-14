@@ -7,6 +7,7 @@ let randomQuestionOrder;
 let draftLessonInformation = {};
 let lessonInformation = {};
 let vocabFlag = [];
+let lifeCount = 3;
 const params = new URLSearchParams(window.location.search);
 const chapter = params.get("chapter");
 const lesson = params.get("lesson");
@@ -180,6 +181,8 @@ document.getElementById("check-button").addEventListener("click", async () => {
     });
     
   } else {
+        lifeCount -= 1;
+        updateLife();
         flashcard.classList.add("incorrectly-selected");
         desired++;
         lessonInformation[desired] = structuredClone(lessonInformation[counter]);
@@ -265,6 +268,8 @@ document.getElementById("check-button-multi").addEventListener("click", function
         selected.classList.add("correctly-selected");
         selected.classList.add("bounce");
     } else {
+        lifeCount -= 1;
+        updateLife();
         selected.classList.add("incorrectly-selected");
         desired++;
         lessonInformation[desired] = structuredClone(lessonInformation[counter]);
@@ -335,6 +340,8 @@ function checkMatch(a, b) {
         b.disabled = true;
         checkIfFinished();
     } else {
+        lifeCount -= 1;
+        updateLife();
         lessonInformation[counter].incorrectFlag = true;
         a.classList.add("incorrectly-selected");
         a.classList.add("shake");
@@ -360,9 +367,29 @@ function checkIfFinished() {
 }
 
 
+// Updating the heart icon.
+
+function updateLife() {
+    img = document.getElementById("heart");
+    img.classList.add("shake");
+    if (lifeCount === 2) {
+        img.src = "icons/hearts/heart2.svg";
+    }
+    if (lifeCount === 1) {
+        img.src = "icons/hearts/heart1.svg";
+    }
+    if (lifeCount === 0) {
+        img.src = "icons/hearts/heart0.svg";
+    }
+}
+
+
 // Going to the next lesson.
 
 document.getElementById("win-next").addEventListener("click", () => {
+    if (lifeCount <= 0) {
+        window.location.href = "hieroglyphs.html";
+    }
     counter++;
     state = lessonInformation[counter].state;
     document.getElementById("flashcard").classList.remove("bounce");
@@ -373,12 +400,18 @@ document.getElementById("win-next").addEventListener("click", () => {
 });
 
 document.getElementById("next-multi").addEventListener("click", () => {
+    if (lifeCount <= 0) {
+        window.location.href = "hieroglyphs.html";
+    }
     counter++;
     state = lessonInformation[counter].state;
     updatePage(state);
 });
 
 document.getElementById("next-match").addEventListener("click", () => {
+    if (lifeCount <= 0) {
+        window.location.href = "hieroglyphs.html";
+    }
     if (lessonInformation[counter].incorrectFlag) {
         desired++;
         lessonInformation[desired] = structuredClone(lessonInformation[counter]);
@@ -730,6 +763,7 @@ vocabulary = [
 
 function updatePage(varstate) {
     removeSpeech();
+    document.getElementById("heart").classList.remove("shake");
 
     // Change flashcards
     const horizontal = document.getElementById("horizontal-layout");
@@ -844,6 +878,7 @@ function updatePage(varstate) {
             let flippyIndex = lessonInformation[counter].flippy;
             if (flippyIndex === 2) {
                 flashcard.classList.add("flippy");
+                vertical.classList.add("flippy");
             }
             else {
                 flashcard.classList.remove("flippy");
