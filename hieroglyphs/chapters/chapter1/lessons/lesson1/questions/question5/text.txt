@@ -1,5 +1,5 @@
 state: horizontal
-words: ẖrd,child; ḥnʿ,with; ꜣpd,bird
 mandatoryButtons: a; child; and; a; bird
 answer: A child and a bird
 avatars: man, owl, cobra, falcon
+betterWords: 1.1.1; 1.1.4; 1.1.3

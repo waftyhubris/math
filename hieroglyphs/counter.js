@@ -6,6 +6,7 @@ let desired;
 let randomQuestionOrder;
 let draftLessonInformation = {};
 let lessonInformation = {};
+let vocabFlag = [];
 const params = new URLSearchParams(window.location.search);
 const chapter = params.get("chapter");
 const lesson = params.get("lesson");
@@ -17,7 +18,7 @@ const lessonPath = `chapters/chapter` + chapter +
 // Effect of clicking anywhere.
 
 document.addEventListener("click", (event) => {
-    if (!event.target.classList.contains("speech")) {
+    if (!event.target.closest(".word-gloss")) {
         removeGloss();
     }
 });
@@ -389,6 +390,28 @@ document.getElementById("next-match").addEventListener("click", () => {
 });
 
 
+// Get number of new vocab items zeroth.
+
+async function vocabFlagInitiator() {
+    const response = await fetch(lessonPath + "new-vocabulary/text.txt");
+    if (!response.ok) throw new Error(`Failed to fetch lesson1.txt (${response.status})`);
+
+    const text = await response.text();
+    const lines = text.split(/\r?\n/).filter(Boolean);
+
+    const config = {};
+    for (const line of lines) {
+        const [key, value] = line.split(":").map(s => s.trim());
+        config[key] = value;
+    }
+
+    vocabCount = parseInt(config.count);
+        for (let i = 0; i < vocabCount; i++) {
+        vocabFlag[i] = false;
+    }
+}
+
+
 // Get question count first.
 
 async function loadQuestionCount() {
@@ -451,14 +474,45 @@ async function loadIntoLessonInformation(url, i) {
             entry.state = value;
         }
 
-        else if (key === "words") {
-            entry.words = value.split(";").map(pair => {
-                const [pronunciation, translation] = pair.split(",");
-                return {
-                    pronunciation: pronunciation.trim(),
-                    translation: translation.trim()
-                };
-            });
+        else if (key === "betterWords") {
+            const directory = value.split("; ");
+            entry.words = [];
+            for (const code of directory) {
+                const [chapter, lesson, word] = code.split(".");
+
+                const base = `chapters/chapter${chapter}/lessons/lesson${lesson}/new-vocabulary`;
+                const textResp = await fetch(`${base}/word${word}/text.txt`);
+                const text = await textResp.text();
+
+                const transliterationMatch = text.match(/^transliteration:\s*(.*)$/m);
+                const meaningMatch = text.match(/^meaning:\s*(.*)$/m);
+
+                const pronunciation = transliterationMatch ? transliterationMatch[1].trim() : "";
+                const meaning = meaningMatch ? meaningMatch[1].trim() : "";
+
+                const htmlResp = await fetch(`${base}/library.html`);
+                const htmlText = await htmlResp.text();
+
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlText, "text/html");
+                let el;
+                if (entry.state === "horizontal") {
+                    el = doc.getElementById(`word${word}-horizontal`);
+                }
+                else {
+                    el = doc.getElementById(`word${word}-vertical`);
+                }
+                
+
+                const image = el ? el.innerHTML : "";
+
+                entry.words.push({
+                    pronunciation: pronunciation,
+                    translation: meaning,
+                    image: image,
+                    index: code
+                });
+            }
         }
 
         else if (key === "mandatoryButtons") {
@@ -513,7 +567,7 @@ async function loadIntoLessonInformation(url, i) {
 
         const result = [];
         for (const i of chosen) {
-            const wordResponse = await fetch(lessonPath + "new-vocabulary/word" + i + ".txt");
+            const wordResponse = await fetch(lessonPath + "new-vocabulary/word" + i + "/text.txt");
             if (!wordResponse.ok) {
                 throw new Error("Failed to fetch word " + i);
             }
@@ -529,13 +583,22 @@ async function loadIntoLessonInformation(url, i) {
                 }
             }
 
+            const base = `chapters/chapter${chapter}/lessons/lesson${lesson}/new-vocabulary`;
+            const htmlResp = await fetch(`${base}/library.html`);
+            const htmlText = await htmlResp.text();
+
+            const parser = new DOMParser();
+            const vocab = parser.parseFromString(htmlText, "text/html");
+            const el = vocab.getElementById(`word${i}-horizontal`).innerHTML;
             result.push({
-                source: lessonPath + "new-vocabulary/word" + i + ".svg",
+                image: el,
                 meaning: meaning
             });
         }
         entry.entries = result;
     }
+
+    entry.flippy = Math.floor(Math.random() * (3));
 
     entry.questionIndex = i;
     draftLessonInformation[i] = entry;
@@ -726,7 +789,7 @@ function updatePage(varstate) {
         for (let i = 0; i < entries.length; i++) {
             const leftBtn = document.getElementById("left-option" + (i+1));
             const rightBtn = document.getElementById("right-option" + (i+1));
-            leftBtn.innerHTML = `<img src="${left[i].source}">`;
+            leftBtn.innerHTML = left[i].image;
             rightBtn.textContent = right[i].meaning;
             leftBtn.dataset.match = left[i].meaning;
             rightBtn.dataset.match = right[i].meaning;
@@ -735,7 +798,8 @@ function updatePage(varstate) {
     else {
         document.getElementById("translation-footer").classList.remove("hidden");
         let flashcard;
-        let flippyIndex = Math.floor(Math.random() * (3));
+        
+        Math.floor(Math.random() * (3));
         if (varstate === "vertical") {
             vertical.classList.remove("flippy");
             flashcard = document.getElementById('vertical-flashcard');
@@ -753,12 +817,6 @@ function updatePage(varstate) {
             multichoice.classList.add("hidden");
             match.classList.add("hidden");
         }
-        if (flippyIndex === 2) {
-            flashcard.classList.add("flippy")
-        }
-        else {
-            flashcard.classList.remove("flippy")
-        }
         document.getElementById("check-button").classList.remove("hidden");
         document.getElementById("win-next").classList.add("hidden");
 
@@ -767,16 +825,36 @@ function updatePage(varstate) {
         let index = 1;
 
         function tryLoadNext() {
+            let blueness = false;
+            const word = lessonInformation[counter].words[index - 1];
+            const prefix = `${chapter}.${lesson}.`;
+            if (typeof word.index === "string" && word.index.startsWith(prefix)) {
+                const numberPart = word.index.slice(prefix.length);
+                const num = parseInt(numberPart, 10);
+                if (!vocabFlag[num-1]) {
+                    blueness = true;
+                    vocabFlag[num-1] = true;
+                }
+            }
             const div = Object.assign(document.createElement("div"), {className: "word-gloss", id: `word-index${index}`});
             const subdiv = Object.assign(document.createElement("div"), {className: "gloss", id: `word-index${index}`});
             const pronunciation = document.createElement("i");
             pronunciation.textContent = lessonInformation[counter].words[index-1].pronunciation;
             const translation = document.createTextNode(lessonInformation[counter].words[index-1].translation);
+            let flippyIndex = lessonInformation[counter].flippy;
+            if (flippyIndex === 2) {
+                flashcard.classList.add("flippy");
+            }
+            else {
+                flashcard.classList.remove("flippy");
+            }
             subdiv.append(pronunciation, ": ", translation);
-            const img = new Image();
-            img.src = lessonPath + `questions/question${lessonInformation[counter].questionIndex}/word${index}.svg`;
-            img.classList.add("speech");
-            img.addEventListener("click", () => {
+            div.innerHTML = lessonInformation[counter].words[index-1].image;
+            div.querySelector("svg").classList.add("speech");
+            if (blueness) {
+                div.querySelector("svg").style.fill = "#00A0D7";
+            }
+            div.addEventListener("click", () => {
                 if (subdiv.classList.contains("show")) {
                     removeGloss();
                 }
@@ -785,15 +863,15 @@ function updatePage(varstate) {
                     subdiv.classList.toggle("show");
                 }
             });
-            div.appendChild(img);
             div.appendChild(subdiv);
-            img.onload = () => {
-                egyptianSentence.appendChild(div);
-                index++;
+            egyptianSentence.appendChild(div);
+            index++;
+            try {
                 tryLoadNext();
-            };
-            img.onerror = () => {
-            };
+            }
+            catch {
+                
+            }
         }
 
         tryLoadNext();
@@ -856,6 +934,7 @@ function randomizeAvatar(varstate) {
             currentAvatar = currentAvatars[randomIndex];
         }
     }
+    lessonInformation[counter].avatars = [currentAvatar];
     img.src = 'speaking_avatars/' + currentAvatar + '.svg';
     previousAvatar = currentAvatar;
 }
@@ -976,6 +1055,7 @@ function randomiseMultichoice() {
 
 (async () => {
     try {
+        await vocabFlagInitiator();
         await loadQuestionCount();
         await loadAllLessons();
         randomQuestionOrder = await randomiseLessons();
