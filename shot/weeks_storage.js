@@ -20,13 +20,13 @@ const week2HTML = `
     </p>
     <img src="week_2.png" alt="Steenrod things" class = "weekly">
     <p>
-    Click to access a <a href="https://youtu.be/jrol5xuLjsg">recording</a> of the talk
+    Click to access a <a href="https://youtu.be/jrol5xuLjsg">recording</a> of the talk.
     </p>
 `;
 
 const week3HTML = `
     <p>
-    Abstract: We will concretely introduce the Steenrod squares, which are precisely the stable cohomology operations on the modulo 2 cochains of a topological space. The method we use is a combination of the ones used by Mosher-Tangora and Lurie. We then prove some of the basic properties of Steenrod squares, including the Cartan formula and the Adem relations.
+    Abstract: We describe the Alexander-Whitney map, and use it to produce the cup product. The cup product is not strictly commutative, but it is commutative up to chain homotopy! Actually, there are two candidates for such a chain homotopy, and again they only agree up to another, higher chain homotopy. It turns out that there is a nice way to package the cup product together with an infinite tower of chain homotopies that live above it.
     </p>
     <p>
     Speaker: <a href="../webpage/index.html">Declan Zammit</a>, Macquarie University
