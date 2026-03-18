@@ -31,7 +31,7 @@ const week3HTML = `
     <p>
     Speaker: <a href="../webpage/index.html">Declan Zammit</a>, Macquarie University
     </p>
-    <img src="week_2.png" alt="Steenrod things" class = "weekly">
+    <img src="week_3.png" alt="Steenrod things" class = "weekly">
     <p>
     The notes and video will be made available after the talk.
     </p>
