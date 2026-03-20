@@ -1,0 +1,5 @@
+state: horizontal
+mandatoryButtons: the; red; sun; and; the; black; night
+answer: The red sun and the black night
+avatars: man, owl, cobra, falcon
+betterWords: 1.2.2; 1.2.5; 1.1.4; 1.2.3; 1.2.4

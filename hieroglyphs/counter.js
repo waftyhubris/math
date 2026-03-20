@@ -7,6 +7,7 @@ let randomQuestionOrder;
 let draftLessonInformation = {};
 let lessonInformation = {};
 let vocabFlag = [];
+let vocabCount;
 let lifeCount = 3;
 const params = new URLSearchParams(window.location.search);
 const chapter = params.get("chapter");
@@ -548,6 +549,63 @@ async function loadIntoLessonInformation(url, i) {
             }
         }
 
+        else if (key === "option") {
+            const [thisChapter, thisLesson, word] = value.split(".");
+            //Rejig this so it also works in different chapters.
+            const numbers = [];
+            for (let k = 1; k <= vocabCount; k++) {
+                if (k !== parseInt(word)) numbers.push(k);
+            }
+
+            for (let k = numbers.length - 1; k > 0; k--) {
+                const j = Math.floor(Math.random() * (k + 1));
+                [numbers[k], numbers[j]] = [numbers[j], numbers[k]];
+            }
+
+            const chosen = [parseInt(word), ...numbers.slice(0, 3)];
+            entry.chosen=chosen;
+
+            const result = [];
+            let index = 0;
+            for (const i of chosen) {
+                index++;
+                const wordResponse = await fetch(lessonPath + "new-vocabulary/word" + i + "/text.txt");
+                if (!wordResponse.ok) {
+                    throw new Error("Failed to fetch word " + i);
+                }
+
+                const wordText = await wordResponse.text();
+                const lines = wordText.split(/\r?\n/);
+
+                let meaning = "";
+                for (const line of lines) {
+                    if (line.startsWith("meaning:")) {
+                        meaning = line.split(":")[1].trim();
+                        break;
+                    }
+                }
+
+                const base = `chapters/chapter${chapter}/lessons/lesson${lesson}/new-vocabulary`;
+                const htmlResp = await fetch(`${base}/library.html`);
+                const htmlText = await htmlResp.text();
+
+                const parser = new DOMParser();
+                const vocab = parser.parseFromString(htmlText, "text/html");
+                const el = vocab.getElementById(`word${i}-horizontal`).innerHTML;
+
+                let correctitude = false;
+                if (index === 1) {
+                    correctitude = true;
+                }
+                result.push({
+                    valency: correctitude,
+                    image: el,
+                    meaning: meaning
+                });
+            }
+            entry.entries = result;
+        }
+
         else if (key === "mandatoryButtons") {
             entry.mandatoryButtons = value.split(";").map(item => {
                 const parts = item.split(",");
@@ -580,15 +638,6 @@ async function loadIntoLessonInformation(url, i) {
 
     if (entry.state === "match") {
         entry.incorrectFlag = false;
-
-        const response = await fetch(lessonPath + "new-vocabulary/text.txt");
-        if (!response.ok) {
-            throw new Error("Failed to fetch vocabulary count");
-        }
-
-        const text = await response.text();
-        const firstLine = text.split(/\r?\n/)[0];
-        const vocabCount = parseInt(firstLine.split(":")[1].trim(), 10);
 
         const numbers = [];
         for (let i = 1; i <= vocabCount; i++) numbers.push(i);
@@ -1060,29 +1109,28 @@ function fillWordsRandomly(words, vocabulary, targetLength) {
 // Randomising the multiple choice options.
 
 function randomiseMultichoice() {
-  const containers = document.querySelectorAll(".multichoice-options");
-  const buttons = Array.from(document.querySelectorAll(".multichoice-option"));
-  buttons.forEach(b => b.classList.remove("correct"));
+    const containers = document.querySelectorAll(".multichoice-options");
+    const buttons = Array.from(document.querySelectorAll(".multichoice-option"));
+    buttons.forEach(b => b.classList.remove("correct"));
 
-  buttons.forEach((button, index) => {
-    const img = button.querySelector("img");
-    img.src = lessonPath + `questions/question${lessonInformation[counter].questionIndex}/option${index + 1}.svg`;
+    buttons.forEach((button, index) => {
+        button.innerHTML = lessonInformation[counter].entries[index].image;
+        button.querySelector("svg").classList.add("multichoice-image");
+        if (index === 0) button.classList.add("correct");
+    });
 
-    if (index === 0) button.classList.add("correct");
-  });
+    // Shuffle buttons
+    for (let i = buttons.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [buttons[i], buttons[j]] = [buttons[j], buttons[i]];
+    }
+    containers[0].innerHTML = "";
+    containers[1].innerHTML = "";
 
-  // Shuffle buttons
-  for (let i = buttons.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [buttons[i], buttons[j]] = [buttons[j], buttons[i]];
-  }
-  containers[0].innerHTML = "";
-  containers[1].innerHTML = "";
-
-  containers[0].appendChild(buttons[0]);
-  containers[0].appendChild(buttons[1]);
-  containers[1].appendChild(buttons[2]);
-  containers[1].appendChild(buttons[3]);
+    containers[0].appendChild(buttons[0]);
+    containers[0].appendChild(buttons[1]);
+    containers[1].appendChild(buttons[2]);
+    containers[1].appendChild(buttons[3]);
 }
 
 

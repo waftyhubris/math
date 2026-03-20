@@ -1,0 +1,5 @@
+state: vertical
+mandatoryButtons: a; black; bird
+answer: A black bird
+avatars: man, owl, cobra, falcon
+betterWords: 1.1.3; 1.2.4

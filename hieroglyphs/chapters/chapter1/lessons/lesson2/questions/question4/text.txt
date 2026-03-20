@@ -1,0 +1,5 @@
+state: horizontal
+mandatoryButtons: the; red; land
+answer: The red land
+avatars: man, owl, cobra, falcon
+betterWords: 1.2.6; 1.2.5

@@ -1,0 +1,5 @@
+state: horizontal
+mandatoryButtons: a; child; and; a; man
+answer: A child and a man
+avatars: man, owl, cobra, falcon
+betterWords: 1.1.1; 1.1.4; 1.2.1

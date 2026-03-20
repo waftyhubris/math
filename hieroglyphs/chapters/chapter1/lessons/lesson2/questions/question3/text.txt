@@ -1,0 +1,5 @@
+state: horizontal
+mandatoryButtons: the; black; land
+answer: The black land
+avatars: man, owl, cobra, falcon
+betterWords: 1.2.6; 1.2.4

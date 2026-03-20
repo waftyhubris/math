@@ -1,3 +1,4 @@
 state: multichoice
-question: Click the Egyptian word meaning `child'
+question: Click the Egyptian word meaning 'child'
 transliteration:
+option: 1.1.1
