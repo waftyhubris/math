@@ -1,0 +1,5 @@
+state: horizontal
+mandatoryButtons: he; is; a; man
+answer: He is a man
+avatars: man, owl, cobra, falcon
+betterWords: 1.1.5; 1.2.1

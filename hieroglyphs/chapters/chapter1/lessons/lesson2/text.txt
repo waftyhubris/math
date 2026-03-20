@@ -1,0 +1,5 @@
+availableQuestionCount: 11
+desiredQuestionCount: 11
+directConsequent: 
+indirectConsequent: 
+mandatory: 
