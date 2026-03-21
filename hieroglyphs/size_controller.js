@@ -1,10 +1,10 @@
+main = document.getElementById("main");
+
 function chooseLayout() {
     if (window.innerWidth < 800) {
-        flashcard = document.getElementById("flashcard");
-        flashcard.classList.add("mobile");
+        main.classList.add("mobile");
     }
     if (window.innerWidth >= 800) {
-        flashcard = document.getElementById("flashcard");
-        flashcard.classList.remove("mobile");
+        main.classList.remove("mobile");
     }
 }

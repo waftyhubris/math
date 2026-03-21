@@ -209,6 +209,14 @@ button.inaccessible:active {
 }
 
 
+.mobile button {
+    font-size: 1em;
+    padding: 6px 12px 7px 12px;
+    margin: 7px 0;
+    border-radius: 13px;
+}
+
+
 /* for the footer */
 
 footer {
@@ -248,6 +256,13 @@ footer button {
     justify-self: end;
 }
 
+.mobile .bottom-buttons {
+    gap: 8px!important;
+}
+
+.mobile footer button {
+    margin: 0;
+}
 
 
 /* for the word gloss  */
@@ -325,6 +340,10 @@ header {
     height: 55px;
 }
 
+
+.mobile header {
+    display: none;
+}
 
 /* for the horizontal flashcard layout */
 
@@ -427,17 +446,32 @@ header {
 
 
 
-#flashcard.mobile {
+.mobile #flashcard {
+    padding: 5px;
     max-width: 350px;
     gap: 0.5rem;
 }
 
 .mobile .speaker {
-    height: 150px;
+    height: 110px;
 }
 
 .mobile .speech {
-    height: 35px;
+    height: 32px;
+    margin: 2px;
+}
+
+.mobile #flashcard-sentence {
+    row-gap: 8px;
+}
+
+.mobile .scroll {
+    margin-top: 0px;
+}
+
+.mobile .bottom-scroll section {
+    flex: 1;
+    height: calc(100vh);
 }
 
 /* for the vertical flashcard layout */
