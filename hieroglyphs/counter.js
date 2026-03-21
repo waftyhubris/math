@@ -1097,7 +1097,7 @@ function renderButtons(varstate) {
     sentence.innerHTML = "";
 
     const words = lessonInformation[counter].mandatoryButtons;
-    fillWordsRandomly(words, vocabulary, 12);
+    fillWordsRandomly(words, vocabulary, 10);
     const buttons = [];
 
     // Create buttons
