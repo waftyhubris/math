@@ -618,14 +618,14 @@ header {
 #multichoice-layout {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: calc(100vh - 60px);
 }
 
 .multichoice-question {
     margin-top: 105px;
     flex: 1;
     background-color: var(--main-color);
-    z-index: 10000;
+    z-index: 90;
 }
 
 .multichoice-text {
@@ -693,6 +693,7 @@ header {
     justify-content: center;
     background-color: var(--main-color);
     padding-bottom: 30px;
+    z-index:100;
 }
 
 .mobile .multichoice-question {
