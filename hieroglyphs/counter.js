@@ -17,6 +17,52 @@ const lessonPath = `chapters/chapter` + chapter +
                         `/lesson` + lesson + 
                         `/`;
 
+// Effect of swiping right on iPhone.
+
+let startX = 0;
+
+document.addEventListener("touchstart", e => {
+    startX = e.changedTouches[0].screenX;
+});
+
+document.addEventListener("touchend", async (e) => {
+    const endX = e.changedTouches[0].screenX;
+
+    if (endX - startX > 50) {
+        if (state === "multichoice") {
+            const checkButton = document.getElementById("check-button-multi");
+            if (!checkButton.classList.contains("hidden") && !checkButton.classList.contains("inaccessible")) {
+                checkButton.click();
+            }
+            else {
+                const nextButton = document.getElementById("next-multi");
+                if (!nextButton.classList.contains("hidden") && !nextButton.classList.contains("inaccessible")) {
+                    nextButton.click();
+                }
+            }
+        }
+        else if (state === "match") {
+            const nextButton = document.getElementById("next-match");
+            if (!nextButton.classList.contains("hidden") && !nextButton.classList.contains("inaccessible")) {
+                nextButton.click();
+            }
+        }
+        else {
+            const nextButton = document.getElementById("win-next");
+            if (!nextButton.classList.contains("hidden") && !nextButton.classList.contains("inaccessible")) {
+                nextButton.click();
+            }
+            else {
+                const checkButton = document.getElementById("check-button");
+                if (checkButton && !checkButton.classList.contains("hidden")) {
+                    checkButton.click();
+                }
+            }
+        }
+    }
+});
+
+
 // Effect of clicking anywhere.
 
 document.addEventListener("click", (event) => {
