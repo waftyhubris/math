@@ -445,6 +445,24 @@ async function vocabFlagInitiator() {
     }
 }
 
+async function getVocabCount(varChapter, varLesson) {
+    const response = await fetch(`chapters/chapter` + varChapter + 
+                        `/lessons` + 
+                        `/lesson` + varLesson + 
+                        `/` + "new-vocabulary/text.txt");
+
+    const text = await response.text();
+    const lines = text.split(/\r?\n/).filter(Boolean);
+
+    const config = {};
+    for (const line of lines) {
+        const [key, value] = line.split(":").map(s => s.trim());
+        config[key] = value;
+    }
+
+    return parseInt(config.count);
+}
+
 
 // Get question count first.
 
@@ -640,16 +658,54 @@ async function loadIntoLessonInformation(url, i) {
         entry.incorrectFlag = false;
 
         const numbers = [];
-        for (let i = 1; i <= vocabCount; i++) numbers.push(i);
+        for (let i = 1; i <= vocabCount; i++) numbers.push({chapter: chapter, lesson: lesson, word: i});
         for (let i = numbers.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
         }
-        const chosen = numbers.slice(0, entry.new).sort((a, b) => a - b);
+        let chosen = numbers.slice(0, entry.new).sort((a, b) => a - b);
+
+        function randomPair(chapter, lesson) {
+            if (chapter <= 0) return null;
+
+            const chooseCase1 = (parseInt(chapter) === 1)
+                ? false
+                : Math.random() < 0.5;
+
+            if (chooseCase1) {
+                const a = Math.floor(Math.random() * (chapter - 1)) + 1; // 1 ≤ a < chapter
+                const b = Math.floor(Math.random() * 4) + 1;             // 1 ≤ b ≤ 4
+                return [a, b];
+            } else {
+                if (lesson <= 1) return null;
+                const a = parseInt(chapter);
+                const b = Math.floor(Math.random() * (lesson - 1))+1;  // 1 ≤ b < lesson
+                return [a, b];
+            }
+        }
+
+        if (entry.new !== 5) {
+            let [newChapter, newLesson] = randomPair(chapter, lesson);
+            let newVocabCount = await getVocabCount(newChapter, newLesson);
+            entry.newVocabCount = newVocabCount;
+            const newNumbers = [];
+            for (let i = 1; i <= newVocabCount; i++) newNumbers.push({chapter: newChapter, lesson: newLesson, word: i});
+            for (let i = newNumbers.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newNumbers[i], newNumbers[j]] = [newNumbers[j], newNumbers[i]];
+            }
+            entry.newNumbers=newNumbers;
+            const newChosen = newNumbers.slice(0, 5-entry.new).sort((a, b) => a - b);
+            chosen = [...chosen, ...newChosen];
+            entry.newChosen=newChosen;
+        }
 
         const result = [];
         for (const i of chosen) {
-            const wordResponse = await fetch(lessonPath + "new-vocabulary/word" + i + "/text.txt");
+            const wordResponse = await fetch(`chapters/chapter` + i.chapter + 
+                        `/lessons` + 
+                        `/lesson` + i.lesson + 
+                        `/` + "new-vocabulary/word" + i.word + "/text.txt");
             if (!wordResponse.ok) {
                 throw new Error("Failed to fetch word " + i);
             }
@@ -665,18 +721,19 @@ async function loadIntoLessonInformation(url, i) {
                 }
             }
 
-            const base = `chapters/chapter${chapter}/lessons/lesson${lesson}/new-vocabulary`;
+            const base = `chapters/chapter${i.chapter}/lessons/lesson${i.lesson}/new-vocabulary`;
             const htmlResp = await fetch(`${base}/library.html`);
             const htmlText = await htmlResp.text();
 
             const parser = new DOMParser();
             const vocab = parser.parseFromString(htmlText, "text/html");
-            const el = vocab.getElementById(`word${i}-horizontal`).innerHTML;
+            const el = vocab.getElementById(`word${i.word}-horizontal`).innerHTML;
             result.push({
                 image: el,
                 meaning: meaning
             });
         }
+        entry.chosen = chosen;
         entry.entries = result;
     }
 

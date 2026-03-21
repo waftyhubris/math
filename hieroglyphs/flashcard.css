@@ -417,7 +417,7 @@ header {
 }
 
 .speech {
-    height: 60px;
+    height: 55px;
     margin: 3px;
 }
 
@@ -425,6 +425,20 @@ header {
     transform: scaleX(-1)!important;
 }
 
+
+
+#flashcard.mobile {
+    max-width: 350px;
+    gap: 0.5rem;
+}
+
+.mobile .speaker {
+    height: 150px;
+}
+
+.mobile .speech {
+    height: 35px;
+}
 
 /* for the vertical flashcard layout */
 
@@ -488,7 +502,7 @@ header {
 
 #vertical-flashcard-sentence .speech {
     height: auto;
-    width: 60px;
+    width: 55px;
     align-self: flex-end;
     margin-right: 0px;
 }

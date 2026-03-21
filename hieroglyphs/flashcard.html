@@ -15,9 +15,9 @@
     <header>
         <img src="icons/hearts/heart3.svg" class="header-left" id ="heart">
         <div class="header-inner">
-            <a href="hieroglyphs.html">
+            <!-- <a href="hieroglyphs.html">
                 <img src="hieroglyphs_logo.png" alt="Pretty bird" class="logo">
-            </a>
+            </a> -->
             <h1>The Hieroglyphics Archive</h1>
         </div>
     </header>
@@ -130,6 +130,12 @@
     </footer>
 
     <script src="counter.js"></script>
+    <script src="size_controller.js"></script>
+
+    <script>
+        chooseLayout();
+        window.addEventListener('resize', chooseLayout);
+    </script>
 
 </main>
 </body>
