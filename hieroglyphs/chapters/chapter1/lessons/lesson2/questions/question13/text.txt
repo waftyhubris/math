@@ -1,0 +1,5 @@
+state: horizontal
+mandatoryButtons: the; child; and; the; black; night
+answer: The child and the black night
+avatars: man, owl, cobra, falcon
+betterWords: 1.1.1; 1.1.4; 1.2.3; 1.2.4

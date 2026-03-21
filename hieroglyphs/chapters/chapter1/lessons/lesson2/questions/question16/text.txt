@@ -1,0 +1,5 @@
+state: horizontal
+mandatoryButtons: the; red; sun
+answer: The red sun
+avatars: man, owl, cobra, falcon
+betterWords: 1.2.2; 1.2.5

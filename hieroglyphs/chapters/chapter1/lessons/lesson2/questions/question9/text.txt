@@ -1,5 +1,4 @@
-state: horizontal
-mandatoryButtons: he; is; a; man
-answer: He is a man
-avatars: man, owl, cobra, falcon
-betterWords: 1.1.5; 1.2.1
+state: multichoice
+question: Click the Egyptian word meaning 'black'
+transliteration: 
+option: 1.2.4

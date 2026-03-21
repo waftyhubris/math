@@ -1,5 +1,4 @@
-state: horizontal
-mandatoryButtons: the; black; land
-answer: The black land
-avatars: man, owl, cobra, falcon
-betterWords: 1.2.6; 1.2.4
+state: multichoice
+question: Click the Egyptian word meaning 'man'
+transliteration:
+option: 1.2.1

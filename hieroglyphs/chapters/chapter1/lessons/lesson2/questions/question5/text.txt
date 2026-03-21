@@ -1,5 +1,5 @@
-state: vertical
-mandatoryButtons: the; black; land; and; the; red; land
-answer: The black land and the red land
+state: horizontal
+mandatoryButtons: the; black; land
+answer: The black land
 avatars: man, owl, cobra, falcon
-betterWords: 1.2.6; 1.2.4; 1.1.4; 1.2.6; 1.2.5
+betterWords: 1.2.6; 1.2.4

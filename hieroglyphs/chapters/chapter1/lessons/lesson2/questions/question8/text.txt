@@ -1,5 +1,5 @@
-state: horizontal
-mandatoryButtons: the; red; sun; and; the; black; night
-answer: The red sun and the black night
+state: vertical
+mandatoryButtons: a; black; bird
+answer: A black bird
 avatars: man, owl, cobra, falcon
-betterWords: 1.2.2; 1.2.5; 1.1.4; 1.2.3; 1.2.4
+betterWords: 1.1.3; 1.2.4
