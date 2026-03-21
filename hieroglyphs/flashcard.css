@@ -501,7 +501,7 @@ header {
 
 .mobile .bottom-scroll section {
     flex: 1;
-    height: calc(100vh - 290px);
+    height: calc(100vh - 310px);
 }
 
 .mobile .sentence-section {
