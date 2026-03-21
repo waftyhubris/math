@@ -727,7 +727,7 @@ header {
 #match-layout {
     display: flex;
     flex-direction: column;
-    height: calc(100vh);
+    height: calc(100vh - 80px);
 }
 
 .match-question {
