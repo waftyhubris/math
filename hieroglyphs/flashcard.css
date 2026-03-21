@@ -734,7 +734,7 @@ header {
     margin-top: 85px;
     flex: 1;
     background-color: var(--main-color);
-    padding-top: 40px;
+    padding-top: 10px;
 }
 
 .match-options {
