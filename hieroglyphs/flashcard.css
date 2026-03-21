@@ -202,6 +202,14 @@ button.word:disabled:active {
     z-index:100;
 }
 
+
+.mobile .check {
+    background: rgb(104, 255, 91);
+    font-size: 20px;
+    width: 350px;
+    /* color: white; */
+}
+
 .mobile .next, .mobile #check {
     margin-right:0px;
 }
@@ -244,6 +252,7 @@ footer {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
+    z-index: 10000000;
 }
 
 footer button {
@@ -270,6 +279,9 @@ footer button {
 
 .mobile footer {
     padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .mobile .bottom-buttons {
@@ -375,8 +387,8 @@ header {
     height: 35px;
 }
 
-/* for the horizontal flashcard layout */
 
+/* for the horizontal flashcard layout */
 
 #flashcard {
     max-width: 800px;
@@ -480,7 +492,7 @@ header {
     gap: 0.5rem;
     border: 3px solid var(--sub-color);
     border-bottom: 7px solid var(--sub-color);
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
 .mobile .speaker {
@@ -488,12 +500,20 @@ header {
 }
 
 .mobile .speech {
-    height: 40px;
+    height: 35px;
     margin: 2px;
 }
 
 .mobile #flashcard-sentence {
     row-gap: 8px;
+}
+
+.mobile .container {
+    gap: 6px!important;
+}
+
+.mobile .sentence-section {
+    max-width: 300px!important;
 }
 
 .mobile .scroll {
@@ -508,6 +528,7 @@ header {
 .mobile .sentence-section {
     padding-top: 30px!important;
 }
+
 
 /* for the vertical flashcard layout */
 
@@ -591,7 +612,7 @@ header {
     gap: 0.5rem;
     border: 3px solid var(--sub-color);
     border-bottom: 7px solid var(--sub-color);
-    margin-top: 20px;
+    margin-top: 45px;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -606,7 +627,7 @@ header {
 }
 
 .mobile #vertical-flashcard-sentence .speech {
-    width: 40px;
+    width: 35px;
     margin: 1px;
     margin-right:0px;
 }
