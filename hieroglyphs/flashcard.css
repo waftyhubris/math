@@ -3,6 +3,8 @@
     --sub-color: rgb(174, 69, 0);
     --pearl: #FFFDF7;
     --offpearl: white;
+    touch-action: pan-x pan-y;
+    height: 100%;
 }
 
 html, body {
