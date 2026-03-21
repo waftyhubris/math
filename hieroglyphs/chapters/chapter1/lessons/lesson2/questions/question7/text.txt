@@ -1,4 +1,4 @@
 state: multichoice
-question: Click the Egyptian word with transliteration
+question: Click the Egyptian word 
 transliteration: tꜣ
 option: 1.2.6
