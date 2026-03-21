@@ -484,11 +484,11 @@ header {
 }
 
 .mobile .speaker {
-    height: 120px;
+    height: 140px;
 }
 
 .mobile .speech {
-    height: 35px;
+    height: 40px;
     margin: 2px;
 }
 
@@ -597,7 +597,7 @@ header {
 }
 
 .mobile .vertical-speaker {
-    height: 120px;
+    height: 140px;
 }
 
 .mobile #vertical-flashcard-sentence {
@@ -606,7 +606,7 @@ header {
 }
 
 .mobile #vertical-flashcard-sentence .speech {
-    width: 35px;
+    width: 40px;
     margin: 1px;
     margin-right:0px;
 }
@@ -618,7 +618,7 @@ header {
 #multichoice-layout {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 80px);
 }
 
 .multichoice-question {
@@ -727,14 +727,14 @@ header {
 #match-layout {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: calc(100vh - 80px);
 }
 
 .match-question {
     margin-top: 85px;
     flex: 1;
     background-color: var(--main-color);
-    padding-top: 80px;
+    padding-top: 40px;
 }
 
 .match-options {
