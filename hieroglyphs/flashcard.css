@@ -582,8 +582,9 @@ header {
 }
 
 .mobile #vertical-scroll section {
-    height: calc(100vh - 120px);
+    height: calc(100vh - 140px);
 }
+
 
 .mobile #vertical-flashcard {
     padding: 5px;
@@ -683,6 +684,10 @@ header {
 }
 
 .multichoice-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
