@@ -28,6 +28,10 @@ h1 {
     text-align: center;
 }
 
+.mobile h1 {
+    font-size: 20px;
+}
+
 h2 {
     font-family: Georgia, "Times New Roman", serif;
     color:white;
@@ -194,6 +198,10 @@ button.word:disabled:active {
     z-index:100;
 }
 
+.mobile .next, .mobile #check {
+    margin-right:0px;
+}
+
 button.inaccessible {
     cursor: default;
 }
@@ -256,8 +264,12 @@ footer button {
     justify-self: end;
 }
 
+.mobile footer {
+    padding: 5px;
+}
+
 .mobile .bottom-buttons {
-    gap: 8px!important;
+    gap: 6px!important;
 }
 
 .mobile footer button {
@@ -342,7 +354,8 @@ header {
 
 
 .mobile header {
-    display: none;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 
 /* for the horizontal flashcard layout */
@@ -444,8 +457,6 @@ header {
     transform: scaleX(-1)!important;
 }
 
-
-
 .mobile #flashcard {
     padding: 5px;
     max-width: 350px;
@@ -466,12 +477,12 @@ header {
 }
 
 .mobile .scroll {
-    margin-top: 0px;
+    margin-top: 50px;
 }
 
 .mobile .bottom-scroll section {
     flex: 1;
-    height: calc(100vh);
+    height: calc(100vh - 250px);
 }
 
 /* for the vertical flashcard layout */
