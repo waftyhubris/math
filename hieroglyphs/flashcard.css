@@ -207,6 +207,7 @@ button.word:disabled:active {
     background: rgb(255, 255, 255);
     font-size: 20px;
     width: 350px;
+    display: none!important;
     /* color: white; */
 }
 
@@ -530,7 +531,7 @@ header {
 
 .mobile .bottom-scroll section {
     flex: 1;
-    height: calc(100vh - 400px);
+    height: calc(100vh);
 }
 
 .mobile .sentence-section {
@@ -608,6 +609,13 @@ header {
 #sentence-vertical {
     padding-top:40px;
     margin-top: 0; 
+}
+
+.mobile #vertical-layout {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 
 .mobile #vertical-scroll section {
@@ -726,6 +734,13 @@ header {
     z-index:100;
 }
 
+.mobile #multichoice-layout {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
 .mobile .multichoice-question {
     margin-top: 60px;
 }
@@ -804,6 +819,13 @@ header {
 
 .incorrectly-selected   { 
     background: #ffccae!important; 
+}
+
+.mobile #match-layout {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
 }
 
 .mobile .match-question {

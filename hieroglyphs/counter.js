@@ -410,6 +410,7 @@ function checkIfFinished() {
     const remaining = document.querySelectorAll(".match-option:not(:disabled)");
     if (remaining.length === 0) {
         document.getElementById("next-match").classList.remove("hidden");
+        document.getElementById("next-match").classList.remove("inaccessible");
     }
 }
 
@@ -944,6 +945,7 @@ function updatePage(varstate) {
         randomiseMultichoice();
     }
     else if (varstate === "match") {
+        document.getElementById("next-match").classList.add("inaccessible");
         document.getElementById("next-match").classList.add("hidden");
         document.getElementById("translation-footer").classList.add("hidden");
         horizontal.classList.add("hidden");
