@@ -487,6 +487,13 @@ header {
     transform: scaleX(-1)!important;
 }
 
+.mobile #horizontal-layout {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
 .mobile #flashcard {
     padding: 5px;
     max-width: 365px;

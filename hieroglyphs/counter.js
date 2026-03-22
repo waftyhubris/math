@@ -28,7 +28,7 @@ document.addEventListener("touchstart", e => {
 document.addEventListener("touchend", async (e) => {
     const endX = e.changedTouches[0].screenX;
 
-    if (endX - startX > 50) {
+    if (startX - endX > 50) {
         if (state === "multichoice") {
             const checkButton = document.getElementById("check-button-multi");
             if (!checkButton.classList.contains("hidden") && !checkButton.classList.contains("inaccessible")) {
