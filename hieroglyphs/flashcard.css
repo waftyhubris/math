@@ -746,24 +746,24 @@ header {
 }
 
 .mobile .multichoice-text {
-    font-size: 18px;
-    margin-top:30px;
+    font-size: 0.95em;
+    margin-top:50px;
 }
 
 .mobile .multichoice-options {
-    gap: 30px;
+    gap: 20px;
 }
 
 .mobile .multichoice-image {
-    height: 50px;
+    height: 40px;
     max-width: 100px;
 }
 
 .mobile .multichoice-option {
-    width: 150px;
+    width: 140px;
     margin-top:0px;
-    margin-bottom: 30px;
-    height: 150px;
+    margin-bottom: 20px;
+    height: 140px;
 }
 
 
