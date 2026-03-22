@@ -6,6 +6,10 @@
     touch-action: pan-x pan-y;
 }
 
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -395,6 +399,11 @@ header {
 #flashcard {
     max-width: 800px;
     width: fit-content;
+    cursor: default;
+}
+
+#flashcard:active {
+    transform: none!important;
 }
 
 #flashcard-sentence {
@@ -482,6 +491,7 @@ header {
 .speech {
     height: 55px;
     margin: 3px;
+    cursor: pointer;
 }
 
 .flippy .speech {
@@ -587,6 +597,11 @@ header {
     margin-left: 20px;
     margin-right: 20px;
     margin-top: 10px;
+    cursor: default!important;
+}
+
+#vertical-flashcard:active {
+    transform: none!important;
 }
 
 .vertical-speaker {
@@ -604,6 +619,7 @@ header {
     width: 55px;
     align-self: flex-end;
     margin-right: 0px;
+    cursor: pointer;
 }
 
 #sentence-vertical {
@@ -742,12 +758,13 @@ header {
 }
 
 .mobile .multichoice-question {
-    margin-top: 60px;
+    margin-top: 70px;
 }
 
 .mobile .multichoice-text {
-    font-size: 0.95em;
+    font-size: 1em;
     margin-top:50px;
+    gap: 7px;
 }
 
 .mobile .multichoice-options {
