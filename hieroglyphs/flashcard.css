@@ -212,7 +212,7 @@ button.word:disabled:active {
 }
 
 .mobile .next, .mobile #check {
-    margin-right:0px;
+    display: none!important;
 }
 
 button.inaccessible {
@@ -619,7 +619,7 @@ header {
 }
 
 .mobile #vertical-scroll section {
-    height: calc(100vh - 140px);
+    height: calc(100vh);
 }
 
 
@@ -832,7 +832,7 @@ header {
     margin-top: 60px;
     flex: 1;
     background-color: var(--main-color);
-    padding-top: 15px;
+    padding-top: 30px;
 }
 
 .mobile .match-option {
