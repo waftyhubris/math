@@ -26,32 +26,27 @@ const week2HTML = `
 
 const week3HTML = `
     <p>
-    Abstract:     We will concretely introduce the Steenrod squares, which are precisely the stable cohomology operations on the modulo 2 cochains of a topological space. The method we use is a combination of the ones used by Mosher-Tangora and Lurie. We then prove some of the basic properties of Steenrod squares, including the Cartan formula and the Adem relations.
+    Abstract: We will concretely introduce the Steenrod squares, which are precisely the stable cohomology operations on the modulo 2 cochains of a topological space. The method we use is a combination of the ones used by Mosher-Tangora and Lurie. We will prove that these operations are additive and well-defined, and begin comparing our results with the axiomatic characterisation of Steenrod squares.
     </p>
     <p>
     Speaker: <a href="../webpage/index.html">Declan Zammit</a>, Macquarie University
     </p>
     <img src="week_3.png" alt="Steenrod things" class = "weekly">
     <p>
-    The notes and video will be made available after the talk.
+    Click to access a <a href="https://youtu.be/MB_SbEkbo-0">recording</a> of the talk.
     </p>
 `;
 
 const week4HTML = `
-    <h2>
-    Week 4: Spectra
-    </h2>
-    <h3>
-      Date and location to be confirmed
-    </h3>
     <p>
-    Abstract: To be confirmed.
+    Abstract: We will put our work on solid footing by using Mosher-Tangora's acyclic carrier theorem, and look towards proving all of the axioms which Steenrod squares satisfy.
     </p>
     <p>
-    Speaker: To be confirmed.
+    Speaker: <a href="../webpage/index.html">Declan Zammit</a>, Macquarie University
     </p>
+    <img src="week_3.png" alt="Steenrod things" class = "weekly">
     <p>
-    The notes and video will be made available after the talk.
+    The recording will be made available after the talk.
     </p>
 `;
 
