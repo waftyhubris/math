@@ -1,2 +1,3 @@
 transliteration: nḏs
 meaning: small
+grid: 0,0,80,33,N35;0,33,80,67,I10;80,0,40,100,S29;120,0,40,100,G37

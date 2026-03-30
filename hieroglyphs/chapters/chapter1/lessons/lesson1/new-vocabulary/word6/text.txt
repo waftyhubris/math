@@ -1,2 +1,4 @@
 transliteration: nts
 meaning: she
+grid: 0,0,80,50,N35;0,50,80,50,X1;80,0,40,100,S29
+

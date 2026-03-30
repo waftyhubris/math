@@ -1,2 +1,3 @@
 transliteration: ntf
 meaning: he
+grid: 0,0,80,33,N35;0,33,80,33,X1;0,66,80,34,I9
