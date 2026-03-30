@@ -138,6 +138,27 @@ document.addEventListener("keydown", async (e) => {
                 nextButton.click();
             }
         }
+        else if (state === "isis") {
+            const footer = document.getElementById("translation-footer");
+            if (!footer.classList.contains("hidden") && footer.style.opacity === "1") {
+                const nextButton = document.getElementById("win-next");
+                if (!nextButton.classList.contains("hidden") && !nextButton.classList.contains("inaccessible")) {
+                    nextButton.click();
+                }
+                else {
+                    const checkButton = document.getElementById("check-button");
+                    if (checkButton && !checkButton.classList.contains("hidden") && !checkButton.classList.contains("inaccessible")) {
+                        checkButton.click();
+                    }
+                    }
+                }
+            else {
+                const accept = document.getElementById("accept-button-isis");
+                if (!accept.classList.contains("pop-out")) {
+                    accept.click();
+                }
+            }
+            }
         else {
             const nextButton = document.getElementById("win-next");
             if (!nextButton.classList.contains("hidden") && !nextButton.classList.contains("inaccessible")) {
@@ -193,80 +214,87 @@ async function tryMatchWord() {
 
 document.getElementById("check-button").addEventListener("click", async () => {
     if (state === "isis") {
-        document.getElementById("check-button").classList.add("inaccessible");
-        const selected = document.querySelector("#canvas .selected");
-        selected.classList.remove("selected");
-        const rects = Array.from(document.querySelectorAll('.rect'));
-        if (!rects.length) return;
+        let footer = document.getElementById("translation-footer");
+        if (!footer.classList.contains("hidden")) {
+            document.getElementById("check-button").classList.add("inaccessible");
+            const selected = document.querySelector("#canvas .selected");
+            selected.classList.remove("selected");
+            const rects = Array.from(document.querySelectorAll('.rect'));
+            if (!rects.length) return;
 
-        const bounds = rects.map(r => r.getBoundingClientRect());
-        const minLeft   = Math.min(...bounds.map(b => b.left));
-        const maxRight  = Math.max(...bounds.map(b => b.right));
-        const minTop    = Math.min(...bounds.map(b => b.top));
-        const maxBottom = Math.max(...bounds.map(b => b.bottom));
-        const eps = 1;
-        const moveFactor = 0.5;
+            const bounds = rects.map(r => r.getBoundingClientRect());
+            const minLeft   = Math.min(...bounds.map(b => b.left));
+            const maxRight  = Math.max(...bounds.map(b => b.right));
+            const minTop    = Math.min(...bounds.map(b => b.top));
+            const maxBottom = Math.max(...bounds.map(b => b.bottom));
+            const eps = 1;
+            const moveFactor = 0.5;
 
-        rects.forEach((rect, i) => {
-            const { left, right, top, bottom } = bounds[i];
-            rect.style.transition = 'border-color 0.3s'; // ensure border has a transition
-            rect.style.borderLeftColor   = left   > minLeft + eps ? 'transparent' : '';
-            rect.style.borderRightColor  = right  < maxRight - eps ? 'transparent' : '';
-            rect.style.borderTopColor    = top    > minTop + eps ? 'transparent' : '';
-            rect.style.borderBottomColor = bottom < maxBottom - eps ? 'transparent' : '';
-        });
-
-        await Promise.all(rects.map(rect => new Promise(resolve => {
-            const handler = e => {
-                if (e.propertyName.includes('border')) resolve();
-            };
-            rect.addEventListener('transitionend', handler, { once: true });
-            
-            // fallback: resolve after the transition duration in case it never fires
-            setTimeout(resolve, 350); 
-        })));
-
-        await Promise.all(rects.map((rect, i) => new Promise(resolve => {
-            const { left, right, top, bottom } = bounds[i];
-            const style = window.getComputedStyle(rect);
-            let l = parseFloat(style.left);
-            let t = parseFloat(style.top);
-            let w = parseFloat(style.width);
-            let h = parseFloat(style.height);
-
-            if (left > minLeft + eps) { const delta = (minLeft - left) * moveFactor; l += delta; w -= delta; }
-            if (right < maxRight - eps) { const delta = (maxRight - right) * moveFactor; w += delta; }
-            if (top > minTop + eps) { const delta = (minTop - top) * moveFactor; t += delta; h -= delta; }
-            if (bottom < maxBottom - eps) { const delta = (maxBottom - bottom) * moveFactor; h += delta; }
-
-            rect.style.transition = 'left 0.3s, top 0.3s, width 0.3s, height 0.3s';
-            rect.addEventListener('transitionend', resolve, { once: true });
-
-            requestAnimationFrame(() => {
-                rect.style.left = l + 'px';
-                rect.style.top = t + 'px';
-                rect.style.width = w + 'px';
-                rect.style.height = h + 'px';
+            rects.forEach((rect, i) => {
+                rect.style.transition = 'border-color 0.3s'; // ensure border has a transition
+                rect.style.borderColor   = 'transparent';
             });
-        })));
 
-        rects.forEach((rect, i) => {
-            rect.classList.add("hidden");
-            document.querySelector("#canvas").style.backgroundColor = "var(--main-color)";
-        });
-        document.querySelector(".bigrect").classList.remove("hidden");
-        const correctness = Array.from(rects).every(el =>
-            el.dataset.desiredGardinerIndex === el.dataset.selectedGardinerIndex
-        );
-        if (!correctness) {
-            lifeCount -= 1;
-            updateLife();
-            document.querySelector(".bigrect").style.backgroundColor = "#ffccae";
-            document.querySelector(".bigrect").classList.add("shake");
+            await Promise.all(rects.map(rect => new Promise(resolve => {
+                const handler = e => {
+                    if (e.propertyName.includes('border')) resolve();
+                };
+                rect.addEventListener('transitionend', handler, { once: true });
+                
+                // fallback: resolve after the transition duration in case it never fires
+                setTimeout(resolve, 350); 
+            })));
+
+            await Promise.all(rects.map((rect, i) => new Promise(resolve => {
+                const { left, right, top, bottom } = bounds[i];
+                const style = window.getComputedStyle(rect);
+                let l = parseFloat(style.left);
+                let t = parseFloat(style.top);
+                let w = parseFloat(style.width);
+                let h = parseFloat(style.height);
+
+                if (left > minLeft + eps) { const delta = (minLeft - left) * moveFactor; l += delta; w -= delta; }
+                if (right < maxRight - eps) { const delta = (maxRight - right) * moveFactor; w += delta; }
+                if (top > minTop + eps) { const delta = (minTop - top) * moveFactor; t += delta; h -= delta; }
+                if (bottom < maxBottom - eps) { const delta = (maxBottom - bottom) * moveFactor; h += delta; }
+
+                rect.style.transition = 'left 0.3s, top 0.3s, width 0.3s, height 0.3s';
+                rect.addEventListener('transitionend', resolve, { once: true });
+
+                requestAnimationFrame(() => {
+                    rect.style.left = l + 'px';
+                    rect.style.top = t + 'px';
+                    rect.style.width = w + 'px';
+                    rect.style.height = h + 'px';
+                });
+            })));
+
+            rects.forEach((rect, i) => {
+                rect.classList.add("hidden");
+            });
+            canvas = document.getElementById("canvas");
+            canvas.innerHTML = lessonInformation[counter].word;
+            svg = canvas.querySelector("svg");
+            svg.removeAttribute("width");
+            svg.removeAttribute("height");
+            svg.classList.add("bigImage");
+            const correctness = Array.from(rects).every(el =>
+                el.dataset.desiredGardinerIndex === el.dataset.selectedGardinerIndex
+            );
+            if (!correctness) {
+                lifeCount -= 1;
+                updateLife();
+                canvas.style.backgroundColor = "#ffccae";
+                canvas.classList.add("shake");
+            }
+            else {
+                canvas.style.backgroundColor = "rgb(147, 255, 137)";
+                canvas.classList.add("bounce");
+            }
+            document.getElementById("check-button").classList.add("hidden");
+            document.getElementById("win-next").classList.remove("inaccessible");
+            document.getElementById("win-next").classList.remove("hidden");
         }
-        document.getElementById("check-button").classList.add("hidden");
-        document.getElementById("win-next").classList.remove("inaccessible");
-        document.getElementById("win-next").classList.remove("hidden");
     }
     else {
         removeGloss();
@@ -499,6 +527,55 @@ function checkIfFinished() {
         document.getElementById("next-match").classList.remove("inaccessible");
     }
 }
+
+// Declaring the god acceptance buttons, which are a little more bespoke.
+
+document.getElementById("accept-button-isis").addEventListener("click", async function () {
+    let selfButton = document.getElementById("accept-button-isis");
+    if (!selfButton.classList.contains("disabled")) {
+        selfButton.classList.add("disabled");
+        selfButton.classList.add("pop-out");
+        let isis = document.getElementById("isis-herself");
+        let canvas = document.getElementById("canvas");
+        let footer = document.getElementById("translation-footer");
+        let text = document.getElementById("isis-question");
+
+        footer.style.opacity = "0";
+
+        text.style.transition = 'opacity 0.3s';
+        requestAnimationFrame(() => {
+            text.style.opacity = '0';
+        });
+        await new Promise(resolve => setTimeout(resolve, 200));
+        text.innerHTML = "Construct the Egyptian word for '" + lessonInformation[counter].meaning + "'";
+        requestAnimationFrame(() => {
+            text.style.opacity = '1';
+        });
+        await new Promise(resolve => setTimeout(resolve, 200));
+
+        canvas.classList.remove("hidden");
+        footer.classList.remove("hidden");
+        
+
+        isis.style.transition = 'margin-top 0.6s';
+        requestAnimationFrame(() => {
+            isis.style.marginTop = '40px';
+        });
+        text.style.transition = 'margin-top 0.6s';
+        requestAnimationFrame(() => {
+            text.style.marginTop = '-40px';
+        });
+
+        await new Promise(resolve => setTimeout(resolve, 800));
+
+        canvas.style.transition = 'opacity 0.6s';
+        footer.style.transition = 'opacity 0.6s';
+        requestAnimationFrame(() => {
+            canvas.style.opacity = '1';
+            footer.style.opacity = '1';
+        });
+    }
+});
 
 
 // Updating the heart icon.
@@ -997,7 +1074,6 @@ async function loadGodChallenge() {
     // Isis god challenge
 
     let vocabIndex = Math.floor(Math.random() * vocabCount) + 1;
-    vocabIndex = 1;
     const response = await fetch(lessonPath + "new-vocabulary/word" + vocabIndex + "/text.txt");
     const image = await fetch(lessonPath + "new-vocabulary/word" + vocabIndex + "/horizontal.svg");
     const imageText = await image.text();
@@ -1008,8 +1084,8 @@ async function loadGodChallenge() {
 
     const text = await response.text();
     const lines = text.split(/\r?\n/);
-
     let gridData = [];
+    let meaning = "";
 
     for (const line of lines) {
         const trimmed = line.trim();
@@ -1032,12 +1108,16 @@ async function loadGodChallenge() {
                 index++;
             }
         }
+        if (key === "meaning") {
+            meaning = value;
+        }
     }
     desired++;
     lessonInformation[desired] = {state: "isis",
     vocabIndex: vocabIndex,
     gridData: gridData,
-    word: imageText
+    word: imageText,
+    meaning: meaning
     };
 }
 
@@ -1124,7 +1204,7 @@ function updatePage(varstate) {
         }
     }
     else if (varstate === "isis") {
-        document.getElementById("translation-footer").classList.remove("hidden");
+        document.getElementById("translation-footer").classList.add("hidden");
         document.getElementById("check-button").classList.remove("hidden");
         document.getElementById("check-button").classList.remove("inaccessible");
         document.getElementById("win-next").classList.add("hidden");
@@ -1136,7 +1216,7 @@ function updatePage(varstate) {
         const canvas = document.getElementById("canvas");
         let maxBottom = 0;
         let maxRight = 0;
-        const scale = 2;
+        const scale = 1.5;
         lessonInformation[counter].gridData.forEach(r => {
             const div = document.createElement("div");
             div.className = "rect";
@@ -1183,32 +1263,14 @@ function updatePage(varstate) {
 
         rects.forEach((rect, i) => {
             const { left, right, top, bottom } = bounds[i];
-            rect.style.transition = 'border-color 0.3s'; // ensure border has a transition
             rect.style.borderLeftColor   = left   <=  minLeft + eps ? 'transparent' : '';
             rect.style.borderRightColor  = right  >= maRight - eps ? 'transparent' : '';
             rect.style.borderTopColor    = top    <= minTop + eps ? 'transparent' : '';
             rect.style.borderBottomColor = bottom >= maBottom - eps ? 'transparent' : '';
         });
-
-
-
-        canvas.style.width = maxRight + 1.5 + "px";
-        canvas.style.height = maxBottom + 1.5 + "px";
-        const answerDiv = document.createElement("div");
-        answerDiv.className = "bigrect";
-        // answerDiv.classList.add("pop");
-        answerDiv.classList.add("bounce");
-        answerDiv.style.left = "-1.5px";
-        answerDiv.style.top = "-1.5px";
-        answerDiv.style.width = maxRight + 1.5 + "px";
-        answerDiv.style.height = maxBottom + 1.5 + "px";
-        answerDiv.innerHTML = lessonInformation[counter].word;
-        svg = answerDiv.querySelector("svg");
-        svg.removeAttribute("width");
-        svg.removeAttribute("height");
-        svg.classList.add("bigImage");
-        answerDiv.classList.add("hidden");
-        canvas.appendChild(answerDiv);
+        canvas.style.width = maxRight + "px";
+        canvas.style.height = maxBottom  + "px";
+        canvas.style.opacity = "0";
         renderButtons(varstate);
         selectRectangle();
     }
@@ -1371,6 +1433,10 @@ function renderButtons(varstate) {
             const button = document.createElement("button");
             button.dataset.gardinerIndex = word.gardinerIndex;
             button.innerHTML = word.image;
+            let svg = button.querySelector("svg");
+            svg.classList.add("button-image");
+            svg.removeAttribute("width");
+            svg.removeAttribute("height");
             buttons.push(button);
             button.classList.add("isis-button");
             button.addEventListener("click", () => {
@@ -1378,6 +1444,7 @@ function renderButtons(varstate) {
                 selected.innerHTML = button.innerHTML;
                 selected.dataset.selectedGardinerIndex = button.dataset.gardinerIndex;
                 svg = selected.querySelector("svg");
+                svg.classList.remove("button-image");
                 svg.classList.add("isis-image");
                 svg.removeAttribute("width");
                 svg.removeAttribute("height");
