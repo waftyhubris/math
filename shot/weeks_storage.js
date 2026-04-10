@@ -26,7 +26,7 @@ const week2HTML = `
 
 const week3HTML = `
     <p>
-    Abstract: We will concretely introduce the Steenrod squares, which are precisely the stable cohomology operations on the modulo 2 cochains of a topological space. The method we use is a combination of the ones used by Mosher-Tangora and Lurie. We will prove that these operations are additive and well-defined, and begin comparing our results with the axiomatic characterisation of Steenrod squares.
+    Abstract: We will concretely introduce the Steenrod squares, which are precisely the stable cohomology operations on the modulo 2 cochains of a topological space. We do this by deriving explicit coboundary formulae for the higher cup products introduced by Steenrod in his original paper. We will prove that these operations are additive and well-defined, and begin comparing our results with the axiomatic characterisation of Steenrod squares.
     </p>
     <p>
     Speaker: <a href="../webpage/index.html">Declan Zammit</a>, Macquarie University
@@ -39,32 +39,27 @@ const week3HTML = `
 
 const week4HTML = `
     <p>
-    Abstract: We will put our work on solid footing by using Mosher-Tangora's acyclic carrier theorem, and look towards proving all of the axioms which Steenrod squares satisfy.
+    Abstract: We will put our work on solid footing by using Mosher-Tangora's acyclic carrier theorem, and look towards proving all of the axioms which Steenrod squares satisfy. In particular, we prove that the Steenrod squares are natural with respect to topological spaces.
     </p>
     <p>
     Speaker: <a href="../webpage/index.html">Declan Zammit</a>, Macquarie University
     </p>
-    <img src="week_3.png" alt="Steenrod things" class = "weekly">
+    <img src="week_4.png" alt="Steenrod things" class = "weekly">
     <p>
-    The recording will be made available after the talk.
+    Click to access a <a href="https://youtu.be/zbaXSzkJuTQ">recording</a> of the talk.
     </p>
 `;
 
 const week5HTML = `
-    <h2>
-    Week 5: Cohomology Theories
-    </h2>
-    <h3>
-      Date and location to be confirmed
-    </h3>
     <p>
-    Abstract: To be confirmed.
+    Abstract: We can always equip the cohomology of a topological space with the notion of multiplication using the cup product. In nice cases, we can also equip the homology of a topological space with a notion of comultiplication. We will describe the comultiplication structure on the homology of infinite real projective space, and use it to deduce the Cartan formula for Steenrod squares.
     </p>
     <p>
-    Speaker: To be confirmed.
+    Speaker: <a href="../webpage/index.html">Declan Zammit</a>, Macquarie University
     </p>
+    <img src="week_5.png" alt="Steenrod things" class = "weekly">
     <p>
-    The notes and video will be made available after the talk.
+    Click to access a <a href="https://youtu.be/zbaXSzkJuTQ">recording</a> of the talk.
     </p>
 `;
 
